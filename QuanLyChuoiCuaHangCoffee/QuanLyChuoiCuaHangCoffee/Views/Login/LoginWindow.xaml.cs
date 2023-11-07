@@ -23,5 +23,43 @@ namespace QuanLyChuoiCuaHangCoffee.Views.Login
         {
             InitializeComponent();
         }
+
+        private void btnMinimizeMouseEnter(object sender, MouseEventArgs e)
+        {
+            Button btn = sender as Button;
+
+            btn.Background = (SolidColorBrush)new BrushConverter().ConvertFrom("#FFA5B9D6");
+        }
+
+        private void btnMinimizeMouseLeave(object sender, MouseEventArgs e)
+        {
+            Button btn = sender as Button;
+
+            btn.Background = new SolidColorBrush(Colors.White);
+        }
+
+        private void btnCloseMouseEnter(object sender, MouseEventArgs e)
+        {
+            Button btn = sender as Button;
+
+            btn.Background = (SolidColorBrush)new BrushConverter().ConvertFrom("#FFA5B9D6");
+            btn.Background = new SolidColorBrush(Colors.OrangeRed);
+        }
+
+        private void btnCloseMouseLeave(object sender, MouseEventArgs e)
+        {
+            Button btn = sender as Button;
+            btn.Background = new SolidColorBrush(Colors.White);
+        }
+
+        private void btnMinimize(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
+        }
+
+        private void btnClose(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }
