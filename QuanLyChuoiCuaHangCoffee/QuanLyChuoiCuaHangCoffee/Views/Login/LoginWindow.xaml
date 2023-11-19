@@ -16,14 +16,23 @@
         FontFamily="{DynamicResource MaterialDesignFont}"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
-        AllowsTransparency="True">
+        AllowsTransparency="True"
+        DataContext="{StaticResource LoginVM}"
+        >
 
     <Window.Clip>
         <RectangleGeometry Rect="0,0,900,500" RadiusX="10" RadiusY="10" x:Name="boGoc">
         </RectangleGeometry>
     </Window.Clip>
-    
-    <Grid>
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadMask}"
+                                CommandParameter="{Binding ElementName=ShadowMask}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
+    <Grid Background="#000000">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition />
@@ -34,39 +43,25 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <!-- Bên trái -->
-            <Grid Grid.Column="0"
+            <!-- Bên phải -->
+            <Grid Grid.Column="1"
                   Grid.RowSpan="2">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="20*" />
                     <RowDefinition Height="70*" />
                 </Grid.RowDefinitions>
 
-                <!--Login Form-->
-                <materialDesign:Card Margin="20,50,20,20"
-                                     Grid.Row="1"
-                                     UniformCornerRadius="8">
-                    <Frame x:Name="frame"
-                           NavigationUIVisibility="Hidden">
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="Loaded">
-                                <i:InvokeCommandAction Command="{Binding LoadLoginPage}"
-                                                       CommandParameter="{Binding ElementName=frame}" />
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
+                <Grid Grid.Row="0">
+                    <Label FontFamily="inter"
+                           FontSize="55"
+                           Content="Welcome"
+                           Foreground="#F0B000"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                           FontWeight="Bold">
 
-                    </Frame>
-                </materialDesign:Card>
-            </Grid>
-
-            <!-- Bên phải -->
-            <Grid Grid.Column="1"
-              Grid.RowSpan="2">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="32*" />
-                    <RowDefinition Height="412*" />
-                </Grid.RowDefinitions>
-
+                    </Label>
+                </Grid>
 
                 <StackPanel Orientation="Horizontal"
                             VerticalAlignment="Top"
@@ -95,9 +90,43 @@
                             MouseLeave="btnCloseMouseLeave"
                             materialDesign:ButtonAssist.CornerRadius="0,10,0,0">
                         <materialDesign:PackIcon Kind="WindowClose"
-                                                 Padding="0" />
+                                 Padding="0" />
                     </Button>
                 </StackPanel>
+
+                <!--Login Form-->
+                <materialDesign:Card Margin="20,30,20,30"
+                                     Grid.Row="1"
+                                     UniformCornerRadius="8"
+                                     Background="#181818">
+                    <Frame x:Name="frame"
+                           NavigationUIVisibility="Hidden"
+                           Width="400"
+                           Height="310">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Loaded">
+                                <i:InvokeCommandAction Command="{Binding LoadLoginPage}"
+                                                       CommandParameter="{Binding ElementName=frame}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+
+                    </Frame>
+                </materialDesign:Card>
+            </Grid>
+
+            <!-- Bên trái -->
+            <Grid Grid.Column="0"
+              Grid.RowSpan="2">
+                <Grid.Background>
+                    <ImageBrush ImageSource="/Resources/loginImage.png"/>
+                </Grid.Background>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="32*" />
+                    <RowDefinition Height="412*" />
+                </Grid.RowDefinitions>
+
+
+
             </Grid>
         </Grid>
 
