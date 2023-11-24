@@ -45,7 +45,7 @@
                      Margin="5,0,0,0"
                      BorderBrush="LightGray"
                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                     Text="{Binding Username}"
+                     Text="{Binding Usernamelog}"
                      x:Name="usernameTextBox" />
         </StackPanel>
         <StackPanel HorizontalAlignment="Center"
@@ -57,17 +57,18 @@
                                      VerticalAlignment="Center" 
                                      Foreground="#ffffff"/>
             <PasswordBox materialDesign:HintAssist.Hint="Password"
+                         x:Name="FloatingPasswordBox"
                         materialDesign:TextFieldAssist.HasClearButton="True"
                         Foreground="#ffffff"
-                         FontSize="15"
+                        FontSize="15"
                         Margin="5,0,0,0"
-                         BorderBrush="LightGray"
+                        BorderBrush="LightGray"
                         IsEnabled="{Binding ElementName=RevealPasswordDefaultEnabled, Path=IsChecked}"
                         Style="{StaticResource MaterialDesignFloatingHintRevealPasswordBox}"
                         Width="220">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="PasswordChanged">
-                        <i:InvokeCommandAction Command="{Binding PasswordChangedCM}"
+                        <i:InvokeCommandAction Command="{Binding PasswordChangedCF}"
                                    CommandParameter="{Binding ElementName=FloatingPasswordBox}" />
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
@@ -78,11 +79,11 @@
             HorizontalAlignment="Center">
             <!-- Thông báo lỗi -->
             <StackPanel Orientation="Horizontal">
-                <Label Margin="30,2,25,0"
-               x:Name="Error"
-               Height="28"
-               FontSize="15"
-               Foreground="Red" />
+                <Label Margin="40,2,25,0"
+                       x:Name="Error"
+                       Height="28"
+                       FontSize="15"
+                       Foreground="Red" />
             </StackPanel>
 
             <!-- Quên mật khẩu -->
@@ -110,7 +111,7 @@
                             Padding="0,0,0,5"
                             Background="#F0B000"
                             materialDesign:ButtonAssist.CornerRadius="8"
-                            Command="{Binding LoginML}"
+                            Command="{Binding LoginCF}"
                             CommandParameter="{Binding ElementName=Error}"  >
                         <!--Click="btnLogin_Click">-->
                     </Button>

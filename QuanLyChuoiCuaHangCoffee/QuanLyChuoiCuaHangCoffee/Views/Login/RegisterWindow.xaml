@@ -165,14 +165,15 @@
                          VerticalAlignment="Center"
                                          Foreground="#ffffff"/>
                 <PasswordBox materialDesign:HintAssist.Hint="Password"
-                            materialDesign:TextFieldAssist.HasClearButton="True"
-                            Foreground="#ffffff"
-                            FontSize="15"
-                            Margin="10,0,0,0"
-                            BorderBrush="LightGray"
-                            IsEnabled="{Binding ElementName=RevealPasswordDefaultEnabled, Path=IsChecked}"
-                            Style="{StaticResource MaterialDesignFloatingHintRevealPasswordBox}"
-                            Width="220">
+                             materialDesign:TextFieldAssist.HasClearButton="True"
+                             x:Name="FloatingPasswordRegChanged"
+                             Foreground="#ffffff"
+                             FontSize="15"
+                             Margin="10,0,0,0"
+                             BorderBrush="LightGray"
+                             IsEnabled="{Binding ElementName=RevealPasswordDefaultEnabled, Path=IsChecked}"
+                             Style="{StaticResource MaterialDesignFloatingHintRevealPasswordBox}"
+                             Width="220">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="PasswordChanged">
                             <i:InvokeCommandAction Command="{Binding PasswordRegChangedCF}" 

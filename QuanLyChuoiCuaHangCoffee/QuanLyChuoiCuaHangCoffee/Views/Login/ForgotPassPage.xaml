@@ -116,6 +116,7 @@
                                 Width="90"
                                 FontSize="15"
                                 x:Name="btnConfirm"
+                                Foreground="#000000"
                                 Padding="0,0,0,5"
                                 Background="#F0B000"
                                 materialDesign:ButtonAssist.CornerRadius="8"
