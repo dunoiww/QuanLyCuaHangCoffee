@@ -7,28 +7,24 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace QuanLyChuoiCuaHangCoffee.Models.DataProvider
+namespace QuanLyChuoiCuaHangCoffee.Models
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class XUATKHO
+    public partial class CHUCDANH
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public XUATKHO()
+        public CHUCDANH()
         {
-            this.CTXUATKHOes = new HashSet<CTXUATKHO>();
+            this.NHANVIENs = new HashSet<NHANVIEN>();
         }
     
-        public string MAPHIEU { get; set; }
-        public string IDNHANVIEN { get; set; }
-        public string TENKHO { get; set; }
-        public string DCKHO { get; set; }
-        public string SDTQLKHO { get; set; }
-        public System.DateTime NGXUATKHO { get; set; }
+        public string MACD { get; set; }
+        public string TENCHUCDANH { get; set; }
+        public Nullable<double> HESOLUONG { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CTXUATKHO> CTXUATKHOes { get; set; }
-        public virtual NHANVIEN NHANVIEN { get; set; }
+        public virtual ICollection<NHANVIEN> NHANVIENs { get; set; }
     }
 }

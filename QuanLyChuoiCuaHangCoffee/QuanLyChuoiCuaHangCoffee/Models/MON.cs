@@ -7,26 +7,28 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace QuanLyChuoiCuaHangCoffee.Models.DataProvider
+namespace QuanLyChuoiCuaHangCoffee.Models
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class SIZE
+    public partial class MON
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public SIZE()
+        public MON()
         {
-            this.THUCDONs = new HashSet<THUCDON>();
+            this.CTDHs = new HashSet<CTDH>();
+            this.CTMONs = new HashSet<CTMON>();
         }
     
-        public string MASIZE { get; set; }
-        public string SIZEMON { get; set; }
-        public Nullable<decimal> GIABAN { get; set; }
-        public Nullable<int> SOLUONG { get; set; }
-        public Nullable<int> TRANGTHAI { get; set; }
+        public string MAMON { get; set; }
+        public string TENMON { get; set; }
+        public string LOAIMON { get; set; }
+        public string IMAGESOURCE { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<THUCDON> THUCDONs { get; set; }
+        public virtual ICollection<CTDH> CTDHs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CTMON> CTMONs { get; set; }
     }
 }

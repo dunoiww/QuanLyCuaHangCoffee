@@ -7,25 +7,29 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace QuanLyChuoiCuaHangCoffee.Models.DataProvider
+namespace QuanLyChuoiCuaHangCoffee.Models
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class NGUYENLIEU
+    public partial class NHANVIEN
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public NGUYENLIEU()
+        public NHANVIEN()
         {
-            this.CTXUATKHOes = new HashSet<CTXUATKHO>();
+            this.DONHANGs = new HashSet<DONHANG>();
+            this.XUATKHOes = new HashSet<XUATKHO>();
         }
     
-        public string MANGUYENLIEU { get; set; }
-        public string TENNGUYENLIEU { get; set; }
-        public Nullable<int> SOLUONGTRONGKHO { get; set; }
-        public string IMAGESOURCE { get; set; }
+        public string IDNHANVIEN { get; set; }
+        public Nullable<int> LOAINHANVIEN { get; set; }
+        public string MACD { get; set; }
     
+        public virtual CHUCDANH CHUCDANH { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CTXUATKHO> CTXUATKHOes { get; set; }
+        public virtual ICollection<DONHANG> DONHANGs { get; set; }
+        public virtual USER USER { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<XUATKHO> XUATKHOes { get; set; }
     }
 }

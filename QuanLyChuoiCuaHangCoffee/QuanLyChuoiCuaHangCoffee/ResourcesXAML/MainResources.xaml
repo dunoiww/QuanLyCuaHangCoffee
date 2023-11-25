@@ -4,10 +4,12 @@
                     xmlns:viewmodel1="clr-namespace:QuanLyChuoiCuaHangCoffee.ViewModel.LoginVM"
                     xmlns:viewmodel2="clr-namespace:QuanLyChuoiCuaHangCoffee.ViewModel.AdminVM"
                     xmlns:viewmodel21="clr-namespace:QuanLyChuoiCuaHangCoffee.ViewModel.AdminVM.DashboardVM"
-                    xmlns:viewmodel22="clr-namespace:QuanLyChuoiCuaHangCoffee.ViewModel.AdminVM.IngredientsVM">
+                    xmlns:viewmodel22="clr-namespace:QuanLyChuoiCuaHangCoffee.ViewModel.AdminVM.IngredientsVM"
+                    xmlns:viewmodel23="clr-namespace:QuanLyChuoiCuaHangCoffee.ViewModel.AdminVM.TablesVM">
     <viewmodel1:LoginViewModel x:Key="LoginVM"/>
     <viewmodel1:ForgotPassViewModel x:Key="ForgotPassVM"/>
     <viewmodel2:MainAdminViewModel x:Key="AdminVM"/>
     <viewmodel21:DashboardViewModel x:Key="DashboardVM"/>
     <viewmodel22:IngredientsViewModel x:Key="IngredientsVM"/>
+    <viewmodel23:MainTablePageViewModel x:Key="TablesVM"/>
 </ResourceDictionary>

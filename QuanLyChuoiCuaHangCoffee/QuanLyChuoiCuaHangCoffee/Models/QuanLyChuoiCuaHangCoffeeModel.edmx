@@ -16,6 +16,15 @@
           <Property Name="SOLUONG" Type="int" />
           <Property Name="TONGTIEN" Type="money" />
         </EntityType>
+        <EntityType Name="CTMON">
+          <Key>
+            <PropertyRef Name="MAMON" />
+            <PropertyRef Name="MANGUYENLIEU" />
+          </Key>
+          <Property Name="MAMON" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="MANGUYENLIEU" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="SLNGUYENLIEU" Type="float" />
+        </EntityType>
         <EntityType Name="CTXUATKHO">
           <Key>
             <PropertyRef Name="MAPHIEU" />
@@ -41,8 +50,8 @@
           <Property Name="IDKHACHHANG" Type="varchar" MaxLength="10" />
           <Property Name="IDNHANVIEN" Type="varchar" MaxLength="10" />
           <Property Name="NGAYDH" Type="smalldatetime" Nullable="false" />
-          <Property Name="PHUONGTHUCNHAN" Type="nvarchar" MaxLength="100" />
           <Property Name="TONGGIATRIDONHANG" Type="money" />
+          <Property Name="ISDISCOUNT" Type="int" />
           <Property Name="GHICHU" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="KHACHHANG">
@@ -52,7 +61,16 @@
           <Property Name="IDKHACHHANG" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="TICHDIEM" Type="int" />
           <Property Name="SODONHANG" Type="int" />
-          <Property Name="HANGTHANHVIEN" Type="nvarchar" MaxLength="5" />
+          <Property Name="HANGTHANHVIEN" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="MON">
+          <Key>
+            <PropertyRef Name="MAMON" />
+          </Key>
+          <Property Name="MAMON" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="TENMON" Type="nvarchar" MaxLength="100" />
+          <Property Name="LOAIMON" Type="nvarchar" MaxLength="20" />
+          <Property Name="IMAGESOURCE" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="NGUYENLIEU">
           <Key>
@@ -60,8 +78,10 @@
           </Key>
           <Property Name="MANGUYENLIEU" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="TENNGUYENLIEU" Type="nvarchar" MaxLength="50" />
+          <Property Name="DONVI" Type="varchar" MaxLength="10" />
           <Property Name="SOLUONGTRONGKHO" Type="int" />
           <Property Name="IMAGESOURCE" Type="varchar(max)" />
+          <Property Name="NGAYNHAP" Type="smalldatetime" Nullable="false" />
         </EntityType>
         <EntityType Name="NHANVIEN">
           <Key>
@@ -79,17 +99,6 @@
           <Property Name="SIZEMON" Type="varchar" MaxLength="1" />
           <Property Name="GIABAN" Type="money" />
           <Property Name="SOLUONG" Type="int" />
-          <Property Name="TRANGTHAI" Type="int" />
-        </EntityType>
-        <EntityType Name="THUCDON">
-          <Key>
-            <PropertyRef Name="MAMON" />
-          </Key>
-          <Property Name="MAMON" Type="varchar" MaxLength="10" Nullable="false" />
-          <Property Name="TENMON" Type="nvarchar" MaxLength="100" />
-          <Property Name="MALOAIMONAN" Type="nvarchar" MaxLength="50" />
-          <Property Name="MASIZE" Type="varchar" MaxLength="10" />
-          <Property Name="IMGSOURCE" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="USERS">
           <Key>
@@ -114,11 +123,9 @@
           <Property Name="MAPHIEU" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="IDNHANVIEN" Type="varchar" MaxLength="10" />
           <Property Name="TENKHO" Type="nvarchar" MaxLength="50" />
-          <Property Name="DCKHO" Type="nvarchar(max)" />
-          <Property Name="SDTQLKHO" Type="varchar" MaxLength="10" />
           <Property Name="NGXUATKHO" Type="smalldatetime" Nullable="false" />
         </EntityType>
-        <Association Name="FK__CTDH__MADH__534D60F1">
+        <Association Name="FK__CTDH__MADH__5629CD9C">
           <End Role="DONHANG" Type="Self.DONHANG" Multiplicity="1" />
           <End Role="CTDH" Type="Self.CTDH" Multiplicity="*" />
           <ReferentialConstraint>
@@ -130,15 +137,39 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__CTDH__MAMON__5441852A">
-          <End Role="THUCDON" Type="Self.THUCDON" Multiplicity="1" />
+        <Association Name="FK__CTDH__MAMON__571DF1D5">
+          <End Role="MON" Type="Self.MON" Multiplicity="1" />
           <End Role="CTDH" Type="Self.CTDH" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="THUCDON">
+            <Principal Role="MON">
               <PropertyRef Name="MAMON" />
             </Principal>
             <Dependent Role="CTDH">
               <PropertyRef Name="MAMON" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CTMON__MAMON__4BAC3F29">
+          <End Role="MON" Type="Self.MON" Multiplicity="1" />
+          <End Role="CTMON" Type="Self.CTMON" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MON">
+              <PropertyRef Name="MAMON" />
+            </Principal>
+            <Dependent Role="CTMON">
+              <PropertyRef Name="MAMON" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CTMON__MANGUYENL__4CA06362">
+          <End Role="NGUYENLIEU" Type="Self.NGUYENLIEU" Multiplicity="1" />
+          <End Role="CTMON" Type="Self.CTMON" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NGUYENLIEU">
+              <PropertyRef Name="MANGUYENLIEU" />
+            </Principal>
+            <Dependent Role="CTMON">
+              <PropertyRef Name="MANGUYENLIEU" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -166,7 +197,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__DONHANG__IDKHACH__4F7CD00D">
+        <Association Name="FK__DONHANG__IDKHACH__52593CB8">
           <End Role="KHACHHANG" Type="Self.KHACHHANG" Multiplicity="0..1" />
           <End Role="DONHANG" Type="Self.DONHANG" Multiplicity="*" />
           <ReferentialConstraint>
@@ -178,7 +209,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__DONHANG__IDNHANV__5070F446">
+        <Association Name="FK__DONHANG__IDNHANV__534D60F1">
           <End Role="NHANVIEN" Type="Self.NHANVIEN" Multiplicity="0..1" />
           <End Role="DONHANG" Type="Self.DONHANG" Multiplicity="*" />
           <ReferentialConstraint>
@@ -190,7 +221,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__KHACHHANG__IDKHA__4CA06362">
+        <Association Name="FK__KHACHHANG__IDKHA__4F7CD00D">
           <End Role="USERS" Type="Self.USERS" Multiplicity="1" />
           <End Role="KHACHHANG" Type="Self.KHACHHANG" Multiplicity="0..1" />
           <ReferentialConstraint>
@@ -226,18 +257,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__THUCDON__MASIZE__49C3F6B7">
-          <End Role="SIZE" Type="Self.SIZE" Multiplicity="0..1" />
-          <End Role="THUCDON" Type="Self.THUCDON" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SIZE">
-              <PropertyRef Name="MASIZE" />
-            </Principal>
-            <Dependent Role="THUCDON">
-              <PropertyRef Name="MASIZE" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__XUATKHO__IDNHANV__3F466844">
           <End Role="NHANVIEN" Type="Self.NHANVIEN" Multiplicity="0..1" />
           <End Role="XUATKHO" Type="Self.XUATKHO" Multiplicity="*" />
@@ -252,23 +271,32 @@
         </Association>
         <EntityContainer Name="QuanLyChuoiCuaHangCoffeeModelStoreContainer">
           <EntitySet Name="CTDH" EntityType="Self.CTDH" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CTMON" EntityType="Self.CTMON" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CTXUATKHO" EntityType="Self.CTXUATKHO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CHUCDANH" EntityType="Self.CHUCDANH" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DONHANG" EntityType="Self.DONHANG" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="KHACHHANG" EntityType="Self.KHACHHANG" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MON" EntityType="Self.MON" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NGUYENLIEU" EntityType="Self.NGUYENLIEU" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NHANVIEN" EntityType="Self.NHANVIEN" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SIZE" EntityType="Self.SIZE" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="THUCDON" EntityType="Self.THUCDON" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="USERS" EntityType="Self.USERS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="XUATKHO" EntityType="Self.XUATKHO" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__CTDH__MADH__534D60F1" Association="Self.FK__CTDH__MADH__534D60F1">
+          <AssociationSet Name="FK__CTDH__MADH__5629CD9C" Association="Self.FK__CTDH__MADH__5629CD9C">
             <End Role="DONHANG" EntitySet="DONHANG" />
             <End Role="CTDH" EntitySet="CTDH" />
           </AssociationSet>
-          <AssociationSet Name="FK__CTDH__MAMON__5441852A" Association="Self.FK__CTDH__MAMON__5441852A">
-            <End Role="THUCDON" EntitySet="THUCDON" />
+          <AssociationSet Name="FK__CTDH__MAMON__571DF1D5" Association="Self.FK__CTDH__MAMON__571DF1D5">
+            <End Role="MON" EntitySet="MON" />
             <End Role="CTDH" EntitySet="CTDH" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CTMON__MAMON__4BAC3F29" Association="Self.FK__CTMON__MAMON__4BAC3F29">
+            <End Role="MON" EntitySet="MON" />
+            <End Role="CTMON" EntitySet="CTMON" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CTMON__MANGUYENL__4CA06362" Association="Self.FK__CTMON__MANGUYENL__4CA06362">
+            <End Role="NGUYENLIEU" EntitySet="NGUYENLIEU" />
+            <End Role="CTMON" EntitySet="CTMON" />
           </AssociationSet>
           <AssociationSet Name="FK__CTXUATKHO__MANGU__44FF419A" Association="Self.FK__CTXUATKHO__MANGU__44FF419A">
             <End Role="NGUYENLIEU" EntitySet="NGUYENLIEU" />
@@ -278,15 +306,15 @@
             <End Role="XUATKHO" EntitySet="XUATKHO" />
             <End Role="CTXUATKHO" EntitySet="CTXUATKHO" />
           </AssociationSet>
-          <AssociationSet Name="FK__DONHANG__IDKHACH__4F7CD00D" Association="Self.FK__DONHANG__IDKHACH__4F7CD00D">
+          <AssociationSet Name="FK__DONHANG__IDKHACH__52593CB8" Association="Self.FK__DONHANG__IDKHACH__52593CB8">
             <End Role="KHACHHANG" EntitySet="KHACHHANG" />
             <End Role="DONHANG" EntitySet="DONHANG" />
           </AssociationSet>
-          <AssociationSet Name="FK__DONHANG__IDNHANV__5070F446" Association="Self.FK__DONHANG__IDNHANV__5070F446">
+          <AssociationSet Name="FK__DONHANG__IDNHANV__534D60F1" Association="Self.FK__DONHANG__IDNHANV__534D60F1">
             <End Role="NHANVIEN" EntitySet="NHANVIEN" />
             <End Role="DONHANG" EntitySet="DONHANG" />
           </AssociationSet>
-          <AssociationSet Name="FK__KHACHHANG__IDKHA__4CA06362" Association="Self.FK__KHACHHANG__IDKHA__4CA06362">
+          <AssociationSet Name="FK__KHACHHANG__IDKHA__4F7CD00D" Association="Self.FK__KHACHHANG__IDKHA__4F7CD00D">
             <End Role="USERS" EntitySet="USERS" />
             <End Role="KHACHHANG" EntitySet="KHACHHANG" />
           </AssociationSet>
@@ -297,10 +325,6 @@
           <AssociationSet Name="FK__NHANVIEN__MACD__3B75D760" Association="Self.FK__NHANVIEN__MACD__3B75D760">
             <End Role="CHUCDANH" EntitySet="CHUCDANH" />
             <End Role="NHANVIEN" EntitySet="NHANVIEN" />
-          </AssociationSet>
-          <AssociationSet Name="FK__THUCDON__MASIZE__49C3F6B7" Association="Self.FK__THUCDON__MASIZE__49C3F6B7">
-            <End Role="SIZE" EntitySet="SIZE" />
-            <End Role="THUCDON" EntitySet="THUCDON" />
           </AssociationSet>
           <AssociationSet Name="FK__XUATKHO__IDNHANV__3F466844" Association="Self.FK__XUATKHO__IDNHANV__3F466844">
             <End Role="NHANVIEN" EntitySet="NHANVIEN" />
@@ -313,23 +337,32 @@
       <Schema Namespace="QuanLyChuoiCuaHangCoffeeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="CoffeeManagementEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="CTDHs" EntityType="QuanLyChuoiCuaHangCoffeeModel.CTDH" />
+          <EntitySet Name="CTMONs" EntityType="QuanLyChuoiCuaHangCoffeeModel.CTMON" />
           <EntitySet Name="CTXUATKHOes" EntityType="QuanLyChuoiCuaHangCoffeeModel.CTXUATKHO" />
           <EntitySet Name="CHUCDANHs" EntityType="QuanLyChuoiCuaHangCoffeeModel.CHUCDANH" />
           <EntitySet Name="DONHANGs" EntityType="QuanLyChuoiCuaHangCoffeeModel.DONHANG" />
           <EntitySet Name="KHACHHANGs" EntityType="QuanLyChuoiCuaHangCoffeeModel.KHACHHANG" />
+          <EntitySet Name="MONs" EntityType="QuanLyChuoiCuaHangCoffeeModel.MON" />
           <EntitySet Name="NGUYENLIEUx" EntityType="QuanLyChuoiCuaHangCoffeeModel.NGUYENLIEU" />
           <EntitySet Name="NHANVIENs" EntityType="QuanLyChuoiCuaHangCoffeeModel.NHANVIEN" />
           <EntitySet Name="SIZEs" EntityType="QuanLyChuoiCuaHangCoffeeModel.SIZE" />
-          <EntitySet Name="THUCDONs" EntityType="QuanLyChuoiCuaHangCoffeeModel.THUCDON" />
           <EntitySet Name="USERS" EntityType="QuanLyChuoiCuaHangCoffeeModel.USER" />
           <EntitySet Name="XUATKHOes" EntityType="QuanLyChuoiCuaHangCoffeeModel.XUATKHO" />
-          <AssociationSet Name="FK__CTDH__MADH__534D60F1" Association="QuanLyChuoiCuaHangCoffeeModel.FK__CTDH__MADH__534D60F1">
+          <AssociationSet Name="FK__CTDH__MADH__5629CD9C" Association="QuanLyChuoiCuaHangCoffeeModel.FK__CTDH__MADH__5629CD9C">
             <End Role="DONHANG" EntitySet="DONHANGs" />
             <End Role="CTDH" EntitySet="CTDHs" />
           </AssociationSet>
-          <AssociationSet Name="FK__CTDH__MAMON__5441852A" Association="QuanLyChuoiCuaHangCoffeeModel.FK__CTDH__MAMON__5441852A">
-            <End Role="THUCDON" EntitySet="THUCDONs" />
+          <AssociationSet Name="FK__CTDH__MAMON__571DF1D5" Association="QuanLyChuoiCuaHangCoffeeModel.FK__CTDH__MAMON__571DF1D5">
+            <End Role="MON" EntitySet="MONs" />
             <End Role="CTDH" EntitySet="CTDHs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CTMON__MAMON__4BAC3F29" Association="QuanLyChuoiCuaHangCoffeeModel.FK__CTMON__MAMON__4BAC3F29">
+            <End Role="MON" EntitySet="MONs" />
+            <End Role="CTMON" EntitySet="CTMONs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CTMON__MANGUYENL__4CA06362" Association="QuanLyChuoiCuaHangCoffeeModel.FK__CTMON__MANGUYENL__4CA06362">
+            <End Role="NGUYENLIEU" EntitySet="NGUYENLIEUx" />
+            <End Role="CTMON" EntitySet="CTMONs" />
           </AssociationSet>
           <AssociationSet Name="FK__CTXUATKHO__MANGU__44FF419A" Association="QuanLyChuoiCuaHangCoffeeModel.FK__CTXUATKHO__MANGU__44FF419A">
             <End Role="NGUYENLIEU" EntitySet="NGUYENLIEUx" />
@@ -343,15 +376,15 @@
             <End Role="CHUCDANH" EntitySet="CHUCDANHs" />
             <End Role="NHANVIEN" EntitySet="NHANVIENs" />
           </AssociationSet>
-          <AssociationSet Name="FK__DONHANG__IDKHACH__4F7CD00D" Association="QuanLyChuoiCuaHangCoffeeModel.FK__DONHANG__IDKHACH__4F7CD00D">
+          <AssociationSet Name="FK__DONHANG__IDKHACH__52593CB8" Association="QuanLyChuoiCuaHangCoffeeModel.FK__DONHANG__IDKHACH__52593CB8">
             <End Role="KHACHHANG" EntitySet="KHACHHANGs" />
             <End Role="DONHANG" EntitySet="DONHANGs" />
           </AssociationSet>
-          <AssociationSet Name="FK__DONHANG__IDNHANV__5070F446" Association="QuanLyChuoiCuaHangCoffeeModel.FK__DONHANG__IDNHANV__5070F446">
+          <AssociationSet Name="FK__DONHANG__IDNHANV__534D60F1" Association="QuanLyChuoiCuaHangCoffeeModel.FK__DONHANG__IDNHANV__534D60F1">
             <End Role="NHANVIEN" EntitySet="NHANVIENs" />
             <End Role="DONHANG" EntitySet="DONHANGs" />
           </AssociationSet>
-          <AssociationSet Name="FK__KHACHHANG__IDKHA__4CA06362" Association="QuanLyChuoiCuaHangCoffeeModel.FK__KHACHHANG__IDKHA__4CA06362">
+          <AssociationSet Name="FK__KHACHHANG__IDKHA__4F7CD00D" Association="QuanLyChuoiCuaHangCoffeeModel.FK__KHACHHANG__IDKHA__4F7CD00D">
             <End Role="USER" EntitySet="USERS" />
             <End Role="KHACHHANG" EntitySet="KHACHHANGs" />
           </AssociationSet>
@@ -362,10 +395,6 @@
           <AssociationSet Name="FK__XUATKHO__IDNHANV__3F466844" Association="QuanLyChuoiCuaHangCoffeeModel.FK__XUATKHO__IDNHANV__3F466844">
             <End Role="NHANVIEN" EntitySet="NHANVIENs" />
             <End Role="XUATKHO" EntitySet="XUATKHOes" />
-          </AssociationSet>
-          <AssociationSet Name="FK__THUCDON__MASIZE__49C3F6B7" Association="QuanLyChuoiCuaHangCoffeeModel.FK__THUCDON__MASIZE__49C3F6B7">
-            <End Role="SIZE" EntitySet="SIZEs" />
-            <End Role="THUCDON" EntitySet="THUCDONs" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="CTDH">
@@ -378,8 +407,19 @@
           <Property Name="SIZEMON" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
           <Property Name="SOLUONG" Type="Int32" />
           <Property Name="TONGTIEN" Type="Decimal" Precision="19" Scale="4" />
-          <NavigationProperty Name="DONHANG" Relationship="QuanLyChuoiCuaHangCoffeeModel.FK__CTDH__MADH__534D60F1" FromRole="CTDH" ToRole="DONHANG" />
-          <NavigationProperty Name="THUCDON" Relationship="QuanLyChuoiCuaHangCoffeeModel.FK__CTDH__MAMON__5441852A" FromRole="CTDH" ToRole="THUCDON" />
+          <NavigationProperty Name="DONHANG" Relationship="QuanLyChuoiCuaHangCoffeeModel.FK__CTDH__MADH__5629CD9C" FromRole="CTDH" ToRole="DONHANG" />
+          <NavigationProperty Name="MON" Relationship="QuanLyChuoiCuaHangCoffeeModel.FK__CTDH__MAMON__571DF1D5" FromRole="CTDH" ToRole="MON" />
+        </EntityType>
+        <EntityType Name="CTMON">
+          <Key>
+            <PropertyRef Name="MAMON" />
+            <PropertyRef Name="MANGUYENLIEU" />
+          </Key>
+          <Property Name="MAMON" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="MANGUYENLIEU" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="SLNGUYENLIEU" Type="Double" />
+          <NavigationProperty Name="MON" Relationship="QuanLyChuoiCuaHangCoffeeModel.FK__CTMON__MAMON__4BAC3F29" FromRole="CTMON" ToRole="MON" />
+          <NavigationProperty Name="NGUYENLIEU" Relationship="QuanLyChuoiCuaHangCoffeeModel.FK__CTMON__MANGUYENL__4CA06362" FromRole="CTMON" ToRole="NGUYENLIEU" />
         </EntityType>
         <EntityType Name="CTXUATKHO">
           <Key>
@@ -409,12 +449,12 @@
           <Property Name="IDKHACHHANG" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="IDNHANVIEN" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="NGAYDH" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="PHUONGTHUCNHAN" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="TONGGIATRIDONHANG" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="ISDISCOUNT" Type="Int32" />
           <Property Name="GHICHU" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="CTDHs" Relationship="QuanLyChuoiCuaHangCoffeeModel.FK__CTDH__MADH__534D60F1" FromRole="DONHANG" ToRole="CTDH" />
-          <NavigationProperty Name="KHACHHANG" Relationship="QuanLyChuoiCuaHangCoffeeModel.FK__DONHANG__IDKHACH__4F7CD00D" FromRole="DONHANG" ToRole="KHACHHANG" />
-          <NavigationProperty Name="NHANVIEN" Relationship="QuanLyChuoiCuaHangCoffeeModel.FK__DONHANG__IDNHANV__5070F446" FromRole="DONHANG" ToRole="NHANVIEN" />
+          <NavigationProperty Name="CTDHs" Relationship="QuanLyChuoiCuaHangCoffeeModel.FK__CTDH__MADH__5629CD9C" FromRole="DONHANG" ToRole="CTDH" />
+          <NavigationProperty Name="KHACHHANG" Relationship="QuanLyChuoiCuaHangCoffeeModel.FK__DONHANG__IDKHACH__52593CB8" FromRole="DONHANG" ToRole="KHACHHANG" />
+          <NavigationProperty Name="NHANVIEN" Relationship="QuanLyChuoiCuaHangCoffeeModel.FK__DONHANG__IDNHANV__534D60F1" FromRole="DONHANG" ToRole="NHANVIEN" />
         </EntityType>
         <EntityType Name="KHACHHANG">
           <Key>
@@ -423,9 +463,20 @@
           <Property Name="IDKHACHHANG" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="TICHDIEM" Type="Int32" />
           <Property Name="SODONHANG" Type="Int32" />
-          <Property Name="HANGTHANHVIEN" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="DONHANGs" Relationship="QuanLyChuoiCuaHangCoffeeModel.FK__DONHANG__IDKHACH__4F7CD00D" FromRole="KHACHHANG" ToRole="DONHANG" />
-          <NavigationProperty Name="USER" Relationship="QuanLyChuoiCuaHangCoffeeModel.FK__KHACHHANG__IDKHA__4CA06362" FromRole="KHACHHANG" ToRole="USER" />
+          <Property Name="HANGTHANHVIEN" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DONHANGs" Relationship="QuanLyChuoiCuaHangCoffeeModel.FK__DONHANG__IDKHACH__52593CB8" FromRole="KHACHHANG" ToRole="DONHANG" />
+          <NavigationProperty Name="USER" Relationship="QuanLyChuoiCuaHangCoffeeModel.FK__KHACHHANG__IDKHA__4F7CD00D" FromRole="KHACHHANG" ToRole="USER" />
+        </EntityType>
+        <EntityType Name="MON">
+          <Key>
+            <PropertyRef Name="MAMON" />
+          </Key>
+          <Property Name="MAMON" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="TENMON" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="LOAIMON" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="IMAGESOURCE" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CTDHs" Relationship="QuanLyChuoiCuaHangCoffeeModel.FK__CTDH__MAMON__571DF1D5" FromRole="MON" ToRole="CTDH" />
+          <NavigationProperty Name="CTMONs" Relationship="QuanLyChuoiCuaHangCoffeeModel.FK__CTMON__MAMON__4BAC3F29" FromRole="MON" ToRole="CTMON" />
         </EntityType>
         <EntityType Name="NGUYENLIEU">
           <Key>
@@ -433,8 +484,11 @@
           </Key>
           <Property Name="MANGUYENLIEU" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="TENNGUYENLIEU" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DONVI" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="SOLUONGTRONGKHO" Type="Int32" />
           <Property Name="IMAGESOURCE" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="NGAYNHAP" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="CTMONs" Relationship="QuanLyChuoiCuaHangCoffeeModel.FK__CTMON__MANGUYENL__4CA06362" FromRole="NGUYENLIEU" ToRole="CTMON" />
           <NavigationProperty Name="CTXUATKHOes" Relationship="QuanLyChuoiCuaHangCoffeeModel.FK__CTXUATKHO__MANGU__44FF419A" FromRole="NGUYENLIEU" ToRole="CTXUATKHO" />
         </EntityType>
         <EntityType Name="NHANVIEN">
@@ -445,7 +499,7 @@
           <Property Name="LOAINHANVIEN" Type="Int32" />
           <Property Name="MACD" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="CHUCDANH" Relationship="QuanLyChuoiCuaHangCoffeeModel.FK__NHANVIEN__MACD__3B75D760" FromRole="NHANVIEN" ToRole="CHUCDANH" />
-          <NavigationProperty Name="DONHANGs" Relationship="QuanLyChuoiCuaHangCoffeeModel.FK__DONHANG__IDNHANV__5070F446" FromRole="NHANVIEN" ToRole="DONHANG" />
+          <NavigationProperty Name="DONHANGs" Relationship="QuanLyChuoiCuaHangCoffeeModel.FK__DONHANG__IDNHANV__534D60F1" FromRole="NHANVIEN" ToRole="DONHANG" />
           <NavigationProperty Name="USER" Relationship="QuanLyChuoiCuaHangCoffeeModel.FK__NHANVIEN__IDNHAN__3C69FB99" FromRole="NHANVIEN" ToRole="USER" />
           <NavigationProperty Name="XUATKHOes" Relationship="QuanLyChuoiCuaHangCoffeeModel.FK__XUATKHO__IDNHANV__3F466844" FromRole="NHANVIEN" ToRole="XUATKHO" />
         </EntityType>
@@ -457,20 +511,6 @@
           <Property Name="SIZEMON" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
           <Property Name="GIABAN" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="SOLUONG" Type="Int32" />
-          <Property Name="TRANGTHAI" Type="Int32" />
-          <NavigationProperty Name="THUCDONs" Relationship="QuanLyChuoiCuaHangCoffeeModel.FK__THUCDON__MASIZE__49C3F6B7" FromRole="SIZE" ToRole="THUCDON" />
-        </EntityType>
-        <EntityType Name="THUCDON">
-          <Key>
-            <PropertyRef Name="MAMON" />
-          </Key>
-          <Property Name="MAMON" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="TENMON" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="MALOAIMONAN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="MASIZE" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="IMGSOURCE" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="CTDHs" Relationship="QuanLyChuoiCuaHangCoffeeModel.FK__CTDH__MAMON__5441852A" FromRole="THUCDON" ToRole="CTDH" />
-          <NavigationProperty Name="SIZE" Relationship="QuanLyChuoiCuaHangCoffeeModel.FK__THUCDON__MASIZE__49C3F6B7" FromRole="THUCDON" ToRole="SIZE" />
         </EntityType>
         <EntityType Name="USER">
           <Key>
@@ -487,7 +527,7 @@
           <Property Name="DIACHI" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="NGBATDAU" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="ROLE" Type="Int32" />
-          <NavigationProperty Name="KHACHHANG" Relationship="QuanLyChuoiCuaHangCoffeeModel.FK__KHACHHANG__IDKHA__4CA06362" FromRole="USER" ToRole="KHACHHANG" />
+          <NavigationProperty Name="KHACHHANG" Relationship="QuanLyChuoiCuaHangCoffeeModel.FK__KHACHHANG__IDKHA__4F7CD00D" FromRole="USER" ToRole="KHACHHANG" />
           <NavigationProperty Name="NHANVIEN" Relationship="QuanLyChuoiCuaHangCoffeeModel.FK__NHANVIEN__IDNHAN__3C69FB99" FromRole="USER" ToRole="NHANVIEN" />
         </EntityType>
         <EntityType Name="XUATKHO">
@@ -497,13 +537,11 @@
           <Property Name="MAPHIEU" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="IDNHANVIEN" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="TENKHO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="DCKHO" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="SDTQLKHO" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="NGXUATKHO" Type="DateTime" Nullable="false" Precision="0" />
           <NavigationProperty Name="CTXUATKHOes" Relationship="QuanLyChuoiCuaHangCoffeeModel.FK__CTXUATKHO__MAPHI__440B1D61" FromRole="XUATKHO" ToRole="CTXUATKHO" />
           <NavigationProperty Name="NHANVIEN" Relationship="QuanLyChuoiCuaHangCoffeeModel.FK__XUATKHO__IDNHANV__3F466844" FromRole="XUATKHO" ToRole="NHANVIEN" />
         </EntityType>
-        <Association Name="FK__CTDH__MADH__534D60F1">
+        <Association Name="FK__CTDH__MADH__5629CD9C">
           <End Type="QuanLyChuoiCuaHangCoffeeModel.DONHANG" Role="DONHANG" Multiplicity="1" />
           <End Type="QuanLyChuoiCuaHangCoffeeModel.CTDH" Role="CTDH" Multiplicity="*" />
           <ReferentialConstraint>
@@ -515,15 +553,39 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__CTDH__MAMON__5441852A">
-          <End Type="QuanLyChuoiCuaHangCoffeeModel.THUCDON" Role="THUCDON" Multiplicity="1" />
+        <Association Name="FK__CTDH__MAMON__571DF1D5">
+          <End Type="QuanLyChuoiCuaHangCoffeeModel.MON" Role="MON" Multiplicity="1" />
           <End Type="QuanLyChuoiCuaHangCoffeeModel.CTDH" Role="CTDH" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="THUCDON">
+            <Principal Role="MON">
               <PropertyRef Name="MAMON" />
             </Principal>
             <Dependent Role="CTDH">
               <PropertyRef Name="MAMON" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CTMON__MAMON__4BAC3F29">
+          <End Type="QuanLyChuoiCuaHangCoffeeModel.MON" Role="MON" Multiplicity="1" />
+          <End Type="QuanLyChuoiCuaHangCoffeeModel.CTMON" Role="CTMON" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MON">
+              <PropertyRef Name="MAMON" />
+            </Principal>
+            <Dependent Role="CTMON">
+              <PropertyRef Name="MAMON" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CTMON__MANGUYENL__4CA06362">
+          <End Type="QuanLyChuoiCuaHangCoffeeModel.NGUYENLIEU" Role="NGUYENLIEU" Multiplicity="1" />
+          <End Type="QuanLyChuoiCuaHangCoffeeModel.CTMON" Role="CTMON" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NGUYENLIEU">
+              <PropertyRef Name="MANGUYENLIEU" />
+            </Principal>
+            <Dependent Role="CTMON">
+              <PropertyRef Name="MANGUYENLIEU" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -563,7 +625,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__DONHANG__IDKHACH__4F7CD00D">
+        <Association Name="FK__DONHANG__IDKHACH__52593CB8">
           <End Type="QuanLyChuoiCuaHangCoffeeModel.KHACHHANG" Role="KHACHHANG" Multiplicity="0..1" />
           <End Type="QuanLyChuoiCuaHangCoffeeModel.DONHANG" Role="DONHANG" Multiplicity="*" />
           <ReferentialConstraint>
@@ -575,7 +637,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__DONHANG__IDNHANV__5070F446">
+        <Association Name="FK__DONHANG__IDNHANV__534D60F1">
           <End Type="QuanLyChuoiCuaHangCoffeeModel.NHANVIEN" Role="NHANVIEN" Multiplicity="0..1" />
           <End Type="QuanLyChuoiCuaHangCoffeeModel.DONHANG" Role="DONHANG" Multiplicity="*" />
           <ReferentialConstraint>
@@ -587,7 +649,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__KHACHHANG__IDKHA__4CA06362">
+        <Association Name="FK__KHACHHANG__IDKHA__4F7CD00D">
           <End Type="QuanLyChuoiCuaHangCoffeeModel.USER" Role="USER" Multiplicity="1" />
           <End Type="QuanLyChuoiCuaHangCoffeeModel.KHACHHANG" Role="KHACHHANG" Multiplicity="0..1" />
           <ReferentialConstraint>
@@ -623,19 +685,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__THUCDON__MASIZE__49C3F6B7">
-          <End Type="QuanLyChuoiCuaHangCoffeeModel.SIZE" Role="SIZE" Multiplicity="0..1" />
-          <End Type="QuanLyChuoiCuaHangCoffeeModel.THUCDON" Role="THUCDON" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SIZE">
-              <PropertyRef Name="MASIZE" />
-            </Principal>
-            <Dependent Role="THUCDON">
-              <PropertyRef Name="MASIZE" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        </Schema>
+      </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -649,6 +699,15 @@
                 <ScalarProperty Name="SIZEMON" ColumnName="SIZEMON" />
                 <ScalarProperty Name="MAMON" ColumnName="MAMON" />
                 <ScalarProperty Name="MADH" ColumnName="MADH" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CTMONs">
+            <EntityTypeMapping TypeName="QuanLyChuoiCuaHangCoffeeModel.CTMON">
+              <MappingFragment StoreEntitySet="CTMON">
+                <ScalarProperty Name="SLNGUYENLIEU" ColumnName="SLNGUYENLIEU" />
+                <ScalarProperty Name="MANGUYENLIEU" ColumnName="MANGUYENLIEU" />
+                <ScalarProperty Name="MAMON" ColumnName="MAMON" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -674,8 +733,8 @@
             <EntityTypeMapping TypeName="QuanLyChuoiCuaHangCoffeeModel.DONHANG">
               <MappingFragment StoreEntitySet="DONHANG">
                 <ScalarProperty Name="GHICHU" ColumnName="GHICHU" />
+                <ScalarProperty Name="ISDISCOUNT" ColumnName="ISDISCOUNT" />
                 <ScalarProperty Name="TONGGIATRIDONHANG" ColumnName="TONGGIATRIDONHANG" />
-                <ScalarProperty Name="PHUONGTHUCNHAN" ColumnName="PHUONGTHUCNHAN" />
                 <ScalarProperty Name="NGAYDH" ColumnName="NGAYDH" />
                 <ScalarProperty Name="IDNHANVIEN" ColumnName="IDNHANVIEN" />
                 <ScalarProperty Name="IDKHACHHANG" ColumnName="IDKHACHHANG" />
@@ -693,11 +752,23 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="MONs">
+            <EntityTypeMapping TypeName="QuanLyChuoiCuaHangCoffeeModel.MON">
+              <MappingFragment StoreEntitySet="MON">
+                <ScalarProperty Name="IMAGESOURCE" ColumnName="IMAGESOURCE" />
+                <ScalarProperty Name="LOAIMON" ColumnName="LOAIMON" />
+                <ScalarProperty Name="TENMON" ColumnName="TENMON" />
+                <ScalarProperty Name="MAMON" ColumnName="MAMON" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="NGUYENLIEUx">
             <EntityTypeMapping TypeName="QuanLyChuoiCuaHangCoffeeModel.NGUYENLIEU">
               <MappingFragment StoreEntitySet="NGUYENLIEU">
+                <ScalarProperty Name="NGAYNHAP" ColumnName="NGAYNHAP" />
                 <ScalarProperty Name="IMAGESOURCE" ColumnName="IMAGESOURCE" />
                 <ScalarProperty Name="SOLUONGTRONGKHO" ColumnName="SOLUONGTRONGKHO" />
+                <ScalarProperty Name="DONVI" ColumnName="DONVI" />
                 <ScalarProperty Name="TENNGUYENLIEU" ColumnName="TENNGUYENLIEU" />
                 <ScalarProperty Name="MANGUYENLIEU" ColumnName="MANGUYENLIEU" />
               </MappingFragment>
@@ -715,22 +786,10 @@
           <EntitySetMapping Name="SIZEs">
             <EntityTypeMapping TypeName="QuanLyChuoiCuaHangCoffeeModel.SIZE">
               <MappingFragment StoreEntitySet="SIZE">
-                <ScalarProperty Name="TRANGTHAI" ColumnName="TRANGTHAI" />
                 <ScalarProperty Name="SOLUONG" ColumnName="SOLUONG" />
                 <ScalarProperty Name="GIABAN" ColumnName="GIABAN" />
                 <ScalarProperty Name="SIZEMON" ColumnName="SIZEMON" />
                 <ScalarProperty Name="MASIZE" ColumnName="MASIZE" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="THUCDONs">
-            <EntityTypeMapping TypeName="QuanLyChuoiCuaHangCoffeeModel.THUCDON">
-              <MappingFragment StoreEntitySet="THUCDON">
-                <ScalarProperty Name="IMGSOURCE" ColumnName="IMGSOURCE" />
-                <ScalarProperty Name="MASIZE" ColumnName="MASIZE" />
-                <ScalarProperty Name="MALOAIMONAN" ColumnName="MALOAIMONAN" />
-                <ScalarProperty Name="TENMON" ColumnName="TENMON" />
-                <ScalarProperty Name="MAMON" ColumnName="MAMON" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -755,8 +814,6 @@
             <EntityTypeMapping TypeName="QuanLyChuoiCuaHangCoffeeModel.XUATKHO">
               <MappingFragment StoreEntitySet="XUATKHO">
                 <ScalarProperty Name="NGXUATKHO" ColumnName="NGXUATKHO" />
-                <ScalarProperty Name="SDTQLKHO" ColumnName="SDTQLKHO" />
-                <ScalarProperty Name="DCKHO" ColumnName="DCKHO" />
                 <ScalarProperty Name="TENKHO" ColumnName="TENKHO" />
                 <ScalarProperty Name="IDNHANVIEN" ColumnName="IDNHANVIEN" />
                 <ScalarProperty Name="MAPHIEU" ColumnName="MAPHIEU" />

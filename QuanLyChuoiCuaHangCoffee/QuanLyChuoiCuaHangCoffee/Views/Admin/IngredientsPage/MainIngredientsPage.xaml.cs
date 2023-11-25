@@ -24,5 +24,20 @@ namespace QuanLyChuoiCuaHangCoffee.Views.Admin.IngredientsPage
         {
             InitializeComponent();
         }
+
+        private void FilterBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void filtercbb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void cbbYear_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace QuanLyChuoiCuaHangCoffee.Models.DataProvider
+namespace QuanLyChuoiCuaHangCoffee.Models
 {
     using System;
     using System.Data.Entity;
@@ -26,14 +26,15 @@ namespace QuanLyChuoiCuaHangCoffee.Models.DataProvider
         }
     
         public virtual DbSet<CTDH> CTDHs { get; set; }
+        public virtual DbSet<CTMON> CTMONs { get; set; }
         public virtual DbSet<CTXUATKHO> CTXUATKHOes { get; set; }
         public virtual DbSet<CHUCDANH> CHUCDANHs { get; set; }
         public virtual DbSet<DONHANG> DONHANGs { get; set; }
         public virtual DbSet<KHACHHANG> KHACHHANGs { get; set; }
+        public virtual DbSet<MON> MONs { get; set; }
         public virtual DbSet<NGUYENLIEU> NGUYENLIEUx { get; set; }
         public virtual DbSet<NHANVIEN> NHANVIENs { get; set; }
         public virtual DbSet<SIZE> SIZEs { get; set; }
-        public virtual DbSet<THUCDON> THUCDONs { get; set; }
         public virtual DbSet<USER> USERS { get; set; }
         public virtual DbSet<XUATKHO> XUATKHOes { get; set; }
     }

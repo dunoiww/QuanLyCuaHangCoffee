@@ -7,29 +7,30 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace QuanLyChuoiCuaHangCoffee.Models.DataProvider
+namespace QuanLyChuoiCuaHangCoffee.Models
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class NHANVIEN
+    public partial class NGUYENLIEU
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public NHANVIEN()
+        public NGUYENLIEU()
         {
-            this.DONHANGs = new HashSet<DONHANG>();
-            this.XUATKHOes = new HashSet<XUATKHO>();
+            this.CTMONs = new HashSet<CTMON>();
+            this.CTXUATKHOes = new HashSet<CTXUATKHO>();
         }
     
-        public string IDNHANVIEN { get; set; }
-        public Nullable<int> LOAINHANVIEN { get; set; }
-        public string MACD { get; set; }
+        public string MANGUYENLIEU { get; set; }
+        public string TENNGUYENLIEU { get; set; }
+        public string DONVI { get; set; }
+        public Nullable<int> SOLUONGTRONGKHO { get; set; }
+        public string IMAGESOURCE { get; set; }
+        public System.DateTime NGAYNHAP { get; set; }
     
-        public virtual CHUCDANH CHUCDANH { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DONHANG> DONHANGs { get; set; }
-        public virtual USER USER { get; set; }
+        public virtual ICollection<CTMON> CTMONs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<XUATKHO> XUATKHOes { get; set; }
+        public virtual ICollection<CTXUATKHO> CTXUATKHOes { get; set; }
     }
 }

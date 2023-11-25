@@ -1,15 +1,12 @@
 ﻿using Library.ViewModel;
 using QuanLyChuoiCuaHangCoffee.DTOs;
-using QuanLyChuoiCuaHangCoffee.Models.DataProvider;
+using QuanLyChuoiCuaHangCoffee.Models;
 using QuanLyChuoiCuaHangCoffee.Views.Login;
 using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Net.Mail;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
+using System.Net.Mail;
 using System.Windows.Controls;
 using System.Windows.Input;
 

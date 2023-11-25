@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace QuanLyChuoiCuaHangCoffee.Models.DataProvider
+namespace QuanLyChuoiCuaHangCoffee.Models
 {
     using System;
     using System.Collections.Generic;
@@ -24,8 +24,8 @@ namespace QuanLyChuoiCuaHangCoffee.Models.DataProvider
         public string IDKHACHHANG { get; set; }
         public string IDNHANVIEN { get; set; }
         public System.DateTime NGAYDH { get; set; }
-        public string PHUONGTHUCNHAN { get; set; }
         public Nullable<decimal> TONGGIATRIDONHANG { get; set; }
+        public Nullable<int> ISDISCOUNT { get; set; }
         public string GHICHU { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

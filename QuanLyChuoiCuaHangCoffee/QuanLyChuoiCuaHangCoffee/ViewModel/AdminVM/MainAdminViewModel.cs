@@ -1,5 +1,6 @@
 ﻿using Library.ViewModel;
 using QuanLyChuoiCuaHangCoffee.Views.Admin.DashboardPage;
+using QuanLyChuoiCuaHangCoffee.Views.Admin.IngredientsPage;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,13 +13,13 @@ namespace QuanLyChuoiCuaHangCoffee.ViewModel.AdminVM
 {
     public class MainAdminViewModel : BaseViewModel
     {
-        public ICommand LoadStatisticalPageML { get; set; }
+        public ICommand LoadMainDashboardPageCF { get; set; }
 
         public MainAdminViewModel()
         {
-            LoadStatisticalPageML = new RelayCommand<Frame>((p) => { return true; }, (p) =>
+            LoadMainDashboardPageCF = new RelayCommand<Frame>((p) => { return true; }, (p) =>
             {
-                p.Content = new MainDashboardPage();
+                p.Content = new MainIngredientsPage();
             });
         }
     }

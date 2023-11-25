@@ -7,20 +7,18 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace QuanLyChuoiCuaHangCoffee.Models.DataProvider
+namespace QuanLyChuoiCuaHangCoffee.Models
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class CTDH
+    public partial class CTXUATKHO
     {
-        public string MADH { get; set; }
-        public string MAMON { get; set; }
-        public string SIZEMON { get; set; }
+        public string MAPHIEU { get; set; }
+        public string MANGUYENLIEU { get; set; }
         public Nullable<int> SOLUONG { get; set; }
-        public Nullable<decimal> TONGTIEN { get; set; }
     
-        public virtual DONHANG DONHANG { get; set; }
-        public virtual THUCDON THUCDON { get; set; }
+        public virtual NGUYENLIEU NGUYENLIEU { get; set; }
+        public virtual XUATKHO XUATKHO { get; set; }
     }
 }

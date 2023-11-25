@@ -1,15 +1,11 @@
 ﻿using Library.ViewModel;
 using QuanLyChuoiCuaHangCoffee.DTOs;
 using QuanLyChuoiCuaHangCoffee.Models.DataProvider;
-using QuanLyChuoiCuaHangCoffee.ViewModel;
 using QuanLyChuoiCuaHangCoffee.Views.Admin;
 using QuanLyChuoiCuaHangCoffee.Views.Customer;
 using QuanLyChuoiCuaHangCoffee.Views.Login;
 using QuanLyChuoiCuaHangCoffee.Views.MessageBoxCF;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;

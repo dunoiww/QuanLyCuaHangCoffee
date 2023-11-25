@@ -1,10 +1,7 @@
-﻿using Microsoft.Xaml.Behaviors.Media;
-using QuanLyChuoiCuaHangCoffee.DTOs;
+﻿using QuanLyChuoiCuaHangCoffee.DTOs;
 using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace QuanLyChuoiCuaHangCoffee.Models.DataProvider
