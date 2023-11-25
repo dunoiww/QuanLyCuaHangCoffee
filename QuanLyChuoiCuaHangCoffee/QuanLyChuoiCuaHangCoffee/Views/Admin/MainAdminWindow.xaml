@@ -23,7 +23,7 @@
         Width="1400" Height="800">
 
     <Window.Clip>
-        <RectangleGeometry Rect="0, 0, 1400, 800" RadiusX="10" RadiusY="10"></RectangleGeometry>
+        <RectangleGeometry Rect="0, 0, 1400, 800" RadiusX="20" RadiusY="20"></RectangleGeometry>
     </Window.Clip>
 
     <Grid Background="#000000">
@@ -33,6 +33,228 @@
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <uc:uc_controlbar></uc:uc_controlbar>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1.5*" />
+                <ColumnDefinition Width="9*" />
+            </Grid.ColumnDefinitions>
+
+            <!--Menu bên trái-->
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="9*" />
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <!-- Logo -->
+                <StackPanel Grid.Row="0"
+                            Orientation="Horizontal"
+                            HorizontalAlignment="Center"
+                            Height="40" Background="#000000">
+                    <Image Source="/Resources/logoEPSRO.png"
+                           Width="50"
+                           Margin="8,-5,5,0" />
+                    <TextBlock TextWrapping="Wrap"
+                               materialDesign:TextBlockAssist.AutoToolTip="True"
+                               VerticalAlignment="Center"
+                               TextAlignment="Center"
+                               Text="Café EPSRO"
+                               FontFamily="Lora"
+                               FontWeight= "DemiBold"
+                               Foreground="#ffde59"
+                               FontSize="16" />
+                </StackPanel>
+
+                <!-- Các chức năng -->
+
+                <StackPanel Grid.Row="1" Background="#1B0D00">
+                    <RadioButton Style="{StaticResource MenuButtonMain}"
+                                 IsChecked="True"
+                                 Name="Dashboard"
+                                 GroupName="mainOptions"
+                                 Command="{Binding LoadStatisticalPageML}"
+                                 CommandParameter="{Binding ElementName=mainFrame}">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Finance"
+                                                     Width="35"
+                                                     Height="32"
+                                                     VerticalAlignment="Center"
+                                                     Cursor="Hand"
+                                                     Foreground="White"
+                                                     Style="{StaticResource menuButtonIcon}"/>
+                            <TextBlock Text="Dashboard" Style="{StaticResource menuButtonText}"/>
+                        </StackPanel>
+                    </RadioButton>
+
+                    <!-- Button quản lý khách hàng-->
+                    <Border CornerRadius="5">
+                        <RadioButton Style="{StaticResource MenuButtonMain}"
+                                     GroupName="mainOptions"
+                                     Command="{Binding LoadCustomerManagePageML}"
+                                     CommandParameter="{Binding ElementName=mainFrame}">
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="TableFurniture"
+                                                         Width="35"
+                                                         Height="32"
+                                                         VerticalAlignment="Center"
+                                                         Cursor="Hand"
+                                                         Foreground="White"
+                                                         Style="{StaticResource menuButtonIcon}"/>
+                                <TextBlock Text="Quản lý bàn" Style="{StaticResource menuButtonText}"/>
+                            </StackPanel>
+                        </RadioButton>
+                    </Border>
+
+                    <!-- Button quản lí sách-->
+                    <Border CornerRadius="5">
+                        <RadioButton Style="{StaticResource MenuButtonMain}"
+                                     GroupName="mainOptions"
+                                     Command="{Binding LoadBookManagePageML}"
+                                     CommandParameter="{Binding ElementName=mainFrame}">
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="Food"
+                                                         Width="35"
+                                                         Height="32"
+                                                         VerticalAlignment="Center"
+                                                         Cursor="Hand"
+                                                         Foreground="White"
+                                                         Style="{StaticResource menuButtonIcon}"/>
+                                <TextBlock Text="Nguyên liệu" Style="{StaticResource menuButtonText}"/>
+                            </StackPanel>
+                        </RadioButton>
+                    </Border>
+
+                    <!-- Button nhập sách -->
+                    <Border CornerRadius="5">
+                        <RadioButton Style="{StaticResource MenuButtonMain}"
+                                     GroupName="mainOptions"
+                                     Command="{Binding LoadBookManagePageML}"
+                                     CommandParameter="{Binding ElementName=mainFrame}">
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="ReceiptText"
+                                                         Width="35"
+                                                         Height="32"
+                                                         VerticalAlignment="Center"
+                                                         Cursor="Hand"
+                                                         Foreground="White"
+                                                         Style="{StaticResource menuButtonIcon}"/>
+                                <TextBlock Text="Hoá đơn" Style="{StaticResource menuButtonText}"/>
+                            </StackPanel>
+                        </RadioButton>
+                    </Border>
+
+                    <!-- Button lịch sử -->
+                    <Border CornerRadius="5">
+                        <RadioButton Style="{StaticResource MenuButtonMain}"
+                                     GroupName="mainOptions"
+                                     Command="{Binding LoadBookManagePageML}"
+                                     CommandParameter="{Binding ElementName=mainFrame}">
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="AccountGroup"
+                                 Width="35"
+                                 Height="32"
+                                 VerticalAlignment="Center"
+                                 Cursor="Hand"
+                                 Foreground="White"
+                                 Style="{StaticResource menuButtonIcon}"/>
+                                <TextBlock Text="Nhân viên" Style="{StaticResource menuButtonText}"/>
+                            </StackPanel>
+                        </RadioButton>
+                    </Border>
+
+                    <!-- Button tầng dãy -->
+                    <Border CornerRadius="5">
+                        <RadioButton Style="{StaticResource MenuButtonMain}"
+                                     GroupName="mainOptions"
+                                     Command="{Binding LoadBookManagePageML}"
+                                     CommandParameter="{Binding ElementName=mainFrame}">
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="AccountMultiple"
+                                                         Width="35"
+                                                         Height="32"
+                                                         VerticalAlignment="Center"
+                                                         Cursor="Hand"
+                                                         Foreground="White"
+                                                         Style="{StaticResource menuButtonIcon}"/>
+                                <TextBlock Text="Khách hàng" Style="{StaticResource menuButtonText}"/>
+                            </StackPanel>
+                        </RadioButton>
+                    </Border>
+
+                    <!-- Button thuê sách -->
+                    <Border CornerRadius="5">
+                        <RadioButton Style="{StaticResource MenuButtonMain}"
+                                     GroupName="mainOptions"
+                                     Command="{Binding LoadBookManagePageML}"
+                                     CommandParameter="{Binding ElementName=mainFrame}">
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="Settings"
+                                                         Width="35"
+                                                         Height="32"
+                                                         VerticalAlignment="Center"
+                                                         Cursor="Hand"
+                                                         Foreground="White"
+                                                         Style="{StaticResource menuButtonIcon}"/>
+                                <TextBlock Text="Cài đặt" Style="{StaticResource menuButtonText}"/>
+                            </StackPanel>
+                        </RadioButton>
+                    </Border>
+                </StackPanel>
+
+                <StackPanel Grid.Row="2"
+                            Orientation="Horizontal"
+                            Grid.ColumnSpan="2"
+                            Height="40" Background="#000000">
+
+                    <TextBlock TextWrapping="Wrap"
+                               materialDesign:TextBlockAssist.AutoToolTip="True"
+                               VerticalAlignment="Center"
+                               TextAlignment="Left"
+                               Margin="5 0 0 0"
+                               Text="Design by GROUP 7 😀"
+                               FontFamily="Inter"
+                               FontWeight= "DemiBold"
+                               Foreground="#CACACA"
+                               Width="122"
+                               FontSize="16" />
+
+                    <Image Source="/Resources/logoEPSRO.png"
+                           Width="50"
+                           Margin="8,-5,5,0" />
+                    
+                </StackPanel>
+            </Grid>
+
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.9*" />
+                    <RowDefinition Height="9*" />
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0" Background="#F0B000">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding optionName}"
+                                   FontSize="50"
+                                   VerticalAlignment="Center"
+                                   Margin="30 0 0 0"/>
+                    </StackPanel>
+                </Grid>
+
+                <Frame x:Name="mainFrame"
+                       NavigationUIVisibility="Hidden" Grid.Row="1"
+                       Background="#242424">
+
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Loaded">
+                            <i:InvokeCommandAction Command="{Binding LoadStatisticalPageML}"
+                                       CommandParameter="{Binding ElementName=mainFrame}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Frame>
+            </Grid>
+
         </Grid>
         
     </Grid>

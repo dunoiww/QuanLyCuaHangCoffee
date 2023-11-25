@@ -43,6 +43,12 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="LiveCharts, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiveCharts.0.9.7\lib\net45\LiveCharts.dll</HintPath>
+    </Reference>
+    <Reference Include="LiveCharts.Wpf, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiveCharts.Wpf.0.9.7\lib\net45\LiveCharts.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="MaterialDesignColors, Version=2.1.4.0, Culture=neutral, PublicKeyToken=df2a72020bd7962a, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialDesignColors.2.1.4\lib\net462\MaterialDesignColors.dll</HintPath>
     </Reference>
@@ -133,11 +139,19 @@
     </Compile>
     <Compile Include="Utils\Constants.cs" />
     <Compile Include="Utils\ConverterValue\BoolValueConverter.cs" />
+    <Compile Include="ViewModel\AdminVM\DashboardVM\DashboardViewModel.cs" />
+    <Compile Include="ViewModel\AdminVM\IngredientsVM\IngredientsViewModel.cs" />
     <Compile Include="ViewModel\AdminVM\MainAdminViewModel.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\LoginVM\ForgotPassViewModel.cs" />
     <Compile Include="ViewModel\LoginVM\LoginViewModel.cs" />
     <Compile Include="ViewModel\uc_controlbarViewModel.cs" />
+    <Compile Include="Views\Admin\DashboardPage\MainDashboardPage.xaml.cs">
+      <DependentUpon>MainDashboardPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Admin\IngredientsPage\MainIngredientsPage.xaml.cs">
+      <DependentUpon>MainIngredientsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Admin\MainAdminWindow.xaml.cs">
       <DependentUpon>MainAdminWindow.xaml</DependentUpon>
     </Compile>
@@ -182,6 +196,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UsercontrolCF\uc_controlbar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Admin\DashboardPage\MainDashboardPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Admin\IngredientsPage\MainIngredientsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -272,6 +294,8 @@
       <DependentUpon>QuanLyChuoiCuaHangCoffeeModels.edmx</DependentUpon>
       <LastGenOutput>QuanLyChuoiCuaHangCoffeeModels.cs</LastGenOutput>
     </Content>
+    <Resource Include="Resources\LogoEPSRO.png" />
+    <Resource Include="Resources\LogoEPSRO.ico" />
     <Resource Include="Resources\waitting.png" />
     <Resource Include="Resources\x-circle.png" />
     <Resource Include="Resources\check-circle.png" />
