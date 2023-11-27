@@ -14,9 +14,18 @@ namespace QuanLyChuoiCuaHangCoffee.Models
     
     public partial class SIZE
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public SIZE()
+        {
+            this.CTMONs = new HashSet<CTMON>();
+        }
+    
         public string MASIZE { get; set; }
         public string SIZEMON { get; set; }
         public Nullable<decimal> GIABAN { get; set; }
         public Nullable<int> SOLUONG { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CTMON> CTMONs { get; set; }
     }
 }

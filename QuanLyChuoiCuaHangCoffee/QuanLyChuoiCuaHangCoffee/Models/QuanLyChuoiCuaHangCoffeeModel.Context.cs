@@ -25,6 +25,7 @@ namespace QuanLyChuoiCuaHangCoffee.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<BAN> BANs { get; set; }
         public virtual DbSet<CTDH> CTDHs { get; set; }
         public virtual DbSet<CTMON> CTMONs { get; set; }
         public virtual DbSet<CTXUATKHO> CTXUATKHOes { get; set; }

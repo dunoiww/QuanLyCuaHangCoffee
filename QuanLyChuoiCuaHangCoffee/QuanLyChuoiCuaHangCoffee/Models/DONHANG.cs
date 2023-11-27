@@ -17,6 +17,7 @@ namespace QuanLyChuoiCuaHangCoffee.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public DONHANG()
         {
+            this.BANs = new HashSet<BAN>();
             this.CTDHs = new HashSet<CTDH>();
         }
     
@@ -28,6 +29,8 @@ namespace QuanLyChuoiCuaHangCoffee.Models
         public Nullable<int> ISDISCOUNT { get; set; }
         public string GHICHU { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BAN> BANs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CTDH> CTDHs { get; set; }
         public virtual KHACHHANG KHACHHANG { get; set; }

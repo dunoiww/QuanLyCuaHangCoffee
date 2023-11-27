@@ -5,10 +5,273 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:QuanLyChuoiCuaHangCoffee.Views.Admin.TablesPage"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="MainTablesPage">
+      d:DesignHeight="690" d:DesignWidth="1180"
+      Title="MainTablesPage"
+      Name="MainTablesPageCF"
+    xmlns:i = "http://schemas.microsoft.com/xaml/behaviors"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+    TextElement.FontWeight="Regular"
+    TextElement.FontSize="13"
+    TextOptions.TextFormattingMode="Ideal"
+    TextOptions.TextRenderingMode="Auto"
+    FontFamily="{DynamicResource MaterialDesignFont}"
+    DataContext="{StaticResource TablesVM}">
+
+    <Page.Triggers>
+        <EventTrigger RoutedEvent="Page.Loaded">
+            <BeginStoryboard>
+                <Storyboard>
+                    <DoubleAnimation Storyboard.TargetName="MainTablesPageCF"
+                             Storyboard.TargetProperty="Opacity"
+                             From="0"
+                             To="1"
+                             Duration="0:0:0.5" />
+
+
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+    </Page.Triggers>
 
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="6*"></ColumnDefinition>
+            <ColumnDefinition Width="4*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <!--Phần này hiển thị bàn-->
+        <Grid Grid.Column="0">
+            <materialDesign:Card Width="700"
+                      Height="685"
+                      UniformCornerRadius="10">
+                <Frame x:Name="mainFrame"
+                        NavigationUIVisibility="Hidden"
+                        Background="#000000">
+
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Loaded">
+                            <i:InvokeCommandAction Command="{Binding LoadMainDashboardPageCF}"
+                                       CommandParameter="{Binding ElementName=mainFrame}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </Frame>
+            </materialDesign:Card>
+        </Grid>
+         <!--Hiển thị thông tin hoá đơn của từng bàn khi click vào-->
+        <Grid Grid.Column="1">
+            <materialDesign:Card Margin="10 5 5 5" 
+                     UniformCornerRadius="10"
+                     Background="#000000">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="3*"></RowDefinition>
+                        <RowDefinition Height="2*"></RowDefinition>
+                        <RowDefinition Height="7*"></RowDefinition>
+                        <RowDefinition Height="2*"></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="0">
+                            <Button VerticalAlignment="Top"
+                                    HorizontalAlignment="Left"
+                                    Background="Transparent"
+                                    Foreground="Black"
+                                    BorderBrush="Transparent"
+                                    ToolBar.OverflowMode="AsNeeded"
+                                    ToolTip="In hoá đơn"
+                                    Click="Button_Click"
+                                    Panel.ZIndex="100">
+                                <materialDesign:PackIcon Kind="LocalPrintShop" Height="30" Width="30"
+                                                         Foreground="#ffffff"/>
+
+                            </Button>
+
+                            <Label Content="Coffee EPSRO"
+                                   FontSize="35"
+                                   FontWeight="Bold"
+                                   Foreground="#ffffff"
+                                   BorderThickness="0 0 0 1"
+                                   BorderBrush="#f0b000"
+                                   HorizontalContentAlignment="Center"/>
+                        </Grid>
+
+                        <Grid Grid.Row="1">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <materialDesign:PackIcon Kind="MapMarker" 
+                                                         Foreground="#ffffff"
+                                                         Width="36"
+                                                         Height="36"
+                                                         VerticalAlignment="Center"/>
+                                <Label Content="Tân Tiến - Đồng Phú - Bình Phước"
+                                       Foreground="#ffffff"
+                                       FontSize="20"
+                                       VerticalAlignment="Center">
+
+                                </Label>
+                            </StackPanel>
+                        </Grid>
+
+                        <Grid Grid.Row="2">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <materialDesign:PackIcon Kind="Phone" 
+                                 Foreground="#ffffff"
+                                 Width="36"
+                                 Height="36"
+                                 VerticalAlignment="Center"/>
+                                <Label Content="0987654321"
+                                       Foreground="#ffffff"
+                                       FontSize="20"
+                                       VerticalAlignment="Center">
+
+                                </Label>
+                            </StackPanel>
+                        </Grid>
+                    </Grid>
+
+                    <Border BorderThickness="0 0 0 1"
+                            BorderBrush="#f0b000"
+                            Margin="10,0,10,0" Grid.Row="1">
+                        <StackPanel Margin="0,0,0,-1">
+                            <StackPanel>
+                                <Grid Margin="0 3 0 0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Grid.Column="0" Content="Bàn số: "
+                                           FontSize="18"
+                                           Foreground="#f0b000"></Label>
+                                    <Label Grid.Column="1" x:Name="tableNumber"
+                                           Foreground="#ffffff"
+                                           FontSize="18" HorizontalAlignment="Right"/>
+                                </Grid>
+                            </StackPanel>
+                            <StackPanel>
+                                <Grid Margin="0 3 0 0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Grid.Column="0" Content="Nhân viên: " Foreground="#f0b000"
+                                           FontSize="18"></Label>
+                                    <Label Grid.Column="1" x:Name="nhanvien" Foreground="#ffffff"
+                                           FontSize="18" HorizontalAlignment="Right"/>
+                                </Grid>
+                            </StackPanel>
+
+                            <StackPanel>
+                                <Grid Margin="0 3 0 0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Grid.Column="0" Content="Ngày: " Foreground="#f0b000"
+                                           FontSize="18"></Label>
+                                    <Label Grid.Column="1" x:Name="datetime" Foreground="#ffffff"
+                                           FontSize="18" HorizontalAlignment="Right"/>
+                                </Grid>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Grid.Row="2"
+                            BorderThickness="0,0,0,1"
+                            BorderBrush="Gray"
+                            Margin="10,0,10,0">
+                        <ScrollViewer VerticalScrollBarVisibility="Auto"
+                                      x:Name="scrollview">
+                            <ItemsControl ItemsSource="{Binding ListProduct}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border  Height="80"
+                                                 BorderBrush="LightGray"
+                                                 BorderThickness="0,0,0,1">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="70*"/>
+                                                    <ColumnDefinition Width="30*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <StackPanel Orientation="Horizontal"
+                                                            Grid.Column="0">
+                                                    <StackPanel>
+                                                        <TextBlock Text="{Binding TenMon}"
+                                                                   FontSize="15" />
+                                                        <StackPanel Orientation="Horizontal"
+                                                                    Margin="0,10,0,0">
+                                                            <TextBlock Text="{Binding SoLuong}"
+                                                                       FontSize="15" />
+                                                            <TextBlock Text="x"
+                                                                       FontSize="15"
+                                                                       VerticalAlignment="Bottom"
+                                                                       Margin="3,0,0,1" />
+                                                            <TextBlock Text="{Binding GiaMoiCaiStr}"
+                                                                       VerticalAlignment="Bottom"
+                                                                       FontSize="15"
+                                                                       Margin="5,0,0,1" />
+                                                        </StackPanel>
+                                                    </StackPanel>
+                                                </StackPanel>
+                                                <StackPanel Grid.Column="1"
+                                                            Orientation="Horizontal"
+                                                            HorizontalAlignment="Right">
+                                                    <TextBlock Text="{Binding TongGiaMoiCaiStr}"
+                                                               FontSize="18" />
+                                                    <TextBlock Text=""
+                                                               FontSize="15" />
+                                                </StackPanel>
+                                            </Grid>
+                                        </Border>
+
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </ScrollViewer>
+                    </Border>
+
+                    <StackPanel Grid.Row="3">
+                        <Grid Margin="8 0 0 5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0" Content="Tổng hoá đơn" Foreground="#f0b000" FontSize="18"></Label>
+                            <Label Grid.Column="1" FontSize="18" Foreground="#ffffff" x:Name="TotalCost" HorizontalAlignment="Right"></Label>
+                        </Grid>
+
+                        <StackPanel Orientation="Vertical">
+                            <Grid Margin="0 0 0 0">
+                                <Label Content="Mật khẩu wifi: 99999999" 
+                                       FontSize="15" 
+                                       FontStyle="Italic"
+                                       FontWeight="Light"
+                                       Foreground="#ffffff"
+                                       HorizontalAlignment="Center"></Label>
+                            </Grid>
+                            <Grid Margin="0 0 0 0">
+                                <Label Content="Hẹn gặp lại quý khách!" 
+                                       FontSize="15" 
+                                       FontStyle="Italic"
+                                       FontWeight="Light"
+                                       Foreground="#ffffff"
+                                       HorizontalAlignment="Center"></Label>
+                            </Grid>
+                        </StackPanel>
+                        
+                       
+                    </StackPanel>
+
+                </Grid>
+            </materialDesign:Card>
+        </Grid>
     </Grid>
 </Page>

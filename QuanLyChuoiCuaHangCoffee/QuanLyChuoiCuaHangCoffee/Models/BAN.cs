@@ -12,15 +12,12 @@ namespace QuanLyChuoiCuaHangCoffee.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class CTMON
+    public partial class BAN
     {
-        public string MAMON { get; set; }
-        public string MANGUYENLIEU { get; set; }
-        public string MASIZE { get; set; }
-        public Nullable<double> SLNGUYENLIEU { get; set; }
+        public int MABAN { get; set; }
+        public string MADH { get; set; }
+        public string TRANGTHAI { get; set; }
     
-        public virtual MON MON { get; set; }
-        public virtual NGUYENLIEU NGUYENLIEU { get; set; }
-        public virtual SIZE SIZE { get; set; }
+        public virtual DONHANG DONHANG { get; set; }
     }
 }

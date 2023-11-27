@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace QuanLyChuoiCuaHangCoffee.Views.Admin.TablesPage
 {
     /// <summary>
-    /// Interaction logic for MainTablesPage.xaml
+    /// Interaction logic for MenuPage.xaml
     /// </summary>
-    public partial class MainTablesPage : Page
+    public partial class MenuPage : Page
     {
-        public MainTablesPage()
+        public MenuPage()
         {
             InitializeComponent();
         }
@@ -31,11 +31,6 @@ namespace QuanLyChuoiCuaHangCoffee.Views.Admin.TablesPage
         }
 
         private void MainListBox_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
-        {
-
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
         {
 
         }
