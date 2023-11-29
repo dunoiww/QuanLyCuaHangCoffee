@@ -13,16 +13,21 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace QuanLyChuoiCuaHangCoffee.Views.Admin.TablesPage
+namespace QuanLyChuoiCuaHangCoffee.Views.Admin.EmployeePage
 {
     /// <summary>
-    /// Interaction logic for MenuPage.xaml
+    /// Interaction logic for ListEmployeePage.xaml
     /// </summary>
-    public partial class MenuPage : Page
+    public partial class ListEmployeePage : Page
     {
-        public MenuPage()
+        public ListEmployeePage()
         {
             InitializeComponent();
+        }
+
+        private void FilterBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
         }
 
         private void filtercbb_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -31,11 +36,6 @@ namespace QuanLyChuoiCuaHangCoffee.Views.Admin.TablesPage
         }
 
         private void MainListBox_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
-        {
-
-        }
-
-        private void FilterBox_TextChanged(object sender, TextChangedEventArgs e)
         {
 
         }

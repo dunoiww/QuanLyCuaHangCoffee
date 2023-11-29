@@ -13,29 +13,29 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace QuanLyChuoiCuaHangCoffee.Views.Admin.TablesPage
+namespace QuanLyChuoiCuaHangCoffee.Views.Admin.BillsPage
 {
     /// <summary>
-    /// Interaction logic for MenuPage.xaml
+    /// Interaction logic for SalesInvoicePage.xaml
     /// </summary>
-    public partial class MenuPage : Page
+    public partial class SalesInvoicePage : Page
     {
-        public MenuPage()
+        public SalesInvoicePage()
         {
             InitializeComponent();
         }
 
-        private void filtercbb_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
-        private void MainListBox_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
+        private void cbbYear_Loaded(object sender, RoutedEventArgs e)
         {
 
         }
 
         private void FilterBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void filtercbb_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
         }

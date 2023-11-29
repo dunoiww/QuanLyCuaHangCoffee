@@ -34,7 +34,7 @@
         </EventTrigger>
     </Page.Triggers>
 
-    <Grid>
+    <Grid Background="#242424">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="6*"></ColumnDefinition>
             <ColumnDefinition Width="4*"></ColumnDefinition>
@@ -43,7 +43,6 @@
         <!--Phần này hiển thị bàn-->
         <Grid Grid.Column="0">
             <materialDesign:Card Width="700"
-                      Height="685"
                       UniformCornerRadius="10">
                 <Frame x:Name="mainFrame"
                         NavigationUIVisibility="Hidden"
@@ -60,7 +59,7 @@
         </Grid>
          <!--Hiển thị thông tin hoá đơn của từng bàn khi click vào-->
         <Grid Grid.Column="1">
-            <materialDesign:Card Margin="10 5 5 5" 
+            <materialDesign:Card  
                      UniformCornerRadius="10"
                      Background="#000000">
                 <Grid>

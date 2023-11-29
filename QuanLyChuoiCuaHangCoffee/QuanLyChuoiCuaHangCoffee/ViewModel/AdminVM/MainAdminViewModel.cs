@@ -1,6 +1,9 @@
 ﻿using Library.ViewModel;
 using QuanLyChuoiCuaHangCoffee.Views.Admin.DashboardPage;
+using QuanLyChuoiCuaHangCoffee.Views.Admin.EmployeePage;
 using QuanLyChuoiCuaHangCoffee.Views.Admin.IngredientsPage;
+using QuanLyChuoiCuaHangCoffee.Views.Admin.SettingPage;
+using QuanLyChuoiCuaHangCoffee.Views.Admin.TablesPage;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +22,7 @@ namespace QuanLyChuoiCuaHangCoffee.ViewModel.AdminVM
         {
             LoadMainDashboardPageCF = new RelayCommand<Frame>((p) => { return true; }, (p) =>
             {
-                p.Content = new MainIngredientsPage();
+                p.Content = new MainSettingPage();
             });
         }
     }

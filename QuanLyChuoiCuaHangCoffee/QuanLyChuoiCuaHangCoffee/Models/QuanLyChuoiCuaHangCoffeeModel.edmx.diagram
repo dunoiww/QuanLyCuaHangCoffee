@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="ce5d03d649dd4ef3b91f631aa3c911bf" Name="Diagram1" ZoomLevel="97">
+      <Diagram DiagramId="ce5d03d649dd4ef3b91f631aa3c911bf" Name="Diagram1" ZoomLevel="39">
         <EntityTypeShape EntityType="QuanLyChuoiCuaHangCoffeeModel.BAN" Width="1.5" PointX="7.5" PointY="9.375" />
         <EntityTypeShape EntityType="QuanLyChuoiCuaHangCoffeeModel.CTDH" Width="1.5" PointX="7.5" PointY="6" />
         <EntityTypeShape EntityType="QuanLyChuoiCuaHangCoffeeModel.CTMON" Width="1.5" PointX="7.5" PointY="12.125" />
@@ -15,7 +15,7 @@
         <EntityTypeShape EntityType="QuanLyChuoiCuaHangCoffeeModel.MON" Width="1.5" PointX="5.25" PointY="14.125" />
         <EntityTypeShape EntityType="QuanLyChuoiCuaHangCoffeeModel.NGUYENLIEU" Width="1.5" PointX="5.25" PointY="10.375" />
         <EntityTypeShape EntityType="QuanLyChuoiCuaHangCoffeeModel.NHANVIEN" Width="1.5" PointX="3" PointY="4.5" />
-        <EntityTypeShape EntityType="QuanLyChuoiCuaHangCoffeeModel.SIZE" Width="1.5" PointX="5.25" PointY="17.25" />
+        <EntityTypeShape EntityType="QuanLyChuoiCuaHangCoffeeModel.SIZE" Width="1.5" PointX="14.75" PointY="3.875" />
         <EntityTypeShape EntityType="QuanLyChuoiCuaHangCoffeeModel.USER" Width="1.5" PointX="0.75" PointY="3.875" />
         <EntityTypeShape EntityType="QuanLyChuoiCuaHangCoffeeModel.XUATKHO" Width="1.5" PointX="5.25" PointY="2.5" />
         <AssociationConnector Association="QuanLyChuoiCuaHangCoffeeModel.FK__BAN__MADH__59FA5E80" />

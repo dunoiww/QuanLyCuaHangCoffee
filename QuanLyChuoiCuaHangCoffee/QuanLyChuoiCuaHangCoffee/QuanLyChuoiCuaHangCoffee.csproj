@@ -148,7 +148,10 @@
     </Compile>
     <Compile Include="Utils\Constants.cs" />
     <Compile Include="Utils\ConverterValue\BoolValueConverter.cs" />
+    <Compile Include="ViewModel\AdminVM\BillsVM\BillsViewModel.cs" />
+    <Compile Include="ViewModel\AdminVM\CustomerVM\CustomerViewModel.cs" />
     <Compile Include="ViewModel\AdminVM\DashboardVM\DashboardViewModel.cs" />
+    <Compile Include="ViewModel\AdminVM\EmployeeVM\EmployeeViewModel.cs" />
     <Compile Include="ViewModel\AdminVM\IngredientsVM\IngredientsViewModel.cs" />
     <Compile Include="ViewModel\AdminVM\MainAdminViewModel.cs" />
     <Compile Include="ViewModel\AdminVM\TablesVM\MainTablePageViewModel.cs" />
@@ -156,17 +159,38 @@
     <Compile Include="ViewModel\LoginVM\ForgotPassViewModel.cs" />
     <Compile Include="ViewModel\LoginVM\LoginViewModel.cs" />
     <Compile Include="ViewModel\uc_controlbarViewModel.cs" />
+    <Compile Include="Views\Admin\BillsPage\ImportInvoicePage.xaml.cs">
+      <DependentUpon>ImportInvoicePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Admin\BillsPage\MainBillsPage.xaml.cs">
       <DependentUpon>MainBillsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Admin\BillsPage\SalesInvoicePage.xaml.cs">
+      <DependentUpon>SalesInvoicePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Admin\CustomerPage\ListCustomerPage.xaml.cs">
+      <DependentUpon>ListCustomerPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Admin\CustomerPage\MainCustomerPage.xaml.cs">
+      <DependentUpon>MainCustomerPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Admin\DashboardPage\MainDashboardPage.xaml.cs">
       <DependentUpon>MainDashboardPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Admin\EmployeePage\ListEmployeePage.xaml.cs">
+      <DependentUpon>ListEmployeePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Admin\EmployeePage\MainEmployeePage.xaml.cs">
+      <DependentUpon>MainEmployeePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Admin\IngredientsPage\MainIngredientsPage.xaml.cs">
       <DependentUpon>MainIngredientsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Admin\MainAdminWindow.xaml.cs">
       <DependentUpon>MainAdminWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Admin\SettingPage\MainSettingPage.xaml.cs">
+      <DependentUpon>MainSettingPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Admin\TablesPage\MainTablesPage.xaml.cs">
       <DependentUpon>MainTablesPage.xaml</DependentUpon>
@@ -221,11 +245,35 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Admin\BillsPage\ImportInvoicePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Admin\BillsPage\MainBillsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Admin\BillsPage\SalesInvoicePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Admin\CustomerPage\ListCustomerPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Admin\CustomerPage\MainCustomerPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Admin\DashboardPage\MainDashboardPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Admin\EmployeePage\ListEmployeePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Admin\EmployeePage\MainEmployeePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -234,6 +282,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Admin\MainAdminWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Admin\SettingPage\MainSettingPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
