@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QuanLyChuoiCuaHangCoffee.DTOs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,17 +28,19 @@ namespace QuanLyChuoiCuaHangCoffee.Views.Admin.IngredientsPage
 
         private void FilterBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            CollectionViewSource.GetDefaultView(lvIngredients.ItemsSource).Refresh();
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(lvIngredients.ItemsSource);
+            view.Filter = Filter;
         }
 
-        private void filtercbb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private bool Filter(object item)
         {
-
-        }
-
-        private void cbbYear_Loaded(object sender, RoutedEventArgs e)
-        {
-
+            if (String.IsNullOrEmpty(FilterBox.Text)) return true;
+            else
+            {
+                return ((item as IngredientsDTO).MANGUYENLIEU.ToString().IndexOf(FilterBox.Text, StringComparison.OrdinalIgnoreCase) >= 0) ||
+                        ((item as IngredientsDTO).TENNGUYENLIEU.ToString().IndexOf(FilterBox.Text, StringComparison.OrdinalIgnoreCase) >= 0);
+            }
         }
     }
 }

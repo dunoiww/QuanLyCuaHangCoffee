@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:QuanLyChuoiCuaHangCoffee.Views.Admin.IngredientsPage"
+      xmlns:local1="clr-namespace:QuanLyChuoiCuaHangCoffee.Utils.ConverterValue"
       mc:Ignorable="d" 
       d:DesignHeight="700" d:DesignWidth="1200"
       Title="MainIngredientsPage"
@@ -34,213 +35,215 @@
         </EventTrigger>
     </Page.Triggers>
 
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding MaskNameIngredients}"
+                       CommandParameter="{Binding ElementName=ShadowMask}" />
+            <i:InvokeCommandAction Command="{Binding LoadIngredients}"
+                               CommandParameter="{Binding ElementName=lvIngredients}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
+    <Page.Resources>
+        <local1:StockStatusConverter x:Key="StockStatus"/>
+    </Page.Resources>
+
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="1*"></RowDefinition>
-            <RowDefinition Height="9*"></RowDefinition>
-        </Grid.RowDefinitions>
+        <Grid Background="Gray"
+              Opacity="0.3"
+              Visibility="Collapsed"
+              x:Name="ShadowMask"
+              Height="800"
+              Width="1400"
+              VerticalAlignment="Center"
+              HorizontalAlignment="Center">
+        </Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"></RowDefinition>
+                <RowDefinition Height="9*"></RowDefinition>
+            </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="904"></ColumnDefinition>
-                    <ColumnDefinition Width="296"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
+            <StackPanel Grid.Row="0">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="904"></ColumnDefinition>
+                        <ColumnDefinition Width="296"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
 
-                <StackPanel Grid.Column="0" Orientation="Horizontal" Height="50">
-                    <materialDesign:Card Width="325" Margin="15 5 0 5"
-                                          UniformCornerRadius="10">
+                    <StackPanel Grid.Column="0" Orientation="Horizontal" Height="50">
+                        <materialDesign:Card Width="325" Margin="15 5 0 5"
+                                      UniformCornerRadius="10">
 
-                        <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="Magnify"
-                                                    Width="25"
-                                                    Height="35"
-                                                    Foreground="Black"
-                                                    VerticalAlignment="Center" 
-                                                    Margin="10 0 0 0"/>
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="Magnify"
+                                                Width="25"
+                                                Height="35"
+                                                Foreground="Black"
+                                                VerticalAlignment="Center" 
+                                                Margin="10 0 0 0"/>
 
-                            <TextBox materialDesign:HintAssist.Hint="Tìm kiếm" 
-                                     x:Name="FilterBox"
-                                     FontSize="18"
-                                     Foreground="#DD000000"
-                                     FontFamily="arial"
-                                     Width="280"
-                                     Height="30"
-                                     TextChanged="FilterBox_TextChanged"
-                                     HorizontalAlignment="Left"/>
+                                <TextBox materialDesign:HintAssist.Hint="Tìm kiếm" 
+                                         x:Name="FilterBox"
+                                         FontSize="18"
+                                         Foreground="#DD000000"
+                                         FontFamily="arial"
+                                         Width="280"
+                                         Height="30"
+                                         TextChanged="FilterBox_TextChanged"
+                                         HorizontalAlignment="Left"/>
 
-                        </StackPanel>
-                    </materialDesign:Card>
+                            </StackPanel>
+                        </materialDesign:Card>
 
-                    <materialDesign:Card Width="120" Margin="15 5 0 5"
-                                        UniformCornerRadius="10">
-                        <ComboBox Height="30" x:Name="filtercbb"
-                                  Width="100"
-                                  Margin="0 0 0 0"
-                                  Padding="0 10 10 0"
-                                  FontSize="13"
-                                  SelectedIndex="0"
-                                  SelectedItem="{Binding SelectedBorrowFilter}"
-                                  SelectionChanged="filtercbb_SelectionChanged">
-                            <i:Interaction.Triggers>
-                                <i:EventTrigger EventName="SelectionChanged">
-                                    <i:InvokeCommandAction Command="{Binding CheckSelectedBorrowFilterML}"
-                                                           CommandParameter="{Binding ElementName=filtercbb}" />
-                                </i:EventTrigger>
-                            </i:Interaction.Triggers>
+                        <materialDesign:Card Width="120" Margin="15 5 0 5"
+                                    UniformCornerRadius="10">
+                            <ComboBox Height="30" x:Name="filtercbb"
+                                      Width="100"
+                                      Margin="0 0 0 0"
+                                      Padding="0 10 10 0"
+                                      FontSize="15"
+                                      SelectedIndex="0"
+                                      SelectedItem="{Binding SelectStockFilter}">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="SelectionChanged">
+                                        <i:InvokeCommandAction Command="{Binding CheckSelectStockFilterCF}"
+                                                       CommandParameter="{Binding ElementName=filtercbb}" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
 
-                            <ComboBoxItem Content="Còn hàng"/>
-                            <ComboBoxItem Content="Hết hàng"/>
-                        </ComboBox>
-                    </materialDesign:Card>
+                                <ComboBoxItem Content="Toàn bộ"/>
+                                <ComboBoxItem Content="Còn hàng"/>
+                                <ComboBoxItem Content="Hết hàng"/>
+                            </ComboBox>
+                        </materialDesign:Card>
+                    </StackPanel>
 
-                    
+                    <StackPanel Grid.Column="1" Orientation="Horizontal">
+                        <materialDesign:Card Width="200" Margin="60 5 0 5"
+                                             UniformCornerRadius="10">
+                            <Button FontFamily="arial"
+                                    FontWeight="Bold"
+                                    Height="50"
+                                    Background="#F0B000"
+                                    Command="{Binding ImportIngredients}">
+                                <Button.Content>
+                                    <StackPanel Orientation="Horizontal">
+                                        <materialDesign:PackIcon Kind="Plus"
+                                                         Width="25"
+                                                         Height="23" 
+                                                         Foreground="#000000"/>
+                                        <Label  Content="Nhập nguyên liệu"
+                                                Foreground="#000000" 
+                                                FontSize="15"/>
+                                    </StackPanel>
+                                </Button.Content>
+                            </Button>
+                        </materialDesign:Card>
 
-                    <ComboBox Height="30"
-                          Width="100"
-                          Margin="10 0 0 0"
-                          Padding="0 10 10 0"
-                          FontSize="13"
-                          Visibility="Collapsed"
-                          x:Name="cbbMonth"
-                          SelectedIndex="{Binding SelectedBorrowMonth, Mode=TwoWay}">
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="SelectionChanged">
-                                <i:InvokeCommandAction Command="{Binding SelectedBorrowMonthML}"
-                                                   CommandParameter="{Binding ElementName=cbbMonth}" />
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                        <ComboBoxItem Content="Tháng 1" />
-                        <ComboBoxItem Content="Tháng 2" />
-                        <ComboBoxItem Content="Tháng 3" />
-                        <ComboBoxItem Content="Tháng 4" />
-                        <ComboBoxItem Content="Tháng 5" />
-                        <ComboBoxItem Content="Tháng 6" />
-                        <ComboBoxItem Content="Tháng 7" />
-                        <ComboBoxItem Content="Tháng 8" />
-                        <ComboBoxItem Content="Tháng 9" />
-                        <ComboBoxItem Content="Tháng 10" />
-                        <ComboBoxItem Content="Tháng 11" />
-                        <ComboBoxItem Content="Tháng 12" />
-                    </ComboBox>
 
-                    <ComboBox Height="30"
-                              Width="100"
-                              Margin="10 0 0 0"
-                              Padding="0 10 10 0"
-                              FontSize="13"
-                              Visibility="Collapsed"
-                              x:Name="cbbYear"
-                              SelectedItem="{Binding SelectedBorrowYear, Mode=TwoWay}"
-                              Loaded="cbbYear_Loaded">
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="SelectionChanged">
-                                <i:InvokeCommandAction Command="{Binding SelectedBorrowYearML}"
-                                                   CommandParameter="{Binding ElementName=cbbYear}" />
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                    </ComboBox>
-                </StackPanel>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
 
-                <StackPanel Grid.Column="1" Orientation="Horizontal">
-                    <materialDesign:Card Width="200" Margin="60 5 0 5"
-                      UniformCornerRadius="10">
-                        <Button FontFamily="arial"
-                                FontWeight="Bold"
-                                Height="50"
-                                Background="#F0B000"
-                                Command="{Binding ExportFileML}">
-                            <Button.Content>
-                                <StackPanel Orientation="Horizontal">
-                                    <materialDesign:PackIcon Kind="Plus"
-                                                             Width="25"
-                                                             Height="23" 
-                                                             Foreground="#000000"/>
-                                    <Label  Content="Nhập nguyên liệu"
-                                            Foreground="#000000" 
-                                            FontSize="15"/>
-                                </StackPanel>
-                            </Button.Content>
-                        </Button>
-                    </materialDesign:Card>
-                    
-                    
-                </StackPanel>
+            <Grid Grid.Row="1">
+                <ProgressBar Value="0"
+                             IsIndeterminate="{Binding IsGettingSource}"
+                             Width="100"
+                             x:Name="load"
+                             VerticalAlignment="Center"
+                             Background="#ffffff"
+                             Height="100">
+                    <ProgressBar.Style>
+                        <Style TargetType="ProgressBar"
+                               BasedOn="{StaticResource MaterialDesignCircularProgressBar}">
+                            <Setter Property="Visibility"
+                                    Value="Collapsed" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ElementName=load,Path=IsIndeterminate}"
+                                             Value="True">
+                                    <Setter Property="Visibility"
+                                            Value="Visible" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ProgressBar.Style>
+                </ProgressBar>
+
+                <ListView x:Name="lvIngredients"
+                          Focusable="False"
+                          Height="620"
+                          VerticalAlignment="Top"
+                          BorderThickness="0"
+                          ItemsSource="{Binding ListIngredients}"
+                          HorizontalAlignment="Stretch">
+                    <ListView.View>
+                        <GridView>
+                            <GridView.ColumnHeaderContainerStyle>
+                                <Style TargetType="{x:Type GridViewColumnHeader}">
+                                    <Setter Property="Foreground" Value="#ffffff" />
+                                    <Setter Property="Background" Value="Transparent" />
+                                    <Setter Property="BorderBrush" Value="Transparent" />
+
+                                    <Setter Property="Height" Value="50" />
+
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Foreground" Value="#000000"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+
+                                </Style>
+                            </GridView.ColumnHeaderContainerStyle>
+                            <GridViewColumn Header="Mã nguyên liệu"
+                                            Width="200">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock  Text="{Binding MANGUYENLIEU}"
+                                                    FontSize="18"
+                                                    TextAlignment="Center"
+                                                    Margin="45,0,0,0" Foreground="#ffffff"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn Header="Tên nguyên liệu"
+                                            Width="200">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock  Text="{Binding TENNGUYENLIEU}"
+                                                    FontSize="18"
+                                                    Margin="45,0,0,0" Foreground="#ffffff" />
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn Header="Số lượng"
+                                            Width="200">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock  Text="{Binding SOLUONGTRONGKHO}"
+                                                    FontSize="18"
+                                                    Margin="62,0,0,0" Foreground="{Binding SOLUONGTRONGKHO, Converter={StaticResource StockStatus}}" />
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn Header="Đơn vị"
+                                            Width="200">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding DONVI}"
+                                                   FontSize="18"
+                                                   Margin="72,0,0,0" Foreground="#ffffff" />
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
             </Grid>
-        </StackPanel>
-
-        <StackPanel Grid.Row="1">
-            <ListView x:Name="lvBorrow"
-                  Focusable="True"
-                  Height="620"
-                  VerticalAlignment="Top"
-                  ItemsSource="{Binding ListBorrow}"
-                  SelectedItem="{Binding SelectedBorrowItem}"
-                  HorizontalAlignment="Stretch">
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="MouseDoubleClick">
-                        <i:InvokeCommandAction Command="{Binding LoadInfoBorrow}" />
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn Header="Mã nguyên liệu"
-                                    Width="auto">
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock  Text="{Binding MaPhieuMuon}"
-                                            FontSize="18"
-                                            Margin="18,0,0,0" />
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
-
-                        <GridViewColumn Header="Tên nguyên liệu"
-                                    Width="200">
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock  Text="{Binding TenKH}"
-                                            FontSize="18"
-                                            Margin="18,0,0,0" />
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
-
-                        <GridViewColumn Header="Số lượng"
-                                    Width="200">
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding TenSach}"
-                                            FontSize="18"
-                                            Margin="18,0,0,0" />
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
-
-                        <GridViewColumn Header="Đơn vị"
-                                    Width="200">
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock  Text="{Binding NgayMuon, StringFormat='dd/MM/yyyy'}"
-                                            FontSize="18"
-                                            Margin="18,0,0,0" />
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
-
-                        <GridViewColumn Header="Ngày nhập"
-                                    Width="200">
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock  Text="{Binding NgayHetHan, StringFormat='dd/MM/yyyy'}"
-                                            FontSize="18"
-                                            Margin="18,0,0,0" />
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
-                    </GridView>
-                </ListView.View>
-            </ListView>
-        </StackPanel>
+        </Grid>
     </Grid>
+    
 </Page>

@@ -28,15 +28,15 @@ namespace QuanLyChuoiCuaHangCoffee.Models
         public virtual DbSet<BAN> BANs { get; set; }
         public virtual DbSet<CTDH> CTDHs { get; set; }
         public virtual DbSet<CTMON> CTMONs { get; set; }
-        public virtual DbSet<CTXUATKHO> CTXUATKHOes { get; set; }
+        public virtual DbSet<CTNHAPKHO> CTNHAPKHOes { get; set; }
         public virtual DbSet<CHUCDANH> CHUCDANHs { get; set; }
         public virtual DbSet<DONHANG> DONHANGs { get; set; }
         public virtual DbSet<KHACHHANG> KHACHHANGs { get; set; }
         public virtual DbSet<MON> MONs { get; set; }
         public virtual DbSet<NGUYENLIEU> NGUYENLIEUx { get; set; }
         public virtual DbSet<NHANVIEN> NHANVIENs { get; set; }
+        public virtual DbSet<NHAPKHO> NHAPKHOes { get; set; }
         public virtual DbSet<SIZE> SIZEs { get; set; }
         public virtual DbSet<USER> USERS { get; set; }
-        public virtual DbSet<XUATKHO> XUATKHOes { get; set; }
     }
 }

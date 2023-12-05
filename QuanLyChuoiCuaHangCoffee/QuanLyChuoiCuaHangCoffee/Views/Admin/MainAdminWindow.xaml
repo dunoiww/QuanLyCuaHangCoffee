@@ -68,13 +68,15 @@
                 </StackPanel>
 
                 <!-- Các chức năng -->
-
+                
+                
                 <StackPanel Grid.Row="1" Background="#1B0D00">
+                    <!--Button dashboard-->
                     <RadioButton Style="{StaticResource MenuButtonMain}"
                                  IsChecked="True"
                                  Name="Dashboard"
                                  GroupName="mainOptions"
-                                 Command="{Binding LoadStatisticalPageML}"
+                                 Command="{Binding LoadMainDashboardPageCF}"
                                  CommandParameter="{Binding ElementName=mainFrame}">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="Finance"
@@ -88,11 +90,11 @@
                         </StackPanel>
                     </RadioButton>
 
-                    <!-- Button quản lý khách hàng-->
+                    <!-- Button quản lý bàn-->
                     <Border CornerRadius="5">
                         <RadioButton Style="{StaticResource MenuButtonMain}"
                                      GroupName="mainOptions"
-                                     Command="{Binding LoadCustomerManagePageML}"
+                                     Command="{Binding LoadMainTablesPageCF}"
                                      CommandParameter="{Binding ElementName=mainFrame}">
                             <StackPanel Orientation="Horizontal">
                                 <materialDesign:PackIcon Kind="TableFurniture"
@@ -106,12 +108,31 @@
                             </StackPanel>
                         </RadioButton>
                     </Border>
-
-                    <!-- Button quản lí sách-->
+                    
+                    <!--Button quản lý thực đơn-->
                     <Border CornerRadius="5">
                         <RadioButton Style="{StaticResource MenuButtonMain}"
                                      GroupName="mainOptions"
-                                     Command="{Binding LoadBookManagePageML}"
+                                     Command="{Binding LoadMainItemsPageCF}"
+                                     CommandParameter="{Binding ElementName=mainFrame}">
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="ListBox"
+                                                         Width="35"
+                                                         Height="32"
+                                                         VerticalAlignment="Center"
+                                                         Cursor="Hand"
+                                                         Foreground="White"
+                                                         Style="{StaticResource menuButtonIcon}"/>
+                                <TextBlock Text="Thực đơn" Style="{StaticResource menuButtonText}"/>
+                            </StackPanel>
+                        </RadioButton>
+                    </Border>
+
+                    <!-- Button quản lí nguyên liệu-->
+                    <Border CornerRadius="5">
+                        <RadioButton Style="{StaticResource MenuButtonMain}"
+                                     GroupName="mainOptions"
+                                     Command="{Binding LoadMainIngredientsPageCF}"
                                      CommandParameter="{Binding ElementName=mainFrame}">
                             <StackPanel Orientation="Horizontal">
                                 <materialDesign:PackIcon Kind="Food"
@@ -126,11 +147,11 @@
                         </RadioButton>
                     </Border>
 
-                    <!-- Button nhập sách -->
+                    <!-- Button quản lý hoá đơn -->
                     <Border CornerRadius="5">
                         <RadioButton Style="{StaticResource MenuButtonMain}"
                                      GroupName="mainOptions"
-                                     Command="{Binding LoadBookManagePageML}"
+                                     Command="{Binding LoadMainBillsPageCF}"
                                      CommandParameter="{Binding ElementName=mainFrame}">
                             <StackPanel Orientation="Horizontal">
                                 <materialDesign:PackIcon Kind="ReceiptText"
@@ -145,11 +166,11 @@
                         </RadioButton>
                     </Border>
 
-                    <!-- Button lịch sử -->
+                    <!-- Button quản lý nhân viên -->
                     <Border CornerRadius="5">
                         <RadioButton Style="{StaticResource MenuButtonMain}"
                                      GroupName="mainOptions"
-                                     Command="{Binding LoadBookManagePageML}"
+                                     Command="{Binding LoadMainEmployeePageCF}"
                                      CommandParameter="{Binding ElementName=mainFrame}">
                             <StackPanel Orientation="Horizontal">
                                 <materialDesign:PackIcon Kind="AccountGroup"
@@ -164,11 +185,11 @@
                         </RadioButton>
                     </Border>
 
-                    <!-- Button tầng dãy -->
+                    <!-- Button quản lý khách hàng -->
                     <Border CornerRadius="5">
                         <RadioButton Style="{StaticResource MenuButtonMain}"
                                      GroupName="mainOptions"
-                                     Command="{Binding LoadBookManagePageML}"
+                                     Command="{Binding LoadMainCustomerPageCF}"
                                      CommandParameter="{Binding ElementName=mainFrame}">
                             <StackPanel Orientation="Horizontal">
                                 <materialDesign:PackIcon Kind="AccountMultiple"
@@ -183,11 +204,11 @@
                         </RadioButton>
                     </Border>
 
-                    <!-- Button thuê sách -->
+                    <!-- Button cài đặt -->
                     <Border CornerRadius="5">
                         <RadioButton Style="{StaticResource MenuButtonMain}"
                                      GroupName="mainOptions"
-                                     Command="{Binding LoadBookManagePageML}"
+                                     Command="{Binding LoadMainSettingPageCF}"
                                      CommandParameter="{Binding ElementName=mainFrame}">
                             <StackPanel Orientation="Horizontal">
                                 <materialDesign:PackIcon Kind="Settings"

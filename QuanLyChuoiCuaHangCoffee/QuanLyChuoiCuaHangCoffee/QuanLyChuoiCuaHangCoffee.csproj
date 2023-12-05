@@ -46,6 +46,15 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="EPPlus, Version=7.0.2.0, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPPlus.7.0.2\lib\net462\EPPlus.dll</HintPath>
+    </Reference>
+    <Reference Include="EPPlus.Interfaces, Version=6.1.1.0, Culture=neutral, PublicKeyToken=a694d7f3b0907a61, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPPlus.Interfaces.6.1.1\lib\net462\EPPlus.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="EPPlus.System.Drawing, Version=6.1.1.0, Culture=neutral, PublicKeyToken=2308d35469c9bac0, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPPlus.System.Drawing.6.1.1\lib\net462\EPPlus.System.Drawing.dll</HintPath>
+    </Reference>
     <Reference Include="LiveCharts, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
       <HintPath>..\packages\LiveCharts.0.9.7\lib\net45\LiveCharts.dll</HintPath>
     </Reference>
@@ -58,15 +67,23 @@
     <Reference Include="MaterialDesignThemes.Wpf, Version=4.9.0.0, Culture=neutral, PublicKeyToken=df2a72020bd7962a, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialDesignThemes.4.9.0\lib\net462\MaterialDesignThemes.Wpf.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.IO.RecyclableMemoryStream, Version=1.4.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IO.RecyclableMemoryStream.1.4.1\lib\net46\Microsoft.IO.RecyclableMemoryStream.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Xaml.Behaviors, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Xaml.Behaviors.Wpf.1.1.39\lib\net45\Microsoft.Xaml.Behaviors.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ComponentModel.Annotations.5.0.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
+    </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Messaging" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Threading.Tasks" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -87,6 +104,9 @@
     </ApplicationDefinition>
     <Compile Include="DTOs\AdminDTO.cs" />
     <Compile Include="DTOs\CustomerDTO.cs" />
+    <Compile Include="DTOs\ImportBillDTO.cs" />
+    <Compile Include="DTOs\ImportIngredientsDTO.cs" />
+    <Compile Include="DTOs\IngredientsDTO.cs" />
     <Compile Include="Models\BAN.cs">
       <DependentUpon>QuanLyChuoiCuaHangCoffeeModel.tt</DependentUpon>
     </Compile>
@@ -99,11 +119,14 @@
     <Compile Include="Models\CTMON.cs">
       <DependentUpon>QuanLyChuoiCuaHangCoffeeModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\CTXUATKHO.cs">
+    <Compile Include="Models\CTNHAPKHO.cs">
       <DependentUpon>QuanLyChuoiCuaHangCoffeeModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DataProvider\AdminServices.cs" />
     <Compile Include="Models\DataProvider\CustomerServices.cs" />
+    <Compile Include="Models\DataProvider\ImportBillServices.cs" />
+    <Compile Include="Models\DataProvider\ImportIngredientsServices.cs" />
+    <Compile Include="Models\DataProvider\IngredientsServices.cs" />
     <Compile Include="Models\DONHANG.cs">
       <DependentUpon>QuanLyChuoiCuaHangCoffeeModel.tt</DependentUpon>
     </Compile>
@@ -117,6 +140,9 @@
       <DependentUpon>QuanLyChuoiCuaHangCoffeeModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\NHANVIEN.cs">
+      <DependentUpon>QuanLyChuoiCuaHangCoffeeModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\NHAPKHO.cs">
       <DependentUpon>QuanLyChuoiCuaHangCoffeeModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\QuanLyChuoiCuaHangCoffeeModel.Context.cs">
@@ -140,20 +166,21 @@
     <Compile Include="Models\USER.cs">
       <DependentUpon>QuanLyChuoiCuaHangCoffeeModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\XUATKHO.cs">
-      <DependentUpon>QuanLyChuoiCuaHangCoffeeModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="UsercontrolCF\uc_controlbar.xaml.cs">
       <DependentUpon>uc_controlbar.xaml</DependentUpon>
     </Compile>
     <Compile Include="Utils\Constants.cs" />
     <Compile Include="Utils\ConverterValue\BoolValueConverter.cs" />
+    <Compile Include="Utils\ConverterValue\IndexConverter.cs" />
+    <Compile Include="Utils\ConverterValue\StockStatusConverter.cs" />
+    <Compile Include="Utils\Helper.cs" />
     <Compile Include="ViewModel\AdminVM\BillsVM\BillsViewModel.cs" />
     <Compile Include="ViewModel\AdminVM\CustomerVM\CustomerViewModel.cs" />
     <Compile Include="ViewModel\AdminVM\DashboardVM\DashboardViewModel.cs" />
     <Compile Include="ViewModel\AdminVM\EmployeeVM\EmployeeViewModel.cs" />
     <Compile Include="ViewModel\AdminVM\IngredientsVM\IngredientsViewModel.cs" />
     <Compile Include="ViewModel\AdminVM\MainAdminViewModel.cs" />
+    <Compile Include="ViewModel\AdminVM\SettingVM\SettingViewModel.cs" />
     <Compile Include="ViewModel\AdminVM\TablesVM\MainTablePageViewModel.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\LoginVM\ForgotPassViewModel.cs" />
@@ -183,8 +210,14 @@
     <Compile Include="Views\Admin\EmployeePage\MainEmployeePage.xaml.cs">
       <DependentUpon>MainEmployeePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Admin\IngredientsPage\ImportIngredientsWindow.xaml.cs">
+      <DependentUpon>ImportIngredientsWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Admin\IngredientsPage\MainIngredientsPage.xaml.cs">
       <DependentUpon>MainIngredientsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Admin\ItemsPage\MainItemsPage.xaml.cs">
+      <DependentUpon>MainItemsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Admin\MainAdminWindow.xaml.cs">
       <DependentUpon>MainAdminWindow.xaml</DependentUpon>
@@ -277,7 +310,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Admin\IngredientsPage\ImportIngredientsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Admin\IngredientsPage\MainIngredientsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Admin\ItemsPage\MainItemsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

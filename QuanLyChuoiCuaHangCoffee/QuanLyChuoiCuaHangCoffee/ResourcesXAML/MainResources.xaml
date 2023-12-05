@@ -1,6 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:viewmodel="clr-namespace:Library.ViewModel"
+                    xmlns:viewmodel="clr-namespace:QuanLyChuoiCuaHangCoffee.ViewModel"
                     xmlns:viewmodel1="clr-namespace:QuanLyChuoiCuaHangCoffee.ViewModel.LoginVM"
                     xmlns:viewmodel2="clr-namespace:QuanLyChuoiCuaHangCoffee.ViewModel.AdminVM"
                     xmlns:viewmodel21="clr-namespace:QuanLyChuoiCuaHangCoffee.ViewModel.AdminVM.DashboardVM"
@@ -8,7 +8,8 @@
                     xmlns:viewmodel23="clr-namespace:QuanLyChuoiCuaHangCoffee.ViewModel.AdminVM.TablesVM"
                     xmlns:viewmodel24="clr-namespace:QuanLyChuoiCuaHangCoffee.ViewModel.AdminVM.BillsVM"
                     xmlns:viewmodel25="clr-namespace:QuanLyChuoiCuaHangCoffee.ViewModel.AdminVM.EmployeeVM"
-                    xmlns:viewmodel26="clr-namespace:QuanLyChuoiCuaHangCoffee.ViewModel.AdminVM.CustomerVM">
+                    xmlns:viewmodel26="clr-namespace:QuanLyChuoiCuaHangCoffee.ViewModel.AdminVM.CustomerVM"
+                    xmlns:viewmodel27="clr-namespace:QuanLyChuoiCuaHangCoffee.ViewModel.AdminVM.SettingVM">
     <viewmodel1:LoginViewModel x:Key="LoginVM"/>
     <viewmodel1:ForgotPassViewModel x:Key="ForgotPassVM"/>
     <viewmodel2:MainAdminViewModel x:Key="AdminVM"/>
@@ -18,4 +19,5 @@
     <viewmodel24:BillsViewModel x:Key="BillsVM"/>
     <viewmodel25:EmployeeViewModel x:Key="EmployeeVM"/>
     <viewmodel26:CustomerViewModel x:Key="CustomerVM"/>
+    <viewmodel27:SettingViewModel x:Key="SettingVM"/>
 </ResourceDictionary>

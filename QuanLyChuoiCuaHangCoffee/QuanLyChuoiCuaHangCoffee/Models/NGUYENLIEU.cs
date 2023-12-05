@@ -18,19 +18,17 @@ namespace QuanLyChuoiCuaHangCoffee.Models
         public NGUYENLIEU()
         {
             this.CTMONs = new HashSet<CTMON>();
-            this.CTXUATKHOes = new HashSet<CTXUATKHO>();
+            this.CTNHAPKHOes = new HashSet<CTNHAPKHO>();
         }
     
         public string MANGUYENLIEU { get; set; }
         public string TENNGUYENLIEU { get; set; }
         public string DONVI { get; set; }
         public Nullable<int> SOLUONGTRONGKHO { get; set; }
-        public string IMAGESOURCE { get; set; }
-        public System.DateTime NGAYNHAP { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CTMON> CTMONs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CTXUATKHO> CTXUATKHOes { get; set; }
+        public virtual ICollection<CTNHAPKHO> CTNHAPKHOes { get; set; }
     }
 }

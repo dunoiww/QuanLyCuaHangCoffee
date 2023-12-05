@@ -18,7 +18,7 @@ namespace QuanLyChuoiCuaHangCoffee.Models
         public NHANVIEN()
         {
             this.DONHANGs = new HashSet<DONHANG>();
-            this.XUATKHOes = new HashSet<XUATKHO>();
+            this.NHAPKHOes = new HashSet<NHAPKHO>();
         }
     
         public string IDNHANVIEN { get; set; }
@@ -30,6 +30,6 @@ namespace QuanLyChuoiCuaHangCoffee.Models
         public virtual ICollection<DONHANG> DONHANGs { get; set; }
         public virtual USER USER { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<XUATKHO> XUATKHOes { get; set; }
+        public virtual ICollection<NHAPKHO> NHAPKHOes { get; set; }
     }
 }

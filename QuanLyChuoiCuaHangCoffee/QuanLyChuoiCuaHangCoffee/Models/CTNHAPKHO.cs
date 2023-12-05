@@ -12,13 +12,14 @@ namespace QuanLyChuoiCuaHangCoffee.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class CTXUATKHO
+    public partial class CTNHAPKHO
     {
         public string MAPHIEU { get; set; }
         public string MANGUYENLIEU { get; set; }
         public Nullable<int> SOLUONG { get; set; }
+        public Nullable<decimal> GIA { get; set; }
     
         public virtual NGUYENLIEU NGUYENLIEU { get; set; }
-        public virtual XUATKHO XUATKHO { get; set; }
+        public virtual NHAPKHO NHAPKHO { get; set; }
     }
 }
