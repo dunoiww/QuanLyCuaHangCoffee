@@ -97,5 +97,32 @@ namespace QuanLyChuoiCuaHangCoffee.Models.DataProvider
                 throw e;
             }
         }
+
+        public async Task<List<ImportProductIngredient>> FindIngredients(string _masanpham)
+        {
+            try
+            {
+                using (var context = new CoffeeManagementEntities())
+                {
+                    var listIngredients = (from ct in context.CTMONs
+                                           where ct.MAMON == _masanpham
+                                           select new ImportProductIngredient
+                                           {
+                                               MaNguyenLieu = ct.MANGUYENLIEU,
+                                               TenNguyenLieu = ct.NGUYENLIEU.TENNGUYENLIEU,
+                                               SoLuong = (int)ct.SLNGUYENLIEU,
+                                               DonVi = ct.NGUYENLIEU.DONVI,
+                                           }).ToListAsync();
+
+                    return await listIngredients;
+                }
+            } 
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+
     }
 }

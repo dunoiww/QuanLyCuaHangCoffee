@@ -29,62 +29,6 @@ namespace QuanLyChuoiCuaHangCoffee.Models.DataProvider
 
         public async Task<string> Import(string _idNhanVien, DateTime _ngayNhapKho, int _triGia, ObservableCollection<ImportIngredientsDTO> _listImport)
         {
-            //try
-            //{
-            //    using (var context = new CoffeeManagementEntities())
-            //    {
-            //        string currentMaxId = await context.NHAPKHOes.MaxAsync(c => c.MAPHIEU);
-            //        string id = CreateNextId(currentMaxId, "PN");
-
-            //        string currentMaxIdNL = await context.NGUYENLIEUx.MaxAsync(c => c.MANGUYENLIEU);
-            //        string idNL = CreateNextId(currentMaxIdNL, "NL");
-
-            //        var nhapkho = new NHAPKHO();
-            //        nhapkho.MAPHIEU = id;
-            //        nhapkho.IDNHANVIEN = _idNhanVien;
-            //        nhapkho.NGNHAPKHO = _ngayNhapKho;
-            //        nhapkho.TRIGIA = (decimal)(_triGia);
-            //        context.NHAPKHOes.Add(nhapkho);
-            //        context.SaveChanges();
-
-            //        foreach (var item in _listImport)
-            //        {
-            //            var ctnhap = new CTNHAPKHO();
-            //            ctnhap.MAPHIEU = id;
-            //            ctnhap.TENNGUYENLIEU = item.TenNguyenLieu;
-            //            ctnhap.SOLUONG = item.SoLuong;
-            //            ctnhap.DONVI = item.DonVi;
-            //            ctnhap.GIA = item.Gia;
-
-            //            context.CTNHAPKHOes.Add(ctnhap);
-
-            //            bool isImport = false;
-            //            foreach (var nl in context.NGUYENLIEUx)
-            //            {
-            //                if (nl.TENNGUYENLIEU == item.TenNguyenLieu)
-            //                {
-            //                    isImport = true;
-            //                    nl.SOLUONGTRONGKHO += item.SoLuong;
-            //                }
-            //            }
-            //            if (!isImport)
-            //            {
-            //                var nl = new NGUYENLIEU();
-            //                nl.MANGUYENLIEU = idNL;
-            //                nl.TENNGUYENLIEU = item.TenNguyenLieu;
-            //                nl.DONVI = item.DonVi;
-            //                nl.SOLUONGTRONGKHO = item.SoLuong;
-            //                context.NGUYENLIEUx.Add(nl);
-            //                context.SaveChanges();
-            //            }
-            //        }
-            //    }
-            //    return ("Nhập kho thành công");
-            //}
-            //catch (Exception e)
-            //{
-            //    throw e;
-            //}
             using (var context = new CoffeeManagementEntities())
             {
                 string currentMaxId = await context.NHAPKHOes.MaxAsync(c => c.MAPHIEU);

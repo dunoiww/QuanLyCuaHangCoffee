@@ -17,7 +17,7 @@ namespace QuanLyChuoiCuaHangCoffee.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public SIZE()
         {
-            this.CTMONs = new HashSet<CTMON>();
+            this.MONs = new HashSet<MON>();
         }
     
         public string MASIZE { get; set; }
@@ -26,6 +26,6 @@ namespace QuanLyChuoiCuaHangCoffee.Models
         public Nullable<int> SOLUONG { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CTMON> CTMONs { get; set; }
+        public virtual ICollection<MON> MONs { get; set; }
     }
 }

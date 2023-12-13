@@ -22,6 +22,7 @@ namespace QuanLyChuoiCuaHangCoffee.Models
         }
     
         public string MAMON { get; set; }
+        public string MASIZE { get; set; }
         public string TENMON { get; set; }
         public string LOAIMON { get; set; }
         public string IMAGESOURCE { get; set; }
@@ -30,5 +31,6 @@ namespace QuanLyChuoiCuaHangCoffee.Models
         public virtual ICollection<CTDH> CTDHs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CTMON> CTMONs { get; set; }
+        public virtual SIZE SIZE { get; set; }
     }
 }

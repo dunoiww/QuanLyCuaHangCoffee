@@ -16,11 +16,9 @@ namespace QuanLyChuoiCuaHangCoffee.Models
     {
         public string MAMON { get; set; }
         public string MANGUYENLIEU { get; set; }
-        public string MASIZE { get; set; }
-        public Nullable<double> SLNGUYENLIEU { get; set; }
+        public Nullable<int> SLNGUYENLIEU { get; set; }
     
         public virtual MON MON { get; set; }
         public virtual NGUYENLIEU NGUYENLIEU { get; set; }
-        public virtual SIZE SIZE { get; set; }
     }
 }

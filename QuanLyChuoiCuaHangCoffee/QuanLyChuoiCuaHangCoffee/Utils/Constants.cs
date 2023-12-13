@@ -12,4 +12,29 @@ namespace QuanLyChuoiCuaHangCoffee.Utils
         public static readonly int Manager = 2;
         public static readonly int Customer = 3;
     }
+
+    public class ProductTypes
+    {
+        public static readonly List<string> ListLoaiSanPham = new List<string>()
+        {
+            "Cà phê",
+            "Trà",
+            "Sinh tố",
+            "Nước ép",
+            "Đá xay",
+            "Nước ngọt",
+            "Soda",
+            "Ăn vặt",
+        };
+    }
+
+    public class Sizes
+    {
+        public static readonly List<string> ListKichThuoc = new List<string>()
+        {
+            "Nhỏ",
+            "Vừa",
+            "Lớn",
+        };
+    }
 }

@@ -19,4 +19,12 @@ namespace QuanLyChuoiCuaHangCoffee.DTOs
             get { return Helper.FormatVNMoney(Gia); }
         }
     }
+
+    public class ImportProductIngredient
+    {
+        public string MaNguyenLieu { get; set; }
+        public string TenNguyenLieu { get; set; }
+        public int SoLuong { get; set; }
+        public string DonVi { get; set; }
+    }
 }
