@@ -53,6 +53,64 @@ namespace QuanLyChuoiCuaHangCoffee.Models.DataProvider
             }
         }
 
+        public async Task<List<ProductsDTO>> GetInStockProducts()
+        {
+            try
+            {
+                using (var context = new CoffeeManagementEntities())
+                {
+                    var inStockProducts = (from sp in context.MONs
+                                           where sp.SIZE.SOLUONG > 0
+                                           select new ProductsDTO
+                                           {
+                                               MAMON = sp.MAMON,
+                                               MASIZE = sp.MASIZE,
+                                               TENMON = sp.TENMON,
+                                               LOAIMON = sp.LOAIMON,
+                                               IMAGESOURCE = sp.IMAGESOURCE,
+                                               SOLUONG = (int)sp.SIZE.SOLUONG,
+                                               SIZESANPHAM = sp.SIZE.SIZEMON,
+                                               GIASANPHAM = (decimal)sp.SIZE.GIABAN
+                                           }).ToListAsync();
+
+                    return await inStockProducts;
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public async Task<List<ProductsDTO>> GetOutStockProducts()
+        {
+            try
+            {
+                using (var context = new CoffeeManagementEntities())
+                {
+                    var inStockProducts = (from sp in context.MONs
+                                           where sp.SIZE.SOLUONG <= 0
+                                           select new ProductsDTO
+                                           {
+                                               MAMON = sp.MAMON,
+                                               MASIZE = sp.MASIZE,
+                                               TENMON = sp.TENMON,
+                                               LOAIMON = sp.LOAIMON,
+                                               IMAGESOURCE = sp.IMAGESOURCE,
+                                               SOLUONG = (int)sp.SIZE.SOLUONG,
+                                               SIZESANPHAM = sp.SIZE.SIZEMON,
+                                               GIASANPHAM = (decimal)sp.SIZE.GIABAN
+                                           }).ToListAsync();
+
+                    return await inStockProducts;
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
         public async Task<string> UpdateProduct (ProductsDTO _pd, string _tensanpham, string _SelectedType, string _SelectedSize, string _imagesource, string _Gia, ObservableCollection<ImportProductIngredient> _listImport)
         {
             try
@@ -122,6 +180,43 @@ namespace QuanLyChuoiCuaHangCoffee.Models.DataProvider
                     await context.SaveChangesAsync();
 
                     return("Xoá thành công");
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public async Task<MON> FindProduct(string _mamon, string _size)
+        {
+            try
+            {
+                using (var context = new CoffeeManagementEntities())
+                {
+                    var product = await context.MONs.Where(x => x.MAMON == _mamon && x.SIZE.SIZEMON == _size).FirstOrDefaultAsync();
+                    return product;
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public async Task UpdateQuantity()
+        {
+            try
+            {
+                using (var context = new CoffeeManagementEntities())
+                {
+                    var productList = await context.MONs.ToListAsync();
+                    foreach (var item in productList)
+                    {
+                        int sl = await CalQuantityProduct(item);
+                        item.SIZE.SOLUONG = sl;
+                    }
+                    await context.SaveChangesAsync();
                 }
             }
             catch (Exception e)

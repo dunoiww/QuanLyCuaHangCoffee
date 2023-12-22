@@ -11,27 +11,21 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace QuanLyChuoiCuaHangCoffee.Views.Admin.TablesPage
 {
     /// <summary>
-    /// Interaction logic for MainTablesPage.xaml
+    /// Interaction logic for AddTableWindow.xaml
     /// </summary>
-    public partial class MainTablesPage : Page
+    public partial class AddTableWindow : Window
     {
-        public MainTablesPage()
+        public AddTableWindow()
         {
             InitializeComponent();
         }
 
-        private void MainListBox_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
-        {
-
-        }
-
-        private void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        private void tbTenban_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             Regex regex = new Regex("[^0-9]+");
             e.Handled = regex.IsMatch(e.Text);

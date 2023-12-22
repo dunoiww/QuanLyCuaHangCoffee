@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:QuanLyChuoiCuaHangCoffee.Views.Admin.TablesPage"
+      xmlns:local1="clr-namespace:QuanLyChuoiCuaHangCoffee.Utils.ConverterValue"
       mc:Ignorable="d" 
       d:DesignHeight="685" d:DesignWidth="700"
       Title="TablesPage"
@@ -16,7 +17,19 @@
     TextOptions.TextRenderingMode="Auto"
     FontFamily="{DynamicResource MaterialDesignFont}"
     DataContext="{StaticResource TablesVM}">
-    
+
+    <Page.Resources>
+        <local1:TableStatusConverter x:Key="TableStatusConverter"/>
+        <local1:TableStatusHoverConverter x:Key="TableStatusHoverConverter"/>
+    </Page.Resources>
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadTable}"
+                                   CommandParameter="{Binding ElementName=TablesPage}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"></RowDefinition>
@@ -39,15 +52,15 @@
                                 Padding="0 10 10 0"
                                 FontSize="15"
                                 SelectedIndex="0"
-                                SelectedItem="{Binding SelectedBorrowFilter}"
-                                SelectionChanged="filtercbb_SelectionChanged">
+                                SelectedItem="{Binding SelectedStatus}">
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="SelectionChanged">
-                                <i:InvokeCommandAction Command="{Binding CheckSelectedBorrowFilterML}"
-                                                    CommandParameter="{Binding ElementName=filtercbb}" />
+                                <i:InvokeCommandAction Command="{Binding CheckSelectedStatusCF}"
+                                                       CommandParameter="{Binding ElementName=filtercbb}" />
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
-
+                        
+                        <ComboBoxItem Content="Toàn bộ"/>
                         <ComboBoxItem Content="Còn trống"/>
                         <ComboBoxItem Content="Có khách"/>
                     </ComboBox>
@@ -62,7 +75,7 @@
                             FontSize="15"
                             Height="50"
                             Background="#F0B000"
-                            Command="{Binding ExportFileML}">
+                            Command="{Binding ManageTable}">
                         <Button.Content>
                             <StackPanel Orientation="Horizontal">
                                 <Label  Content="Quản lý bàn"
@@ -75,71 +88,100 @@
             </StackPanel>
         </Grid>
 
-        <Grid Grid.Row="1">
-            <ListBox ItemsSource="{Binding ListBook}"
-                        Grid.Row="1"
-                        x:Name="MainListBox"
-                        PreviewMouseWheel="MainListBox_PreviewMouseWheel"
-                        SelectedItem="{Binding SelectedItem, UpdateSourceTrigger=PropertyChanged}">
-                <ListBox.ItemContainerStyle>
-                    <Style TargetType="ListBoxItem"
-                            BasedOn="{StaticResource styleListBoxItems}" />
-                </ListBox.ItemContainerStyle>
+        <ScrollViewer VerticalScrollBarVisibility="Auto"
+                      x:Name="scrollview"
+                      Grid.Row="1">
+            
+            <Grid Grid.Row="1">
+                <ListBox ItemsSource="{Binding ListTable}"
+                         Grid.Row="1"
+                         x:Name="MainListBox"
+                         PreviewMouseWheel="MainListBox_PreviewMouseWheel"
+                         SelectedItem="{Binding SelectedTableItem, UpdateSourceTrigger=PropertyChanged}" 
+                         d:ItemsSource="{d:SampleData ItemCount=5}" >
+                    
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem"
+                               BasedOn="{StaticResource styleListBoxItems}" />
+                    </ListBox.ItemContainerStyle>
 
-                <ListBox.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <UniformGrid Columns="3" />
-                    </ItemsPanelTemplate>
-                </ListBox.ItemsPanel>
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <UniformGrid Columns="3" />
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
 
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <materialDesign:Card UniformCornerRadius="10"
-                                            Cursor="Hand"
-                                            Width="250"
-                                            VerticalAlignment="Top">
-                            <materialDesign:Card.Style>
-                                <Style TargetType="materialDesign:Card">
-                                    <Setter Property="Background"
-                                        Value="White" />
-                                    <Style.Triggers>
-                                        <Trigger Property="IsMouseOver"
-                                                Value="True">
-                                            <Setter Property="Background"
-                                                Value="LightGray" />
-                                        </Trigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </materialDesign:Card.Style>
-                            <StackPanel>
-                                <TextBlock Text="{Binding TenSach}"
-                                            FontSize="17"
-                                            Foreground="#3f2016"
-                                            FontWeight="Bold"
-                                            Width="220"
-                                            TextAlignment="Left"
-                                            HorizontalAlignment="Left"
-                                            TextWrapping="Wrap"
-                                            Margin="10,0"/>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <materialDesign:Card UniformCornerRadius="10"
+                                                 Cursor="Hand"
+                                                 Width="200"
+                                                 VerticalAlignment="Top">
+                                <materialDesign:Card.Style>
+                                    <Style TargetType="materialDesign:Card">
+                                        <Setter Property="Background"
+                                                Value="{Binding TRANGTHAI, Converter={StaticResource TableStatusConverter}}" />
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver"
+                                                     Value="True">
+                                                <Setter Property="Background"
+                                                        Value="{Binding TRANGTHAI, Converter={StaticResource TableStatusHoverConverter}}" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </materialDesign:Card.Style>
+                                <StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Bàn số "
+                                                   FontSize="17"
+                                                   Foreground="#3f2016"
+                                                   FontWeight="Bold"
+                                                   TextAlignment="Left"
+                                                   HorizontalAlignment="Left"
+                                                   TextWrapping="Wrap"
+                                                   Margin="10, 0, 0 ,0"></TextBlock>
+                                        <TextBlock Text="{Binding MABAN}"
+                                                   FontSize="17"
+                                                   Foreground="#3f2016"
+                                                   FontWeight="Bold"
+                                                   TextAlignment="Left"
+                                                   HorizontalAlignment="Left"
+                                                   TextWrapping="Wrap"
+                                                   />
 
-                                <Image Source="/Resources/table.png"
-                                        HorizontalAlignment="Center"
-                                        VerticalAlignment="Top"
-                                        Height="150"
-                                        Width="150"
-                                        Margin="10"
-                                        Stretch="Fill">
-                                </Image>
-                            </StackPanel>
-                            <i:Interaction.Triggers>
-                                <i:EventTrigger EventName="MouseUp">
-                                    <i:InvokeCommandAction Command="{Binding ElementName=MainListBox, Path=DataContext.LoadDetailBook}" />
-                                </i:EventTrigger>
-                            </i:Interaction.Triggers>
-                        </materialDesign:Card>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
-        </Grid>
+                                        <TextBlock Text="{Binding TRANGTHAI}"
+                                                   FontSize="17"
+                                                   Foreground="#3f2016"
+                                                   FontWeight="Bold"
+                                                   TextAlignment="Left"
+                                                   HorizontalAlignment="Left"
+                                                   TextWrapping="Wrap"
+                                                   Margin="40,0">
+
+                                        </TextBlock>
+                                    </StackPanel>
+
+
+                                    <Image Source="/Resources/table.png"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Top"
+                                           Height="150"
+                                           Width="150"
+                                           Margin="10"
+                                           Stretch="Fill">
+                                    </Image>
+                                </StackPanel>
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="MouseUp">
+                                        <i:InvokeCommandAction Command="{Binding ElementName=MainListBox, Path=DataContext.LoadMenu}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </materialDesign:Card>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Grid>
+        </ScrollViewer>
+        
     </Grid>
 </Page>

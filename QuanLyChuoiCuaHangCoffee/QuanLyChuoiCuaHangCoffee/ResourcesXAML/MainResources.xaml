@@ -16,7 +16,7 @@
     <viewmodel2:MainAdminViewModel x:Key="AdminVM"/>
     <viewmodel21:DashboardViewModel x:Key="DashboardVM"/>
     <viewmodel22:IngredientsViewModel x:Key="IngredientsVM"/>
-    <viewmodel23:MainTablePageViewModel x:Key="TablesVM"/>
+    <viewmodel23:TablesViewModel x:Key="TablesVM"/>
     <viewmodel24:BillsViewModel x:Key="BillsVM"/>
     <viewmodel25:EmployeeViewModel x:Key="EmployeeVM"/>
     <viewmodel26:CustomerViewModel x:Key="CustomerVM"/>

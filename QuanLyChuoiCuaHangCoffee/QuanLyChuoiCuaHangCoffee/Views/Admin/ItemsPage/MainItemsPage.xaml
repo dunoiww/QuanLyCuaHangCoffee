@@ -87,10 +87,10 @@
                         <materialDesign:Card Width="200" Margin="60 5 0 5"
                                      UniformCornerRadius="10">
                             <Button FontFamily="arial"
-                            FontWeight="Bold"
-                            Height="50"
-                            Background="#F0B000"
-                            Command="{Binding OpenAddMenuWindow}">
+                                    FontWeight="Bold"
+                                    Height="50"
+                                    Background="#F0B000"
+                                    Command="{Binding OpenAddMenuWindow}">
                                 <Button.Content>
                                     <StackPanel Orientation="Horizontal">
                                         <materialDesign:PackIcon Kind="Plus"

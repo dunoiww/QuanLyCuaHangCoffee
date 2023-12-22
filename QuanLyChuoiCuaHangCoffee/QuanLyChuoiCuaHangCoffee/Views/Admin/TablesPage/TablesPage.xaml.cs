@@ -25,14 +25,20 @@ namespace QuanLyChuoiCuaHangCoffee.Views.Admin.TablesPage
             InitializeComponent();
         }
 
-        private void filtercbb_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
         private void MainListBox_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
         {
-
+            if (e.Delta < 0)
+            {
+                scrollview.LineDown();
+                scrollview.LineDown();
+                scrollview.LineDown();
+            }
+            else
+            {
+                scrollview.LineUp();
+                scrollview.LineUp();
+                scrollview.LineUp();
+            }
         }
     }
 }

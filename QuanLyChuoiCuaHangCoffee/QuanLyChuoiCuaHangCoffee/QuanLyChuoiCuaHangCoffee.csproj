@@ -161,9 +161,11 @@
     <Compile Include="DTOs\ImportBillDTO.cs" />
     <Compile Include="DTOs\ImportIngredientsDTO.cs" />
     <Compile Include="DTOs\IngredientsDTO.cs" />
+    <Compile Include="DTOs\MenuItemDTO.cs" />
     <Compile Include="DTOs\ProductDetailDTO.cs" />
     <Compile Include="DTOs\ProductsDTO.cs" />
     <Compile Include="DTOs\ProductSizesDTO.cs" />
+    <Compile Include="DTOs\TablesDTO.cs" />
     <Compile Include="Models\BAN.cs">
       <DependentUpon>QuanLyChuoiCuaHangCoffeeModel.tt</DependentUpon>
     </Compile>
@@ -180,12 +182,14 @@
       <DependentUpon>QuanLyChuoiCuaHangCoffeeModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DataProvider\AdminServices.cs" />
+    <Compile Include="Models\DataProvider\CheckOutServices.cs" />
     <Compile Include="Models\DataProvider\CustomerServices.cs" />
     <Compile Include="Models\DataProvider\ImportBillServices.cs" />
     <Compile Include="Models\DataProvider\ImportIngredientsProductServices.cs" />
     <Compile Include="Models\DataProvider\ImportIngredientsServices.cs" />
     <Compile Include="Models\DataProvider\IngredientsServices.cs" />
     <Compile Include="Models\DataProvider\ProductServices.cs" />
+    <Compile Include="Models\DataProvider\TablesServices.cs" />
     <Compile Include="Models\DONHANG.cs">
       <DependentUpon>QuanLyChuoiCuaHangCoffeeModel.tt</DependentUpon>
     </Compile>
@@ -233,6 +237,7 @@
     <Compile Include="Utils\ConverterValue\BoolValueConverter.cs" />
     <Compile Include="Utils\ConverterValue\IndexConverter.cs" />
     <Compile Include="Utils\ConverterValue\StockStatusConverter.cs" />
+    <Compile Include="Utils\ConverterValue\TableStatusConverter.cs" />
     <Compile Include="Utils\Helper.cs" />
     <Compile Include="ViewModel\AdminVM\BillsVM\BillsViewModel.cs" />
     <Compile Include="ViewModel\AdminVM\CustomerVM\CustomerViewModel.cs" />
@@ -242,7 +247,8 @@
     <Compile Include="ViewModel\AdminVM\ItemsVM\ItemsViewModel.cs" />
     <Compile Include="ViewModel\AdminVM\MainAdminViewModel.cs" />
     <Compile Include="ViewModel\AdminVM\SettingVM\SettingViewModel.cs" />
-    <Compile Include="ViewModel\AdminVM\TablesVM\MainTablePageViewModel.cs" />
+    <Compile Include="ViewModel\AdminVM\TablesVM\MenuPageViewModel.cs" />
+    <Compile Include="ViewModel\AdminVM\TablesVM\TablesViewModel.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\LoginVM\ForgotPassViewModel.cs" />
     <Compile Include="ViewModel\LoginVM\LoginViewModel.cs" />
@@ -288,6 +294,12 @@
     </Compile>
     <Compile Include="Views\Admin\SettingPage\MainSettingPage.xaml.cs">
       <DependentUpon>MainSettingPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Admin\TablesPage\AddTableWindow.xaml.cs">
+      <DependentUpon>AddTableWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Admin\TablesPage\BillWindow.xaml.cs">
+      <DependentUpon>BillWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Admin\TablesPage\MainTablesPage.xaml.cs">
       <DependentUpon>MainTablesPage.xaml</DependentUpon>
@@ -398,6 +410,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Admin\TablesPage\AddTableWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Admin\TablesPage\BillWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Admin\TablesPage\MainTablesPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -492,6 +512,7 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resources\Machiato.jpg" />
     <Resource Include="LogoEPSRO.ico" />
     <Content Include="Models\QuanLyChuoiCuaHangCoffeeModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

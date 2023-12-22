@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QuanLyChuoiCuaHangCoffee.DTOs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,19 +26,19 @@ namespace QuanLyChuoiCuaHangCoffee.Views.Admin.TablesPage
             InitializeComponent();
         }
 
-        private void filtercbb_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
-        private void MainListBox_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
-        {
-
-        }
-
         private void FilterBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            CollectionViewSource.GetDefaultView(MainListBox.ItemsSource).Refresh();
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(MainListBox.ItemsSource);
+            view.Filter = Filter;
+        }
+        private bool Filter(object item)
+        {
+            if (String.IsNullOrEmpty(FilterBox.Text)) return true;
+            else
+            {
+                return ((item as ProductsDTO).TENMON.ToString().IndexOf(FilterBox.Text, StringComparison.OrdinalIgnoreCase) >= 0);
+            }
         }
     }
 }

@@ -71,7 +71,7 @@ namespace QuanLyChuoiCuaHangCoffee.Models.DataProvider
                     }
                     context.SaveChanges();
 
-                    //tính toán số lượng
+                    //tính toán số lượng sản phẩm dựa theo số lượng nguyên liệu
                     int sl = await ProductServices.Ins.CalQuantityProduct(newItem);
 
                     newSize.SOLUONG = sl;

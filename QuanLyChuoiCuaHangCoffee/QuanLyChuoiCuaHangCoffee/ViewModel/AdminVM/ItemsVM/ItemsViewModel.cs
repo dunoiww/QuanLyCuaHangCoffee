@@ -231,6 +231,7 @@ namespace QuanLyChuoiCuaHangCoffee.ViewModel.AdminVM.ItemsVM
                     mb.ShowDialog();
 
                     TenSanPham = SelectedIngredient = SelectedType = SelectedSize = Gia = ImgSource = imagesource = DonVi = null;
+                    ListImport = null;
 
                     loadProducts();
                 } else

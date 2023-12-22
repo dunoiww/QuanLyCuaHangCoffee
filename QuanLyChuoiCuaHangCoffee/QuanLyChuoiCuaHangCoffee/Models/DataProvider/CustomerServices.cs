@@ -64,7 +64,7 @@ namespace QuanLyChuoiCuaHangCoffee.Models.DataProvider
                 us.DOB = DateTime.Now;
                 us.DIACHI = "";
                 us.NGBATDAU = DateTime.Now;
-                us.ROLE = 2;
+                us.ROLE = 3;
 
                 context.USERS.Add(us);
 
@@ -136,6 +136,39 @@ namespace QuanLyChuoiCuaHangCoffee.Models.DataProvider
             catch (Exception)
             {
                 return (false, "Lỗi hệ thống", null);
+            }
+        }
+
+        public async Task<CustomerDTO> FindCus(string _sdt)
+        {
+            try
+            {
+                using (var context = new CoffeeManagementEntities())
+                {
+                    var cus = (from s in context.USERS
+                                where s.SODT == _sdt
+                                select new CustomerDTO
+                                {
+                                   IDKHACHHANG = s.KHACHHANG.IDKHACHHANG,
+                                   USERNAME = s.USERNAME,
+                                   USERPASSWORD = s.USERPASSWORD,
+                                   HOTEN = s.HOTEN,
+                                   SODT = s.SODT,
+                                   EMAIL = s.EMAIL,
+                                   DCHI = s.DIACHI,
+                                   TICHDIEM = (int)s.KHACHHANG.TICHDIEM,
+                                   SODONHANG = (int)s.KHACHHANG.SODONHANG,
+                                   HANGTHANHVIEN = s.KHACHHANG.HANGTHANHVIEN
+                                   
+                               }).FirstOrDefault();
+
+                    return cus;
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
             }
         }
 
