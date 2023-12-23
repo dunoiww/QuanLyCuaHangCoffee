@@ -26,7 +26,7 @@ namespace QuanLyChuoiCuaHangCoffee.Models.DataProvider
             private set => _ins = value;
         }
 
-        public async Task CheckOut(string _makh, string _manv, int _maban, string _datetime, decimal _total, int _isDiscount, string _ghichu, ObservableCollection<MenuItemDTO> _listproduct) 
+        public async Task<string> CheckOut(string _makh, string _manv, int _maban, string _datetime, decimal _total, int _isDiscount, string _ghichu, ObservableCollection<MenuItemDTO> _listproduct) 
         {
             try
             {
@@ -75,6 +75,8 @@ namespace QuanLyChuoiCuaHangCoffee.Models.DataProvider
                         }
 
                         cus.TICHDIEM += (int)_total / 100;
+                        context.SaveChanges();
+                        return newBill.MADH;
                     }
                     //Nếu không có tài khoản khách hàng thì sẽ tạo một khách hàng vãng lai mới
                     else
@@ -138,11 +140,9 @@ namespace QuanLyChuoiCuaHangCoffee.Models.DataProvider
                             newCT.TONGTIEN = item.THANHTIEN;
                             context.CTDHs.Add(newCT);
                         }
+                        context.SaveChanges();
+                        return newBill.MADH;
                     }
-
-                    context.SaveChanges();
-
-
                 }
             }
             catch (Exception e)

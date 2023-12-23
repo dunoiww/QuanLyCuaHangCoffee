@@ -348,19 +348,24 @@
                             </Grid>
 
                             <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                                     x:Name="tbReview"
                                      Width="440"
                                      Height="100"
                                      FontSize="18"
-                                     MaxLength="500"
+                                     MaxLength="100"
                                      BorderBrush="#696F79"
                                      Foreground="White"
                                      TextWrapping="Wrap"
                                      VerticalScrollBarVisibility="Auto"
                                      HorizontalScrollBarVisibility="Disabled"
                                      IsReadOnly="False"
-                                     materialDesign:HintAssist.Hint="Ghi chú"
-                                     Text="{Binding Note}" />
+                                     materialDesign:HintAssist.Hint="Ghi chú (tối đa 100 ký tự)"
+                                     Text="{Binding Note, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="TextChanged">
+                                        <i:InvokeCommandAction Command="{Binding LoadNote}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </TextBox>
 
                             <materialDesign:Card Width="150" Margin="10 10 0 5" Height="40"
                                                  UniformCornerRadius="10" HorizontalAlignment="Center"

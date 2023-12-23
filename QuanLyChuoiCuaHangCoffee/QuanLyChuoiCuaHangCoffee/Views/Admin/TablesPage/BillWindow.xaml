@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:QuanLyChuoiCuaHangCoffee.Views.Admin.TablesPage"
         xmlns:uc="clr-namespace:QuanLyChuoiCuaHangCoffee.UsercontrolCF"
         mc:Ignorable="d"
-        Title="BillWindow" Height="750" Width="472"
+        Title="BillWindow" Height="800" Width="475"
         Name="BillWindowCF"
         xmlns:i = "http://schemas.microsoft.com/xaml/behaviors"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
@@ -22,7 +22,7 @@
         DataContext="{StaticResource TablesVM}">
 
     <Window.Clip>
-        <RectangleGeometry Rect="0, 0, 472, 750" RadiusX="10" RadiusY="10"></RectangleGeometry>
+        <RectangleGeometry Rect="0, 0, 472, 800" RadiusX="10" RadiusY="10"></RectangleGeometry>
     </Window.Clip>
     
     <Grid>
@@ -30,14 +30,15 @@
                              Background="#000000">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="3*"></RowDefinition>
+                    <RowDefinition Height="4*"></RowDefinition>
                     <RowDefinition Height="2*"></RowDefinition>
                     <RowDefinition Height="6*"></RowDefinition>
-                    <RowDefinition Height="2*"></RowDefinition>
+                    <RowDefinition Height="3*"></RowDefinition>
                 </Grid.RowDefinitions>
 
                 <Grid Grid.Row="0">
                     <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
                         <RowDefinition></RowDefinition>
                         <RowDefinition></RowDefinition>
                         <RowDefinition></RowDefinition>
@@ -114,55 +115,123 @@
                             </Label>
                         </StackPanel>
                     </Grid>
+                    
+                    <Grid Grid.Row="3">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Label Content="Hoá đơn bán hàng bàn số "
+                                   Foreground="White"
+                                   FontSize="24"></Label>
+                            <Label Content="{Binding tableNumber}"
+                                   Foreground="White"
+                                   FontSize="24">
+                                
+                            </Label>
+                        </StackPanel>
+                    </Grid>
                 </Grid>
 
                 <Border BorderThickness="0 0 0 1"
                         BorderBrush="#f0b000"
                         Margin="10,0,10,0" Grid.Row="1">
-                    <StackPanel Margin="0,0,0,-1">
-                        <StackPanel>
-                            <Grid Margin="0 3 0 0">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition></ColumnDefinition>
-                                    <ColumnDefinition></ColumnDefinition>
-                                </Grid.ColumnDefinitions>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        
+                        <Grid Grid.Column="0">
+                            <StackPanel>
+                                <StackPanel>
+                                    <Grid Margin="0 3 0 0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition></ColumnDefinition>
+                                            <ColumnDefinition></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
 
-                                <Label Grid.Column="0" Content="Bàn số: "
-                                       FontSize="18"
-                                       Foreground="#f0b000"></Label>
-                                <Label Grid.Column="1" x:Name="tableNumber"
-                                       Foreground="#ffffff"
-                                       FontSize="18" HorizontalAlignment="Right"/>
-                            </Grid>
-                        </StackPanel>
-                        <StackPanel>
-                            <Grid Margin="0 3 0 0">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition></ColumnDefinition>
-                                    <ColumnDefinition></ColumnDefinition>
-                                </Grid.ColumnDefinitions>
+                                        <Label Grid.Column="0" Content="Ngày: " Foreground="#f0b000"
+                                               FontSize="15"></Label>
+                                        <Label Grid.Column="1" Content="{Binding DateBill, StringFormat='dd/MM/yyyy'}" Foreground="#ffffff"
+                                               FontSize="15" HorizontalAlignment="Right"/>
+                                    </Grid>
+                                </StackPanel>
 
-                                <Label Grid.Column="0" Content="Nhân viên: " Foreground="#f0b000"
-                                       FontSize="18"></Label>
-                                <Label Grid.Column="1" x:Name="nhanvien" Foreground="#ffffff"
-                                       FontSize="18" HorizontalAlignment="Right"/>
-                            </Grid>
-                        </StackPanel>
+                                <StackPanel>
+                                    <Grid Margin="0 3 0 0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition></ColumnDefinition>
+                                            <ColumnDefinition></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
 
-                        <StackPanel>
-                            <Grid Margin="0 3 0 0">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition></ColumnDefinition>
-                                    <ColumnDefinition></ColumnDefinition>
-                                </Grid.ColumnDefinitions>
+                                        <Label Grid.Column="0" Content="Nhân viên: " Foreground="#f0b000"
+                                               FontSize="15"></Label>
+                                        <Label Grid.Column="1" Content="{Binding Employee}" Foreground="#ffffff"
+                                               FontSize="15" HorizontalAlignment="Right"/>
+                                    </Grid>
+                                </StackPanel>
 
-                                <Label Grid.Column="0" Content="Ngày: " Foreground="#f0b000"
-                                       FontSize="18"></Label>
-                                <Label Grid.Column="1" x:Name="datetime" Foreground="#ffffff"
-                                       FontSize="18" HorizontalAlignment="Right"/>
-                            </Grid>
-                        </StackPanel>
-                    </StackPanel>
+                                <StackPanel>
+                                    <Grid Margin="0 3 0 0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition></ColumnDefinition>
+                                            <ColumnDefinition></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Label Grid.Column="0" Content="Giờ vào: " Foreground="#f0b000"
+                                               FontSize="15"></Label>
+                                        <Label Grid.Column="1" Content="{Binding HourBillIn, StringFormat='HH:mm:ss'}" Foreground="#ffffff"
+                                               FontSize="15" HorizontalAlignment="Right"/>
+                                    </Grid>
+                                </StackPanel>
+                            </StackPanel>
+                            
+                        </Grid>
+                        <Grid Grid.Column="1">
+                            <StackPanel>
+                                <StackPanel>
+                                    <Grid Margin="0 3 0 0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition></ColumnDefinition>
+                                            <ColumnDefinition></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Label Grid.Column="0" Content="Số: " Foreground="#f0b000"
+                                               FontSize="15"></Label>
+                                        <Label Grid.Column="1" Content="{Binding MADH}" Foreground="#ffffff"
+                                               FontSize="15" HorizontalAlignment="Right"/>
+                                    </Grid>
+                                </StackPanel>
+
+                                <StackPanel>
+                                    <Grid Margin="0 3 0 0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="0.7*"></ColumnDefinition>
+                                            <ColumnDefinition></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Label Grid.Column="0" Content="Khách hàng: " Foreground="#f0b000"
+                                               FontSize="15"></Label>
+                                        <Label Grid.Column="1" Content="{Binding CusName}" Foreground="#ffffff"
+                                               FontSize="15" HorizontalAlignment="Right"/>
+                                    </Grid>
+                                </StackPanel>
+
+                                <StackPanel>
+                                    <Grid Margin="0 3 0 0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition></ColumnDefinition>
+                                            <ColumnDefinition></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Label Grid.Column="0" Content="Giờ ra: " Foreground="#f0b000"
+                                               FontSize="15"></Label>
+                                        <Label Grid.Column="1" Content="{Binding HourBillOut, StringFormat='HH:mm:ss'}" Foreground="#ffffff"
+                                               FontSize="15" HorizontalAlignment="Right"/>
+                                    </Grid>
+                                </StackPanel>
+                            </StackPanel>
+
+                        </Grid>
+                    </Grid>
                 </Border>
 
                 <Border Grid.Row="2"
@@ -174,45 +243,46 @@
                         <ItemsControl ItemsSource="{Binding ListProduct}">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <Border  Height="80"
+                                    <Border  Height="40"
                                              BorderBrush="LightGray"
                                              BorderThickness="0,0,0,1">
                                         <Grid>
                                             <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="70*"/>
-                                                <ColumnDefinition Width="30*"/>
+                                                <ColumnDefinition Width="4*"/>
+                                                <ColumnDefinition Width="3*"/>
+                                                <ColumnDefinition Width="3*"/>
                                             </Grid.ColumnDefinitions>
                                             <StackPanel Orientation="Horizontal"
                                                         Grid.Column="0">
-                                                <StackPanel>
-                                                    <TextBlock Text="{Binding TENMON}"
-                                                               FontSize="15" 
-                                                               Foreground="White"/>
-                                                    <StackPanel Orientation="Horizontal"
-                                                                Margin="0,10,0,0">
-                                                        <TextBlock Text="{Binding SOLUONG}"
-                                                                    FontSize="15" 
-                                                                   Foreground="White"/>
-                                                        <TextBlock Text="x"
-                                                                   FontSize="15"
-                                                                   VerticalAlignment="Bottom"
-                                                                   Margin="3,0,0,1" 
-                                                                   Foreground="White"/>
-                                                        <TextBlock Text="{Binding DONGIASTR}"
-                                                                   VerticalAlignment="Bottom"
-                                                                   FontSize="15"
-                                                                   Margin="5,0,0,1" 
-                                                                   Foreground="White"/>
-                                                    </StackPanel>
-                                                </StackPanel>
+                                                <TextBlock Text="{Binding TENMON}"
+                                                           FontSize="18"
+                                                           MaxWidth="100"
+                                                           TextWrapping="Wrap"
+                                                           Foreground="White"
+                                                           Margin="0 5 0 0"/>
                                             </StackPanel>
-                                            <StackPanel Grid.Column="1"
+
+                                            <StackPanel Grid.Column="1" Orientation="Horizontal">
+                                                <TextBlock Text="{Binding SOLUONG}"
+                                                           FontSize="18" 
+                                                           Foreground="White"
+                                                           Margin="0 5 0 0"/>
+                                                <TextBlock Text="x"
+                                                           FontSize="18"
+                                                           Margin="0 5 0 0" 
+                                                           Foreground="White"/>
+                                                <TextBlock Text="{Binding DONGIASTR}"
+                                                           FontSize="18"
+                                                           Margin="0 5 0 0" 
+                                                           Foreground="White"/>
+                                            </StackPanel>
+                                            <StackPanel Grid.Column="2"
                                                         Orientation="Horizontal"
                                                         HorizontalAlignment="Right">
-                                                <TextBlock Text="{Binding TongGiaMoiCaiStr}"
-                                                           FontSize="18" />
-                                                <TextBlock Text=""
-                                                           FontSize="15" />
+                                                <TextBlock Text="{Binding THANHTIENSTR}"
+                                                           FontSize="18" 
+                                                           Foreground="White"
+                                                           Margin="0 5 0 0"/>
                                             </StackPanel>
                                         </Grid>
                                     </Border>
@@ -224,13 +294,13 @@
                 </Border>
 
                 <StackPanel Grid.Row="3">
-                    <Grid Margin="8 0 0 5">
+                    <Grid Margin="8 0 4 5">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition></ColumnDefinition>
                             <ColumnDefinition></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <Label Grid.Column="0" Content="Tổng hoá đơn" Foreground="#f0b000" FontSize="18"></Label>
-                        <Label Grid.Column="1" FontSize="18" Foreground="#ffffff" x:Name="TotalCost" HorizontalAlignment="Right"></Label>
+                        <Label Grid.Column="1" FontSize="18" Foreground="#ffffff" Content="{Binding Total}" HorizontalAlignment="Right"></Label>
                     </Grid>
 
                     <StackPanel Orientation="Horizontal">
@@ -242,17 +312,18 @@
                         
                         </TextBlock>
 
-                        <TextBlock Text="Ngô Phương Nam đtrai vailol"
+                        <TextBlock Text="{Binding Note}"
                                    FontSize="15"
                                    Foreground="White"
                                    Margin="0 0 10 5"
+                                   MaxWidth="400"
                                    TextWrapping="Wrap">
 
                         </TextBlock>
                     </StackPanel>
                     
                     <StackPanel Orientation="Vertical">
-                        <Grid Margin="0 0 0 0">
+                        <Grid Margin="0 5 0 0">
                             <Label Content="Mật khẩu wifi: 99999999" 
                                    FontSize="15" 
                                    FontStyle="Italic"

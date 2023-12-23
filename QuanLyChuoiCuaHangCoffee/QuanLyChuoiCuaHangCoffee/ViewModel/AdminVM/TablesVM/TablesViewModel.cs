@@ -71,6 +71,27 @@ namespace QuanLyChuoiCuaHangCoffee.ViewModel.AdminVM.TablesVM
             set { _DateBill = value; OnPropertyChanged(); }
         }
 
+        private string _HourBillIn { get; set; }
+        public string HourBillIn
+        {
+            get { return _HourBillIn; }
+            set { _HourBillIn = value; OnPropertyChanged(); }
+        }
+
+        private string _HourBillOut { get; set; }
+        public string HourBillOut
+        {
+            get { return _HourBillOut; }
+            set { _HourBillOut = value; OnPropertyChanged(); }
+        }
+
+        private string _MADH { get; set; }
+        public string MADH
+        {
+            get { return _MADH; }
+            set { _MADH = value; OnPropertyChanged(); }
+        }
+
         private decimal _TotalDec { get; set; }
         public decimal TotalDec
         {
@@ -165,6 +186,7 @@ namespace QuanLyChuoiCuaHangCoffee.ViewModel.AdminVM.TablesVM
         public ICommand closeCF { get; set; }
         public ICommand MaskNameCF { get; set; }
         public ICommand LoadUser { get; set; }
+        public ICommand LoadNote { get; set; }
 
         #endregion
 
@@ -173,6 +195,7 @@ namespace QuanLyChuoiCuaHangCoffee.ViewModel.AdminVM.TablesVM
             MaskNameCF = new RelayCommand<Grid>((p) => { return true; }, (p) => { MaskName = p; });
             ListProduct = new ObservableCollection<MenuItemDTO>();
             MenuOfTable = new ObservableCollection<MenuOfTableDTO>();
+            CusName = "Khách vãng lai";
 
             LoadTablesPage = new RelayCommand<Frame>((p) => { return true; }, (p) =>
             {
@@ -202,23 +225,23 @@ namespace QuanLyChuoiCuaHangCoffee.ViewModel.AdminVM.TablesVM
                 if (existTable != null)
                 {
                     ListProduct = new ObservableCollection<MenuItemDTO>(existTable.Products);
+                    HourBillIn = existTable.TIMEIn;
+                    Note = existTable.GHICHU;
                 } 
                 else
                 {
                     ListProduct = new ObservableCollection<MenuItemDTO>();
                     MenuOfTableDTO mot = new MenuOfTableDTO();
                     mot.MABAN = SelectedTableItem.MABAN;
+                    mot.TIMEIn = DateTime.Now.ToString("HH:mm:ss");
+                    mot.GHICHU = "";
                     mot.Products = new ObservableCollection<MenuItemDTO>();
 
                     MenuOfTable.Add(mot);
+                    HourBillIn = DateTime.Now.ToString("HH:mm:ss");
                 }
 
-                TotalDec = 0;
-                foreach (var item in ListProduct)
-                {
-                    TotalDec += item.THANHTIEN;
-                }
-                Total = Helper.FormatVNMoney(TotalDec);
+                CalTotalBill();
             });
 
             LoadUser = new RelayCommand<object>((p) => { return true; }, async (p) =>
@@ -238,8 +261,30 @@ namespace QuanLyChuoiCuaHangCoffee.ViewModel.AdminVM.TablesVM
                 }
             });
 
-            BackTable = new RelayCommand<Frame>((p) => { return true; }, (p) =>
+            //LoadNote = new RelayCommand<object>((p) => { return true; }, (p) =>
+            //{
+            //    var currentTable = MenuOfTable.Where(x => x.MABAN == SelectedTableItem.MABAN).FirstOrDefault();
+            //    if (currentTable != null)
+            //    {
+            //        currentTable.GHICHU = Note;
+            //    }
+            //});
+
+            BackTable = new RelayCommand<Frame>((p) => { return true; }, async (p) =>
             {
+                var table = MenuOfTable.Where(x => x.MABAN == SelectedTableItem.MABAN).FirstOrDefault();
+                if (table != null)
+                {
+                    if (table.Products.Count == 0)
+                    {
+                        await TablesServices.Ins.SetStatusAvailableTable((SelectedTableItem.MABAN));
+                        table.GHICHU = "";
+                    }
+                    else
+                    {
+                        table.GHICHU = Note;
+                    }
+                }
                 MainFrame.Content = new TablesPage();
                 ResetProperty();
             });
@@ -286,22 +331,36 @@ namespace QuanLyChuoiCuaHangCoffee.ViewModel.AdminVM.TablesVM
 
             CheckOut = new RelayCommand<Window>((p) => { return true; }, async (p) =>
             {
-                MaskName.Visibility = Visibility.Visible;
-                await TablesServices.Ins.SetStatusAvailableTable(SelectedTableItem.MABAN);
-                BillWindow bw = new BillWindow();
-                bw.ShowDialog();
-
                 var table = MenuOfTable.Where(x => x.MABAN == SelectedTableItem.MABAN).FirstOrDefault();
-                await CheckOutServices.Ins.CheckOut(CusID, AdminServices.MaNhanVien, SelectedTableItem.MABAN, _DateBill, TotalDec, 20, "", table.Products);
-
-                //Xoá danh sách món ăn của bàn khi thanh toán
                 if (table != null)
                 {
-                    table.Products = new ObservableCollection<MenuItemDTO>();
-                }
+                    if (table.Products.Count == 0)
+                    {
+                        MessageBoxCF ms = new MessageBoxCF("Bạn chưa chọn món ăn!", MessageType.Error, MessageButtons.OK);
+                        ms.ShowDialog();
+                        return;
+                    }
+                    HourBillOut = DateTime.Now.ToString("HH:mm:ss");
 
-                MainFrame.Content = new TablesPage();
-                ResetProperty();
+                    string madh = await CheckOutServices.Ins.CheckOut(CusID, AdminServices.MaNhanVien, SelectedTableItem.MABAN, _DateBill, TotalDec, 20, "", table.Products);
+                    MADH = madh;
+
+                    MaskName.Visibility = Visibility.Visible;
+                    await TablesServices.Ins.SetStatusAvailableTable(SelectedTableItem.MABAN);
+                    BillWindow bw = new BillWindow();
+                    bw.ShowDialog();
+
+
+                    //Xoá danh sách món ăn của bàn khi thanh toán
+                    table.Products = new ObservableCollection<MenuItemDTO>();
+                    table.TIMEIn = "";
+                    table.GHICHU = "";
+
+                    MainFrame.Content = new TablesPage();
+                    ResetProperty();
+                    MenuOfTable.Remove(table);
+                }
+                
             });
 
             closeCF = new RelayCommand<Window>((p) => { return true; }, (p) =>
@@ -326,37 +385,44 @@ namespace QuanLyChuoiCuaHangCoffee.ViewModel.AdminVM.TablesVM
                 addToListMenuItem();
                 await TablesServices.Ins.SetStatusNotAvailableTable((SelectedTableItem.MABAN));
 
-                TotalDec = 0;
-                foreach (var item in ListProduct)
-                {
-                    TotalDec += item.THANHTIEN;
-                }
-                Total = Helper.FormatVNMoney(TotalDec);
+                CalTotalBill();
             });
 
             IncreaseProduct = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
                 if (p is MenuItemDTO item)
                 {
-                    var product = ListProduct.Where(x => x.TENMON == item.TENMON).FirstOrDefault();
-                    if (product != null)
+                    var currentTable = MenuOfTable.Where(x => x.MABAN == SelectedTableItem.MABAN).FirstOrDefault();
+                    if (currentTable != null)
                     {
-                        ObservableCollection<MenuItemDTO> temporaryList = new ObservableCollection<MenuItemDTO>(ListProduct);
-
-                        ListProduct.Remove(product);
-                        product.SOLUONG = (int.Parse(product.SOLUONG) + 1).ToString();
-                        product.THANHTIEN = product.DONGIA * int.Parse(product.SOLUONG);
-                        ListProduct.Add(product);
-
-                        // Cập nhật lại ListProduct từ danh sách tạm thời
-                        ListProduct = new ObservableCollection<MenuItemDTO>(temporaryList);
-
-                        TotalDec = 0;
-                        foreach (var i in ListProduct)
+                        var product = ListProduct.Where(x => x.TENMON == item.TENMON).FirstOrDefault();
+                        if (product != null)
                         {
-                            TotalDec += i.THANHTIEN;
+                            var productInMenu = ListMenu.Where(x => x.TENMON == product.TENMON).FirstOrDefault();
+                            if (productInMenu != null)
+                            {
+                                if (int.Parse(product.SOLUONG) + 1 > productInMenu.SOLUONG)
+                                {
+                                    MessageBoxCF mb = new MessageBoxCF("Số lượng sản phẩm không đủ!", MessageType.Error, MessageButtons.OK);
+                                    mb.ShowDialog();
+                                    return;
+                                }
+                            }
+
+                            ObservableCollection<MenuItemDTO> temporaryList = new ObservableCollection<MenuItemDTO>(ListProduct);
+
+                            ListProduct.Remove(product);
+                            product.SOLUONG = (int.Parse(product.SOLUONG) + 1).ToString();
+                            product.THANHTIEN = product.DONGIA * int.Parse(product.SOLUONG);
+                            ListProduct.Add(product);
+
+                            // Cập nhật lại ListProduct từ danh sách tạm thời
+                            ListProduct = new ObservableCollection<MenuItemDTO>(temporaryList);
+
+                            CalTotalBill();
+
+                            currentTable.Products = ListProduct;
                         }
-                        Total = Helper.FormatVNMoney(TotalDec);
                     }
                 }
             });
@@ -365,38 +431,40 @@ namespace QuanLyChuoiCuaHangCoffee.ViewModel.AdminVM.TablesVM
             {
                 if (p is MenuItemDTO item)
                 {
-                    var product = ListProduct.Where(x => x.TENMON == item.TENMON).FirstOrDefault();
-                    if (product != null)
+                    var currentTable = MenuOfTable.Where(x => x.MABAN == SelectedTableItem.MABAN).FirstOrDefault();
+                    if (currentTable != null)
                     {
-                        if (int.Parse(product.SOLUONG) > 1)
-                        {
-                            // Tạo một danh sách tạm thời để lưu trữ các phần tử theo thứ tự ban đầu
-                            ObservableCollection<MenuItemDTO> temporaryList = new ObservableCollection<MenuItemDTO>(ListProduct);
 
-                            ListProduct.Remove(product);
-                            product.SOLUONG = (int.Parse(product.SOLUONG) - 1).ToString();
-                            product.THANHTIEN = product.DONGIA * int.Parse(product.SOLUONG);
-                            ListProduct.Add(product);
-
-                            // Cập nhật lại ListProduct từ danh sách tạm thời
-                            ListProduct = new ObservableCollection<MenuItemDTO>(temporaryList);
-                        }
-                        else
+                        var product = ListProduct.Where(x => x.TENMON == item.TENMON).FirstOrDefault();
+                        if (product != null)
                         {
-                            ListProduct.Remove(product);
-                        }
+                            if (int.Parse(product.SOLUONG) > 1)
+                            {
+                                // Tạo một danh sách tạm thời để lưu trữ các phần tử theo thứ tự ban đầu
+                                ObservableCollection<MenuItemDTO> temporaryList = new ObservableCollection<MenuItemDTO>(ListProduct);
 
-                        TotalDec = 0;
-                        foreach (var i in ListProduct)
-                        {
-                            TotalDec += i.THANHTIEN;
+                                ListProduct.Remove(product);
+                                product.SOLUONG = (int.Parse(product.SOLUONG) - 1).ToString();
+                                product.THANHTIEN = product.DONGIA * int.Parse(product.SOLUONG);
+                                ListProduct.Add(product);
+
+                                // Cập nhật lại ListProduct từ danh sách tạm thời
+                                ListProduct = new ObservableCollection<MenuItemDTO>(temporaryList);
+                            }
+                            else
+                            {
+                                ListProduct.Remove(product);
+                            }
+
+                            CalTotalBill();
+
+                            currentTable.Products = ListProduct;
                         }
-                        Total = Helper.FormatVNMoney(TotalDec);
                     }
                 }
             });
+            #endregion
         }
-        #endregion
 
         private void ResetProperty()
         {
@@ -408,6 +476,19 @@ namespace QuanLyChuoiCuaHangCoffee.ViewModel.AdminVM.TablesVM
             CusName = "";
             CusPhone = "";
             CusPoint = 0;
+            HourBillIn = "";
+            HourBillOut = "";
+            Note = "";
+        }
+
+        private void CalTotalBill()
+        {
+            TotalDec = 0;
+            foreach (var i in ListProduct)
+            {
+                TotalDec += i.THANHTIEN;
+            }
+            Total = Helper.FormatVNMoney(TotalDec);
         }
 
         #region Lấy danh sách bàn

@@ -188,6 +188,7 @@
     <Compile Include="Models\DataProvider\ImportIngredientsProductServices.cs" />
     <Compile Include="Models\DataProvider\ImportIngredientsServices.cs" />
     <Compile Include="Models\DataProvider\IngredientsServices.cs" />
+    <Compile Include="Models\DataProvider\OrderBillServices.cs" />
     <Compile Include="Models\DataProvider\ProductServices.cs" />
     <Compile Include="Models\DataProvider\TablesServices.cs" />
     <Compile Include="Models\DONHANG.cs">

@@ -31,6 +31,7 @@ namespace QuanLyChuoiCuaHangCoffee.Models.DataProvider
             {
                 using (var context = new CoffeeManagementEntities())
                 {
+                    await UpdateQuantity();
                     var allProductsList = (from sp in context.MONs
                                            select new ProductsDTO
                                            {
@@ -59,6 +60,7 @@ namespace QuanLyChuoiCuaHangCoffee.Models.DataProvider
             {
                 using (var context = new CoffeeManagementEntities())
                 {
+                    await UpdateQuantity();
                     var inStockProducts = (from sp in context.MONs
                                            where sp.SIZE.SOLUONG > 0
                                            select new ProductsDTO
@@ -88,6 +90,7 @@ namespace QuanLyChuoiCuaHangCoffee.Models.DataProvider
             {
                 using (var context = new CoffeeManagementEntities())
                 {
+                    await UpdateQuantity();
                     var inStockProducts = (from sp in context.MONs
                                            where sp.SIZE.SOLUONG <= 0
                                            select new ProductsDTO

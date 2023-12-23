@@ -16,6 +16,8 @@ namespace QuanLyChuoiCuaHangCoffee.DTOs
     public class MenuOfTableDTO
     {
         public int MABAN { get; set; }
+        public string TIMEIn { get; set; }
+        public string GHICHU { get; set; }
         public ObservableCollection<MenuItemDTO> Products { get; set; }
     }
 }

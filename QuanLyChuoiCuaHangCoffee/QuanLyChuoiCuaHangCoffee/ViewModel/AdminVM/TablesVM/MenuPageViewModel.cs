@@ -62,6 +62,13 @@ namespace QuanLyChuoiCuaHangCoffee.ViewModel.AdminVM.TablesVM
 
         private void addToListMenuItem()
         {
+            if (SelectedMenuItem.SOLUONG <= 0)
+            {
+                MessageBoxCF mb = new MessageBoxCF("Món bạn chọn đã hết rồi!", MessageType.Error, MessageButtons.OK);
+                mb.ShowDialog();
+                return;
+            }
+
             var existProduct = ListProduct.FirstOrDefault(x => x.TENMON == SelectedMenuItem.TENMON);
             if (existProduct != null)
             {
