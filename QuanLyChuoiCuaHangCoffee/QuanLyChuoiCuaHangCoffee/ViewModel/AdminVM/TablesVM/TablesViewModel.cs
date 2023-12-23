@@ -342,7 +342,7 @@ namespace QuanLyChuoiCuaHangCoffee.ViewModel.AdminVM.TablesVM
                     }
                     HourBillOut = DateTime.Now.ToString("HH:mm:ss");
 
-                    string madh = await CheckOutServices.Ins.CheckOut(CusID, AdminServices.MaNhanVien, SelectedTableItem.MABAN, _DateBill, TotalDec, 20, "", table.Products);
+                    string madh = await CheckOutServices.Ins.CheckOut(CusID, AdminServices.MaNhanVien, SelectedTableItem.MABAN, _DateBill, TotalDec, 20, Note, table.Products, table.TIMEIn, HourBillOut);
                     MADH = madh;
 
                     MaskName.Visibility = Visibility.Visible;

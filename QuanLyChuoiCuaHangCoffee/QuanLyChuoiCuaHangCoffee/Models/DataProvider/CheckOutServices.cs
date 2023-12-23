@@ -26,7 +26,7 @@ namespace QuanLyChuoiCuaHangCoffee.Models.DataProvider
             private set => _ins = value;
         }
 
-        public async Task<string> CheckOut(string _makh, string _manv, int _maban, string _datetime, decimal _total, int _isDiscount, string _ghichu, ObservableCollection<MenuItemDTO> _listproduct) 
+        public async Task<string> CheckOut(string _makh, string _manv, int _maban, string _datetime, decimal _total, int _isDiscount, string _ghichu, ObservableCollection<MenuItemDTO> _listproduct, string _timein, string _timeout) 
         {
             try
             {
@@ -44,6 +44,8 @@ namespace QuanLyChuoiCuaHangCoffee.Models.DataProvider
                         newBill.TONGGIATRIDONHANG = _total;
                         newBill.ISDISCOUNT = _isDiscount;
                         newBill.GHICHU = _ghichu;
+                        newBill.TIME_IN = DateTime.Parse(_timein);
+                        newBill.TIME_OUT = DateTime.Parse(_timeout);
                         context.DONHANGs.Add(newBill);
 
                         foreach (var item in _listproduct)
@@ -85,7 +87,7 @@ namespace QuanLyChuoiCuaHangCoffee.Models.DataProvider
                         newUser.IDUSER = CreateNextId(context.KHACHHANGs.Max(p => p.IDKHACHHANG), "KH");
                         newUser.USERNAME = "";
                         newUser.USERPASSWORD = "";
-                        newUser.HOTEN = "Khách mới";
+                        newUser.HOTEN = "Khách vãng lai";
                         newUser.EMAIL = "";
                         newUser.CCCD = "";
                         newUser.SODT = "";
@@ -112,12 +114,15 @@ namespace QuanLyChuoiCuaHangCoffee.Models.DataProvider
                         newBill.TONGGIATRIDONHANG = _total;
                         newBill.ISDISCOUNT = _isDiscount;
                         newBill.GHICHU = _ghichu;
+                        newBill.TIME_IN = DateTime.Parse(_timein);
+                        newBill.TIME_OUT = DateTime.Parse(_timeout);
                         context.DONHANGs.Add(newBill);
 
                         foreach (var item in _listproduct)
                         {
                             ObservableCollection<ImportProductIngredient> listProduct = new ObservableCollection<ImportProductIngredient>();
-                            var mon = context.MONs.Where(p => p.MAMON == item.MAMON && p.MASIZE == item.SIZE).FirstOrDefault();
+                            MON mon = await ProductServices.Ins.FindProduct(item.MAMON, item.SIZE);
+
                             if (mon != null)
                             {
                                 //tìm danh sách nguyên liệu của món và trừ đi nguyên liệu trong kho
@@ -125,11 +130,11 @@ namespace QuanLyChuoiCuaHangCoffee.Models.DataProvider
                                 foreach (var ingredient in listProduct)
                                 {
                                     var nguyenlieu = context.NGUYENLIEUx.Where(p => p.MANGUYENLIEU == ingredient.MaNguyenLieu).FirstOrDefault();
-                                    nguyenlieu.SOLUONGTRONGKHO -= ingredient.SoLuong;
+                                    nguyenlieu.SOLUONGTRONGKHO -= ingredient.SoLuong * int.Parse(item.SOLUONG);
                                 }
                                 context.SaveChanges();
-                                int sl = await ProductServices.Ins.CalQuantityProduct(mon);
-                                mon.SIZE.SOLUONG = sl;
+
+                                await ProductServices.Ins.UpdateQuantity();
                             }
 
                             CTDH newCT = new CTDH();

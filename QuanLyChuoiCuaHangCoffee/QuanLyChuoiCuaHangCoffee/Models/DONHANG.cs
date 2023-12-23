@@ -28,6 +28,8 @@ namespace QuanLyChuoiCuaHangCoffee.Models
         public Nullable<decimal> TONGGIATRIDONHANG { get; set; }
         public Nullable<int> ISDISCOUNT { get; set; }
         public string GHICHU { get; set; }
+        public Nullable<System.DateTime> TIME_IN { get; set; }
+        public Nullable<System.DateTime> TIME_OUT { get; set; }
     
         public virtual BAN BAN { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

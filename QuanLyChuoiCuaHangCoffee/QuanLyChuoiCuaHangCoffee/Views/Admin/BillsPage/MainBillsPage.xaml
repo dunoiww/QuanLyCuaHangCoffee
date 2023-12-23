@@ -34,7 +34,7 @@
 
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
-            <i:InvokeCommandAction Command="{Binding MaskNameML}"
+            <i:InvokeCommandAction Command="{Binding MaskNameCF}"
                                    CommandParameter="{Binding ElementName=ShadowMask}" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
@@ -50,7 +50,7 @@
                              IsChecked="True"
                              Margin="20 20 0 0"
                              Content="Bán hàng"
-                             Command="{Binding LoadExpensePage}"
+                             Command="{Binding LoadSalesInvoicePage}"
                              CommandParameter="{Binding ElementName=MainListViewFrame}"/>
 
                 <RadioButton Style="{StaticResource MaterialDesignTabRadioButtonTop}"
@@ -61,7 +61,7 @@
                              IsChecked="False"
                              Margin="10 20 0 0"
                              Content="Nhập hàng"
-                             Command="{Binding LoadRevenuePage}"
+                             Command="{Binding LoadImportInvoicePage}"
                              CommandParameter="{Binding ElementName=MainListViewFrame}"/>
 
             </StackPanel>
@@ -73,7 +73,7 @@
                     <Frame x:Name="MainListViewFrame">
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="Loaded">
-                                <i:InvokeCommandAction Command="{Binding LoadExpensePage}"
+                                <i:InvokeCommandAction Command="{Binding LoadSalesInvoicePage}"
                                                    CommandParameter="{Binding ElementName=MainListViewFrame}" />
                             </i:EventTrigger>
                         </i:Interaction.Triggers>

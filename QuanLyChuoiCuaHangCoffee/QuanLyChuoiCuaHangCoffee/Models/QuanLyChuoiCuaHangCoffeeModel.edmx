@@ -62,6 +62,8 @@
           <Property Name="TONGGIATRIDONHANG" Type="money" />
           <Property Name="ISDISCOUNT" Type="int" />
           <Property Name="GHICHU" Type="nvarchar(max)" />
+          <Property Name="TIME_IN" Type="smalldatetime" />
+          <Property Name="TIME_OUT" Type="smalldatetime" />
         </EntityType>
         <EntityType Name="KHACHHANG">
           <Key>
@@ -516,6 +518,8 @@
           <Property Name="TONGGIATRIDONHANG" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="ISDISCOUNT" Type="Int32" />
           <Property Name="GHICHU" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TIME_IN" Type="DateTime" Precision="0" />
+          <Property Name="TIME_OUT" Type="DateTime" Precision="0" />
           <NavigationProperty Name="BAN" Relationship="QuanLyChuoiCuaHangCoffeeModel.FK__DONHANG__MABAN__37703C52" FromRole="DONHANG" ToRole="BAN" />
           <NavigationProperty Name="CTDHs" Relationship="QuanLyChuoiCuaHangCoffeeModel.FK__CTDH__MADH__3E1D39E1" FromRole="DONHANG" ToRole="CTDH" />
           <NavigationProperty Name="KHACHHANG" Relationship="QuanLyChuoiCuaHangCoffeeModel.FK__DONHANG__IDKHACH__3587F3E0" FromRole="DONHANG" ToRole="KHACHHANG" />
@@ -835,6 +839,8 @@
           <EntitySetMapping Name="DONHANGs">
             <EntityTypeMapping TypeName="QuanLyChuoiCuaHangCoffeeModel.DONHANG">
               <MappingFragment StoreEntitySet="DONHANG">
+                <ScalarProperty Name="TIME_OUT" ColumnName="TIME_OUT" />
+                <ScalarProperty Name="TIME_IN" ColumnName="TIME_IN" />
                 <ScalarProperty Name="GHICHU" ColumnName="GHICHU" />
                 <ScalarProperty Name="ISDISCOUNT" ColumnName="ISDISCOUNT" />
                 <ScalarProperty Name="TONGGIATRIDONHANG" ColumnName="TONGGIATRIDONHANG" />

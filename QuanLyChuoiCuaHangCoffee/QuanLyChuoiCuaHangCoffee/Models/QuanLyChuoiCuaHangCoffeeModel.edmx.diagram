@@ -8,14 +8,14 @@
         <EntityTypeShape EntityType="QuanLyChuoiCuaHangCoffeeModel.BAN" Width="1.5" PointX="3" PointY="1.375" />
         <EntityTypeShape EntityType="QuanLyChuoiCuaHangCoffeeModel.CTDH" Width="1.5" PointX="7.5" PointY="6" />
         <EntityTypeShape EntityType="QuanLyChuoiCuaHangCoffeeModel.CTMON" Width="1.5" PointX="7.5" PointY="12.5" />
-        <EntityTypeShape EntityType="QuanLyChuoiCuaHangCoffeeModel.CTNHAPKHO" Width="1.5" PointX="7.5" PointY="2.5" />
+        <EntityTypeShape EntityType="QuanLyChuoiCuaHangCoffeeModel.CTNHAPKHO" Width="1.5" PointX="7.5" PointY="1.5" />
         <EntityTypeShape EntityType="QuanLyChuoiCuaHangCoffeeModel.CHUCDANH" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="QuanLyChuoiCuaHangCoffeeModel.DONHANG" Width="1.5" PointX="5.25" PointY="5.5" />
+        <EntityTypeShape EntityType="QuanLyChuoiCuaHangCoffeeModel.DONHANG" Width="1.5" PointX="5.25" PointY="5.25" />
         <EntityTypeShape EntityType="QuanLyChuoiCuaHangCoffeeModel.KHACHHANG" Width="1.5" PointX="3" PointY="7.625" />
         <EntityTypeShape EntityType="QuanLyChuoiCuaHangCoffeeModel.MON" Width="1.5" PointX="5.25" PointY="13.875" />
-        <EntityTypeShape EntityType="QuanLyChuoiCuaHangCoffeeModel.NGUYENLIEU" Width="1.5" PointX="5.25" PointY="10.5" />
+        <EntityTypeShape EntityType="QuanLyChuoiCuaHangCoffeeModel.NGUYENLIEU" Width="1.5" PointX="5.25" PointY="10.625" />
         <EntityTypeShape EntityType="QuanLyChuoiCuaHangCoffeeModel.NHANVIEN" Width="1.5" PointX="3" PointY="4.5" />
-        <EntityTypeShape EntityType="QuanLyChuoiCuaHangCoffeeModel.NHAPKHO" Width="1.5" PointX="5.25" PointY="2.5" />
+        <EntityTypeShape EntityType="QuanLyChuoiCuaHangCoffeeModel.NHAPKHO" Width="1.5" PointX="5.25" PointY="1.5" />
         <EntityTypeShape EntityType="QuanLyChuoiCuaHangCoffeeModel.SIZE" Width="1.5" PointX="3" PointY="14.125" />
         <EntityTypeShape EntityType="QuanLyChuoiCuaHangCoffeeModel.USER" Width="1.5" PointX="0.75" PointY="3.875" />
         <AssociationConnector Association="QuanLyChuoiCuaHangCoffeeModel.FK__DONHANG__MABAN__37703C52" />

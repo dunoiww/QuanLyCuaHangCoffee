@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:QuanLyChuoiCuaHangCoffee.Views.Admin.BillsPage"
+      xmlns:controls="clr-namespace:System.Windows.Controls;assembly=PresentationFramework"
       mc:Ignorable="d" 
       d:DesignHeight="700" d:DesignWidth="1200"
       Title="SalesInvoicePage"
@@ -69,76 +70,50 @@
 
                         </StackPanel>
                     </materialDesign:Card>
+                    
+                    <Label Content="Từ:"
+                           VerticalAlignment="Center"
+                           Foreground="Gray"
+                           FontSize="12"
+                           FontStyle="Italic"
+                           Margin="15 0 0 0">
+                        
+                    </Label>
 
-                    <materialDesign:Card Width="120" Margin="15 5 0 5"
+                    <materialDesign:Card Width="140" Margin="0 5 0 5"
                                     UniformCornerRadius="10">
-                        <ComboBox Height="30" x:Name="filtercbb"
-                              Width="100"
-                              Margin="0 0 0 0"
-                              Padding="0 10 10 0"
-                              FontSize="13"
-                              SelectedIndex="0"
-                              SelectedItem="{Binding SelectedBorrowFilter}"
-                              SelectionChanged="filtercbb_SelectionChanged">
+                        <controls:DatePicker x:Name="datePicker" FontSize="18"
+                                             Margin="5"
+                                             SelectedDate="{Binding SelectedDateStart, Mode=TwoWay}">
                             <i:Interaction.Triggers>
-                                <i:EventTrigger EventName="SelectionChanged">
-                                    <i:InvokeCommandAction Command="{Binding CheckSelectedBorrowFilterML}"
-                                                       CommandParameter="{Binding ElementName=filtercbb}" />
+                                <i:EventTrigger EventName="SelectedDateChanged">
+                                    <i:InvokeCommandAction Command="{Binding SelectedDateStartChanged}" />
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
-
-                            <ComboBoxItem Content="Toàn bộ"/>
-                            <ComboBoxItem Content="Theo tháng"/>
-                            <ComboBoxItem Content="Theo năm"/>
-                        </ComboBox>
+                        </controls:DatePicker>
                     </materialDesign:Card>
 
+                    <Label Content="Đến:"
+                           VerticalAlignment="Center"
+                           Foreground="Gray"
+                           FontSize="12"
+                           FontStyle="Italic"
+                           Margin="5 0 0 0">
 
+                    </Label>
 
-                    <ComboBox Height="30"
-                      Width="100"
-                      Margin="10 0 0 0"
-                      Padding="0 10 10 0"
-                      FontSize="13"
-                      Visibility="Collapsed"
-                      x:Name="cbbMonth"
-                      SelectedIndex="{Binding SelectedBorrowMonth, Mode=TwoWay}">
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="SelectionChanged">
-                                <i:InvokeCommandAction Command="{Binding SelectedBorrowMonthML}"
-                                               CommandParameter="{Binding ElementName=cbbMonth}" />
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                        <ComboBoxItem Content="Tháng 1" />
-                        <ComboBoxItem Content="Tháng 2" />
-                        <ComboBoxItem Content="Tháng 3" />
-                        <ComboBoxItem Content="Tháng 4" />
-                        <ComboBoxItem Content="Tháng 5" />
-                        <ComboBoxItem Content="Tháng 6" />
-                        <ComboBoxItem Content="Tháng 7" />
-                        <ComboBoxItem Content="Tháng 8" />
-                        <ComboBoxItem Content="Tháng 9" />
-                        <ComboBoxItem Content="Tháng 10" />
-                        <ComboBoxItem Content="Tháng 11" />
-                        <ComboBoxItem Content="Tháng 12" />
-                    </ComboBox>
-
-                    <ComboBox Height="30"
-                          Width="100"
-                          Margin="10 0 0 0"
-                          Padding="0 10 10 0"
-                          FontSize="13"
-                          Visibility="Collapsed"
-                          x:Name="cbbYear"
-                          SelectedItem="{Binding SelectedBorrowYear, Mode=TwoWay}"
-                          Loaded="cbbYear_Loaded">
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="SelectionChanged">
-                                <i:InvokeCommandAction Command="{Binding SelectedBorrowYearML}"
-                                               CommandParameter="{Binding ElementName=cbbYear}" />
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                    </ComboBox>
+                    <materialDesign:Card Width="140" Margin="0 5 0 5"
+                                         UniformCornerRadius="10">
+                        <controls:DatePicker FontSize="18"
+                                             Margin="5"
+                                             SelectedDate="{Binding SelectedDateEnd, Mode=TwoWay}">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="SelectedDateChanged">
+                                    <i:InvokeCommandAction Command="{Binding SelectedDateEndChanged}" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </controls:DatePicker>
+                    </materialDesign:Card>
                 </StackPanel>
 
                 <StackPanel Grid.Column="1" Orientation="Horizontal">
@@ -148,7 +123,7 @@
                             FontWeight="Bold"
                             Height="50"
                             Background="#F0B000"
-                            Command="{Binding ExportFileML}">
+                            Command="{Binding ExportFileSaleInvoiceCF}">
                             <Button.Content>
                                 <StackPanel Orientation="Horizontal">
                                     <materialDesign:PackIcon Kind="FileExcel"
@@ -169,71 +144,65 @@
         </StackPanel>
 
         <StackPanel Grid.Row="1">
-            <ListView x:Name="lvBorrow"
-              Focusable="True"
-              Height="620"
-              VerticalAlignment="Top"
-              ItemsSource="{Binding ListBorrow}"
-              SelectedItem="{Binding SelectedBorrowItem}"
-              HorizontalAlignment="Stretch">
+            <ListView x:Name="lvSaleInvoice"
+                      Focusable="True"
+                      Height="620"
+                      VerticalAlignment="Top"
+                      ItemsSource="{Binding ListSaleInvoice}"
+                      SelectedItem="{Binding SelectedSaleInvoiceItem}"
+                      HorizontalAlignment="Stretch"
+                      ToolTip="Double-click để xem chi tiết hoá đơn">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="MouseDoubleClick">
-                        <i:InvokeCommandAction Command="{Binding LoadInfoBorrow}" />
+                        <i:InvokeCommandAction Command="{Binding LoadInforSaleInvoice}" />
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="Mã nguyên liệu"
+                        <GridViewColumn Header="Mã đơn hàng"
                                 Width="auto">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock  Text="{Binding MaPhieuMuon}"
-                                        FontSize="18"
-                                        Margin="18,0,0,0" />
+                                    <TextBlock  Text="{Binding MADH}"
+                                                FontSize="18"
+                                                Margin="18,0,0,0" 
+                                                Foreground="White"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
 
-                        <GridViewColumn Header="Tên nguyên liệu"
-                                Width="200">
+                        <GridViewColumn Header="Tên khách hàng"
+                                Width="300">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock  Text="{Binding TenKH}"
-                                        FontSize="18"
-                                        Margin="18,0,0,0" />
+                                    <TextBlock  Text="{Binding TENKHACHHANG}"
+                                                FontSize="18"
+                                                Margin="18,0,0,0" 
+                                                Foreground="White"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
 
-                        <GridViewColumn Header="Số lượng"
-                                Width="200">
+                        <GridViewColumn Header="Ngày thanh toán"
+                                Width="300">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding TenSach}"
-                                        FontSize="18"
-                                        Margin="18,0,0,0" />
+                                    <TextBlock  Text="{Binding NGDH, StringFormat='dd/MM/yyyy'}"
+                                                FontSize="18"
+                                                Margin="18,0,0,0" 
+                                                Foreground="White"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
 
-                        <GridViewColumn Header="Đơn vị"
-                                Width="200">
+                        <GridViewColumn Header="Thành tiền"
+                                        Width="200">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock  Text="{Binding NgayMuon, StringFormat='dd/MM/yyyy'}"
-                                        FontSize="18"
-                                        Margin="18,0,0,0" />
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
-
-                        <GridViewColumn Header="Ngày nhập"
-                                Width="200">
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock  Text="{Binding NgayHetHan, StringFormat='dd/MM/yyyy'}"
-                                        FontSize="18"
-                                        Margin="18,0,0,0" />
+                                    <TextBlock  Text="{Binding TONGTIENSTR}"
+                                                FontSize="18"
+                                                Margin="18,0,0,0" 
+                                                Foreground="White"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
