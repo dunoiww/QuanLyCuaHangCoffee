@@ -10,6 +10,12 @@ namespace QuanLyChuoiCuaHangCoffee.DTOs
     {
         public string MAPHIEU { get; set; }
         public string IDNHANVIEN { get; set; }
+        public string TENNHANVIEN { get; set; }
         public DateTime NGNHAPKHO { get; set; }
+        public decimal TRIGIA { get; set; }
+        public string TRIGIASTR
+        {
+            get { return Utils.Helper.FormatVNMoney(TRIGIA); }
+        }
     }
 }

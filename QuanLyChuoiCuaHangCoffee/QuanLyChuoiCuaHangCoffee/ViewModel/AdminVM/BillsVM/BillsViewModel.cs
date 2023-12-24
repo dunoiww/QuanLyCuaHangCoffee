@@ -38,7 +38,9 @@ namespace QuanLyChuoiCuaHangCoffee.ViewModel.AdminVM.BillsVM
         {
             SelectedDateEnd = DateTime.Now;
             SelectedDateStart = DateTime.Now.AddDays(-30);
-            //main page bills
+            SelectedDateEndImport = DateTime.Now;
+            SelectedDateStartImport = DateTime.Now.AddDays(-30);
+            #region main page bills
             MaskNameCF = new RelayCommand<Grid>((p) => { return true; }, (p) =>
             {
                 MaskName = p;
@@ -52,14 +54,15 @@ namespace QuanLyChuoiCuaHangCoffee.ViewModel.AdminVM.BillsVM
                 p.Content = w;
             });
 
-            LoadImportInvoicePage = new RelayCommand<Frame>((p) => { return true; }, (p) =>
+            LoadImportInvoicePage = new RelayCommand<Frame>((p) => { return true; }, async (p) =>
             {
+                ListImportInvoice = new ObservableCollection<ImportBillDTO>(await ImportBillServices.Ins.GetAllBill(SelectedDateStartImport, SelectedDateEndImport));
                 ImportInvoicePage w = new ImportInvoicePage();
                 p.Content = w;
             });
+            #endregion
 
-
-            //page sales invoice
+            #region page sales invoice
             ExportFileSaleInvoiceCF = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
                 SaveFileDialog sf = new SaveFileDialog
@@ -111,7 +114,7 @@ namespace QuanLyChuoiCuaHangCoffee.ViewModel.AdminVM.BillsVM
 
             SelectedDateStartChanged = new RelayCommand<object>((p) => { return true; }, async (p) =>
             {
-                if (SelectedDateStart >= SelectedDateEnd)
+                if (SelectedDateStart > SelectedDateEnd)
                 {
                     MessageBoxCF ms = new MessageBoxCF("Ngày bắt đầu không thể lớn hơn ngày kết thúc!", MessageType.Error, MessageButtons.OK);
                     ms.ShowDialog();
@@ -128,7 +131,7 @@ namespace QuanLyChuoiCuaHangCoffee.ViewModel.AdminVM.BillsVM
 
             SelectedDateEndChanged = new RelayCommand<object>((p) => { return true; }, async (p) =>
             {
-                if (SelectedDateStart >= SelectedDateEnd)
+                if (SelectedDateStart > SelectedDateEnd)
                 {
                     MessageBoxCF ms = new MessageBoxCF("Ngày kết thúc không thể nhỏ hơn ngày bắt đầu!", MessageType.Error, MessageButtons.OK);
                     ms.ShowDialog();
@@ -148,7 +151,7 @@ namespace QuanLyChuoiCuaHangCoffee.ViewModel.AdminVM.BillsVM
                 if (SelectedSaleInvoiceItem != null)
                 {
                     tableNumber = SelectedSaleInvoiceItem.MABAN.ToString();
-                    DateBill = SelectedSaleInvoiceItem.NGDH;
+                    DateBill = SelectedSaleInvoiceItem.NGDH.ToString("dd/MM/yyyy");
                     Employee = SelectedSaleInvoiceItem.TENNV;
                     HourBillIn = DateTime.Parse(SelectedSaleInvoiceItem.TIMEIN).ToString("HH:mm:ss");
                     MADH = SelectedSaleInvoiceItem.MADH;
@@ -157,7 +160,7 @@ namespace QuanLyChuoiCuaHangCoffee.ViewModel.AdminVM.BillsVM
                     Note = SelectedSaleInvoiceItem.GHICHU;
                     Total = Helper.FormatVNMoney(SelectedSaleInvoiceItem.TONGTIEN);
 
-                    ListProduct = new ObservableCollection<DTOs.MenuItemDTO>(await OrderBillServices.Ins.GetProductFromBill(SelectedSaleInvoiceItem.MADH));
+                    ListProduct = new ObservableCollection<MenuItemDTO>(await OrderBillServices.Ins.GetProductFromBill(SelectedSaleInvoiceItem.MADH));
 
                     BillDetailWindow w = new BillDetailWindow();
                     w.ShowDialog();
@@ -169,6 +172,109 @@ namespace QuanLyChuoiCuaHangCoffee.ViewModel.AdminVM.BillsVM
                 p.Close();
 
             });
+            #endregion
+
+            #region page import invoice
+            SelectedDateStartImportChanged = new RelayCommand<object>((p) => { return true; }, async (p) =>
+            {
+                if (SelectedDateStartImport > SelectedDateEndImport)
+                {
+                    MessageBoxCF ms = new MessageBoxCF("Ngày bắt đầu không thể lớn hơn ngày kết thúc!", MessageType.Error, MessageButtons.OK);
+                    ms.ShowDialog();
+                    IsGettingSource = true;
+                    ListImportInvoice = new ObservableCollection<ImportBillDTO>(await ImportBillServices.Ins.GetAllBill(SelectedDateStartImport, SelectedDateEndImport));
+                    IsGettingSource = false;
+                }
+                else
+                {
+                    IsGettingSource = true;
+                    ListImportInvoice = new ObservableCollection<ImportBillDTO>(await ImportBillServices.Ins.GetAllBill(SelectedDateStartImport, SelectedDateEndImport));
+                    IsGettingSource = false;
+                }
+            });
+
+            SelectedDateEndImportChanged = new RelayCommand<object>((p) => { return true; }, async (p) =>
+            {
+                if (SelectedDateStartImport > SelectedDateEndImport)
+                {
+                    MessageBoxCF ms = new MessageBoxCF("Ngày kết thúc không thể nhỏ hơn ngày bắt đầu!", MessageType.Error, MessageButtons.OK);
+                    ms.ShowDialog();
+                    IsGettingSource = true;
+                    ListImportInvoice = new ObservableCollection<ImportBillDTO>(await ImportBillServices.Ins.GetAllBill(SelectedDateStartImport, SelectedDateEndImport));
+                    IsGettingSource = false;
+                }
+                else
+                {
+                    IsGettingSource = true;
+                    ListImportInvoice = new ObservableCollection<ImportBillDTO>(await ImportBillServices.Ins.GetAllBill(SelectedDateStartImport, SelectedDateEndImport));
+                    IsGettingSource = false;
+                }
+            });
+
+            LoadInfoImportInvoice = new RelayCommand<object>((p) => { return true; }, async (p) =>
+            {
+                if (SelectedImportInvoiceItem != null)
+                {
+                    MaskName.Visibility = System.Windows.Visibility.Visible;
+                    EmployeeImport = SelectedImportInvoiceItem.TENNHANVIEN;
+                    DateBillImport = SelectedImportInvoiceItem.NGNHAPKHO.ToString("dd/MM/yyyy");
+                    IsGettingSource = true;
+                    ListImportDetail = new ObservableCollection<IngredientsDTO>(await ImportBillServices.Ins.GetIngredientFromBill(SelectedImportInvoiceItem.MAPHIEU));
+                    IsGettingSource = false;
+
+                    ImportIngredientDetail w = new ImportIngredientDetail();
+                    w.ShowDialog();
+                    MaskName.Visibility = System.Windows.Visibility.Collapsed;
+                }
+            });
+
+            ExportFileImoprtInvoiceCF = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                SaveFileDialog sf = new SaveFileDialog
+                {
+                    FileName = "ImportInvoice",
+                    Filter = "Excel |*.xlsx",
+                    ValidateNames = true
+                };
+
+                if (sf.ShowDialog() == DialogResult.OK)
+                {
+                    Mouse.OverrideCursor = System.Windows.Input.Cursors.Wait;
+
+                    // Tạo một đối tượng ExcelPackage
+                    ExcelPackage package = new ExcelPackage();
+
+                    // Tạo một đối tượng ExcelWorksheet
+                    ExcelWorksheet worksheet = package.Workbook.Worksheets.Add("Sheet1");
+
+                    // Tiêu đề cột
+                    worksheet.Cells[1, 1].Value = "Mã phiếu nhập";
+                    worksheet.Cells[1, 2].Value = "Tên nhân viên";
+                    worksheet.Cells[1, 3].Value = "Ngày nhập";
+                    worksheet.Cells[1, 4].Value = "Tổng trị giá hoá đơn";
+
+                    // Dữ liệu
+                    int count = 2;
+                    foreach (var item in ListImportInvoice)
+                    {
+                        worksheet.Cells[count, 1].Value = item.MAPHIEU;
+                        worksheet.Cells[count, 2].Value = item.TENNHANVIEN;
+                        worksheet.Cells[count, 3].Value = item.NGNHAPKHO.ToString("dd/MM/yyyy");
+                        worksheet.Cells[count, 4].Value = item.TRIGIASTR;
+
+                        count++;
+                    }
+
+                    // Lưu file Excel
+                    FileInfo fileInfo = new FileInfo(sf.FileName);
+                    package.SaveAs(fileInfo);
+
+                    Mouse.OverrideCursor = System.Windows.Input.Cursors.Arrow;
+                    MessageBoxCF mb = new MessageBoxCF("Xuất file thành công", MessageType.Accept, MessageButtons.OK);
+                    mb.ShowDialog();
+                }
+            });
+            #endregion
         }
     }
 }

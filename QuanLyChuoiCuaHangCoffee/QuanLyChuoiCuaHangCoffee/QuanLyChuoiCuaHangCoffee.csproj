@@ -266,6 +266,9 @@
     <Compile Include="Views\Admin\BillsPage\BillDetailWindow.xaml.cs">
       <DependentUpon>BillDetailWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Admin\BillsPage\ImportIngredientDetail.xaml.cs">
+      <DependentUpon>ImportIngredientDetail.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Admin\BillsPage\ImportInvoicePage.xaml.cs">
       <DependentUpon>ImportInvoicePage.xaml</DependentUpon>
     </Compile>
@@ -368,6 +371,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Admin\BillsPage\BillDetailWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Admin\BillsPage\ImportIngredientDetail.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -529,6 +536,7 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="SQL\COFFEEMANAGEMENT.sql" />
     <Resource Include="Resources\Machiato.jpg" />
     <Resource Include="LogoEPSRO.ico" />
     <Content Include="Models\QuanLyChuoiCuaHangCoffeeModel.Context.tt">

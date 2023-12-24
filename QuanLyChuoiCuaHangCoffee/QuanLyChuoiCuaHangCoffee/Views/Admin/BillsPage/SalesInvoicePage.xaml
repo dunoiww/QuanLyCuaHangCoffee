@@ -146,7 +146,7 @@
         <StackPanel Grid.Row="1">
             <ListView x:Name="lvSaleInvoice"
                       Focusable="True"
-                      Height="620"
+                      Height="550"
                       VerticalAlignment="Top"
                       ItemsSource="{Binding ListSaleInvoice}"
                       SelectedItem="{Binding SelectedSaleInvoiceItem}"

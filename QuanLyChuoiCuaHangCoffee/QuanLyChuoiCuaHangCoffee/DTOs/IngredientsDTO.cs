@@ -1,6 +1,8 @@
-﻿using System;
+﻿using QuanLyChuoiCuaHangCoffee.Utils;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -14,5 +16,10 @@ namespace QuanLyChuoiCuaHangCoffee.DTOs
         public int SOLUONGTRONGKHO { get;set; }
         public DateTime NGAYNHAP { get; set; }
         public string IMAGESOURCE {  get; set; }
+        public decimal GIANHAP { get; set; }
+        public string GIANHAPSTR
+        {
+            get { return Helper.FormatVNMoney(GIANHAP); }
+        }
     }
 }

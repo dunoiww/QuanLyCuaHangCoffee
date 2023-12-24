@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QuanLyChuoiCuaHangCoffee.DTOs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,17 +28,20 @@ namespace QuanLyChuoiCuaHangCoffee.Views.Admin.BillsPage
 
         private void FilterBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            CollectionViewSource.GetDefaultView(lvImportInvoice.ItemsSource).Refresh();
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(lvImportInvoice.ItemsSource);
+            view.Filter = Filter;
         }
-
-        private void filtercbb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private bool Filter(object item)
         {
-
-        }
-
-        private void cbbYear_Loaded(object sender, RoutedEventArgs e)
-        {
-
+            if (String.IsNullOrEmpty(FilterBox.Text)) return true;
+            else
+            {
+                return ((item as ImportBillDTO).MAPHIEU.ToString().IndexOf(FilterBox.Text, StringComparison.OrdinalIgnoreCase) >= 0) ||
+                        ((item as ImportBillDTO).TENNHANVIEN.ToString().IndexOf(FilterBox.Text, StringComparison.OrdinalIgnoreCase) >= 0) ||
+                        ((item as ImportBillDTO).TRIGIA.ToString().IndexOf(FilterBox.Text, StringComparison.OrdinalIgnoreCase) >= 0) ||
+                        ((item as ImportBillDTO).NGNHAPKHO.ToString().IndexOf(FilterBox.Text, StringComparison.OrdinalIgnoreCase) >= 0);
+            }
         }
     }
 }

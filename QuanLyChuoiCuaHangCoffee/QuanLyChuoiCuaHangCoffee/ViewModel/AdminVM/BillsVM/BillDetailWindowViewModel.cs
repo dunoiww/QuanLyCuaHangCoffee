@@ -23,8 +23,8 @@ namespace QuanLyChuoiCuaHangCoffee.ViewModel.AdminVM.BillsVM
             }
         }
 
-        private DateTime _DateBill { get; set; }
-        public DateTime DateBill
+        private string _DateBill { get; set; }
+        public string DateBill
         {
             get => _DateBill;
             set
