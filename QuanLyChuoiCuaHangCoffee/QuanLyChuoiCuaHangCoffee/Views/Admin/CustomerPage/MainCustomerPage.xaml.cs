@@ -24,5 +24,10 @@ namespace QuanLyChuoiCuaHangCoffee.Views.Admin.CustomerPage
         {
             InitializeComponent();
         }
+
+        private void FilterBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }

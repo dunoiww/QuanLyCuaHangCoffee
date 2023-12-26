@@ -44,5 +44,7 @@ namespace QuanLyChuoiCuaHangCoffee.DTOs
         public string HANGTHANHVIEN { get; set; }
         public int ROLE { get; set; }
 
+        public decimal CHITIEU { get; set; }
+
     }
 }

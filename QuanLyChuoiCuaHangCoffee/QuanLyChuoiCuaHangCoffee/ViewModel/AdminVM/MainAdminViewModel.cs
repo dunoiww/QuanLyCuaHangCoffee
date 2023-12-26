@@ -39,7 +39,7 @@ namespace QuanLyChuoiCuaHangCoffee.ViewModel.AdminVM
         {
             LoadMainDashboardPageCF = new RelayCommand<Frame>((p) => { return true; }, (p) =>
             {
-                p.Content = new MainTablesPage();
+                p.Content = new MainDashboardPage();
                 optionName = "Trang chủ";
             });
 
