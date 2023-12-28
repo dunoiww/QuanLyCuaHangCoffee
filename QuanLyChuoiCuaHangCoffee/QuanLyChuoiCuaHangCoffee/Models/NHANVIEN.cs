@@ -22,7 +22,6 @@ namespace QuanLyChuoiCuaHangCoffee.Models
         }
     
         public string IDNHANVIEN { get; set; }
-        public Nullable<int> LOAINHANVIEN { get; set; }
         public string MACD { get; set; }
     
         public virtual CHUCDANH CHUCDANH { get; set; }

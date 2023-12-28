@@ -99,6 +99,7 @@ namespace QuanLyChuoiCuaHangCoffee.ViewModel.AdminVM.CustomerVM
 
             LoadInfoCus = new RelayCommand<object>((p) => { return true; }, async (p) =>
             {
+                NameCus = SelectedCusItem.HOTEN;
                 PhoneCus = SelectedCusItem.SODT;
                 AddressCus = SelectedCusItem.EMAIL;
                 PointCus = SelectedCusItem.TICHDIEM.ToString();
@@ -140,7 +141,7 @@ namespace QuanLyChuoiCuaHangCoffee.ViewModel.AdminVM.CustomerVM
             {
                 SaveFileDialog sf = new SaveFileDialog
                 {
-                    FileName = "SaleInvoice",
+                    FileName = "Customer",
                     Filter = "Excel |*.xlsx",
                     ValidateNames = true
                 };

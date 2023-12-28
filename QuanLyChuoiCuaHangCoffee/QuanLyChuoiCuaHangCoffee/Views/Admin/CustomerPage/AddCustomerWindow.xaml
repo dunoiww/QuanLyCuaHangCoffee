@@ -84,6 +84,7 @@
                              BorderBrush="LightGray"
                              Style="{StaticResource MaterialDesignFloatingHintTextBox}"  
                              PreviewTextInput="TextBox_PreviewTextInput"
+                             TextChanged="TextBox_TextChanged"
                              VerticalAlignment="Center"/>
 
                     <TextBox Margin="10 0 10 0"

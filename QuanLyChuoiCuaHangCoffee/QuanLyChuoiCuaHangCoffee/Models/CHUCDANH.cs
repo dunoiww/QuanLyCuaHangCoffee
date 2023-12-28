@@ -23,6 +23,7 @@ namespace QuanLyChuoiCuaHangCoffee.Models
         public string MACD { get; set; }
         public string TENCHUCDANH { get; set; }
         public Nullable<double> HESOLUONG { get; set; }
+        public Nullable<decimal> LUONGCOBAN { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NHANVIEN> NHANVIENs { get; set; }

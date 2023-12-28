@@ -215,6 +215,7 @@
                                  BorderBrush="LightGray"
                                  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                  PreviewTextInput="TextBox_PreviewTextInput"
+                                 TextChanged="TextBox_TextChanged"
                                  VerticalAlignment="Center"/>
                     </StackPanel>
                     <TextBlock Text="Vui lòng nhập số điện thoại"
@@ -244,6 +245,7 @@
                                  BorderBrush="LightGray"
                                  Style="{StaticResource MaterialDesignFloatingHintTextBox}"  
                                  PreviewTextInput="TextBox_PreviewTextInput"
+                                 TextChanged="TextBox_TextChanged_1"
                                  VerticalAlignment="Center"/>
                     </StackPanel>
 

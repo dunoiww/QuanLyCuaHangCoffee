@@ -163,6 +163,7 @@
     </ApplicationDefinition>
     <Compile Include="DTOs\AdminDTO.cs" />
     <Compile Include="DTOs\CustomerDTO.cs" />
+    <Compile Include="DTOs\EmployeeDTO.cs" />
     <Compile Include="DTOs\ImportBillDTO.cs" />
     <Compile Include="DTOs\ImportIngredientsDTO.cs" />
     <Compile Include="DTOs\IngredientsDTO.cs" />
@@ -190,6 +191,7 @@
     <Compile Include="Models\DataProvider\AdminServices.cs" />
     <Compile Include="Models\DataProvider\CheckOutServices.cs" />
     <Compile Include="Models\DataProvider\CustomerServices.cs" />
+    <Compile Include="Models\DataProvider\EmployeeServices.cs" />
     <Compile Include="Models\DataProvider\ImportBillServices.cs" />
     <Compile Include="Models\DataProvider\ImportIngredientsProductServices.cs" />
     <Compile Include="Models\DataProvider\ImportIngredientsServices.cs" />
@@ -255,6 +257,7 @@
     <Compile Include="ViewModel\AdminVM\CustomerVM\CustomerViewModel.cs" />
     <Compile Include="ViewModel\AdminVM\CustomerVM\EditCusViewModel.cs" />
     <Compile Include="ViewModel\AdminVM\DashboardVM\DashboardViewModel.cs" />
+    <Compile Include="ViewModel\AdminVM\EmployeeVM\AddEmployeeViewModel.cs" />
     <Compile Include="ViewModel\AdminVM\EmployeeVM\EmployeeViewModel.cs" />
     <Compile Include="ViewModel\AdminVM\IngredientsVM\IngredientsViewModel.cs" />
     <Compile Include="ViewModel\AdminVM\ItemsVM\ItemsViewModel.cs" />
@@ -287,17 +290,14 @@
     <Compile Include="Views\Admin\CustomerPage\EditCusWindow.xaml.cs">
       <DependentUpon>EditCusWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Admin\CustomerPage\ListCustomerPage.xaml.cs">
-      <DependentUpon>ListCustomerPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\Admin\CustomerPage\MainCustomerPage.xaml.cs">
       <DependentUpon>MainCustomerPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Admin\DashboardPage\MainDashboardPage.xaml.cs">
       <DependentUpon>MainDashboardPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Admin\EmployeePage\ListEmployeePage.xaml.cs">
-      <DependentUpon>ListEmployeePage.xaml</DependentUpon>
+    <Compile Include="Views\Admin\EmployeePage\AddEmployeeWindow.xaml.cs">
+      <DependentUpon>AddEmployeeWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Admin\EmployeePage\MainEmployeePage.xaml.cs">
       <DependentUpon>MainEmployeePage.xaml</DependentUpon>
@@ -407,10 +407,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Admin\CustomerPage\ListCustomerPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\Admin\CustomerPage\MainCustomerPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -419,7 +415,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Admin\EmployeePage\ListEmployeePage.xaml">
+    <Page Include="Views\Admin\EmployeePage\AddEmployeeWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

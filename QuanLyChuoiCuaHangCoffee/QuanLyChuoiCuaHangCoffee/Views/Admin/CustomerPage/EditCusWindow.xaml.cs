@@ -30,5 +30,35 @@ namespace QuanLyChuoiCuaHangCoffee.Views.Admin.CustomerPage
             Regex regex = new Regex("[^0-9]+");
             e.Handled = regex.IsMatch(e.Text);
         }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Regex regex = new Regex("^[0-9]{0,10}$"); // Chỉ cho phép nhập từ 0 đến 12 chữ số
+
+            TextBox textBox = (TextBox)sender;
+            string inputText = textBox.Text;
+
+            if (!regex.IsMatch(inputText))
+            {
+                // Nếu đầu vào không phù hợp với điều kiện, xóa ký tự cuối cùng
+                textBox.Text = inputText.Remove(inputText.Length - 1);
+                textBox.CaretIndex = textBox.Text.Length; // Đặt vị trí con trỏ vào cuối
+            }
+        }
+
+        private void TextBox_TextChanged_1(object sender, TextChangedEventArgs e)
+        {
+            Regex regex = new Regex("^[0-9]{0,12}$"); // Chỉ cho phép nhập từ 0 đến 12 chữ số
+
+            TextBox textBox = (TextBox)sender;
+            string inputText = textBox.Text;
+
+            if (!regex.IsMatch(inputText))
+            {
+                // Nếu đầu vào không phù hợp với điều kiện, xóa ký tự cuối cùng
+                textBox.Text = inputText.Remove(inputText.Length - 1);
+                textBox.CaretIndex = textBox.Text.Length; // Đặt vị trí con trỏ vào cuối
+            }
+        }
     }
 }

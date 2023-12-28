@@ -47,8 +47,9 @@
             <PropertyRef Name="MACD" />
           </Key>
           <Property Name="MACD" Type="varchar" MaxLength="10" Nullable="false" />
-          <Property Name="TENCHUCDANH" Type="nvarchar" MaxLength="50" />
+          <Property Name="TENCHUCDANH" Type="nvarchar(max)" />
           <Property Name="HESOLUONG" Type="float" />
+          <Property Name="LUONGCOBAN" Type="money" />
         </EntityType>
         <EntityType Name="DONHANG">
           <Key>
@@ -98,7 +99,6 @@
             <PropertyRef Name="IDNHANVIEN" />
           </Key>
           <Property Name="IDNHANVIEN" Type="varchar" MaxLength="10" Nullable="false" />
-          <Property Name="LOAINHANVIEN" Type="int" />
           <Property Name="MACD" Type="varchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="NHAPKHO">
@@ -502,8 +502,9 @@
             <PropertyRef Name="MACD" />
           </Key>
           <Property Name="MACD" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="TENCHUCDANH" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TENCHUCDANH" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="HESOLUONG" Type="Double" />
+          <Property Name="LUONGCOBAN" Type="Decimal" Precision="19" Scale="4" />
           <NavigationProperty Name="NHANVIENs" Relationship="QuanLyChuoiCuaHangCoffeeModel.FK__NHANVIEN__MACD__3B75D760" FromRole="CHUCDANH" ToRole="NHANVIEN" />
         </EntityType>
         <EntityType Name="DONHANG">
@@ -565,7 +566,6 @@
             <PropertyRef Name="IDNHANVIEN" />
           </Key>
           <Property Name="IDNHANVIEN" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="LOAINHANVIEN" Type="Int32" />
           <Property Name="MACD" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="CHUCDANH" Relationship="QuanLyChuoiCuaHangCoffeeModel.FK__NHANVIEN__MACD__3B75D760" FromRole="NHANVIEN" ToRole="CHUCDANH" />
           <NavigationProperty Name="DONHANGs" Relationship="QuanLyChuoiCuaHangCoffeeModel.FK__DONHANG__IDNHANV__367C1819" FromRole="NHANVIEN" ToRole="DONHANG" />
@@ -830,6 +830,7 @@
           <EntitySetMapping Name="CHUCDANHs">
             <EntityTypeMapping TypeName="QuanLyChuoiCuaHangCoffeeModel.CHUCDANH">
               <MappingFragment StoreEntitySet="CHUCDANH">
+                <ScalarProperty Name="LUONGCOBAN" ColumnName="LUONGCOBAN" />
                 <ScalarProperty Name="HESOLUONG" ColumnName="HESOLUONG" />
                 <ScalarProperty Name="TENCHUCDANH" ColumnName="TENCHUCDANH" />
                 <ScalarProperty Name="MACD" ColumnName="MACD" />
@@ -887,7 +888,6 @@
             <EntityTypeMapping TypeName="QuanLyChuoiCuaHangCoffeeModel.NHANVIEN">
               <MappingFragment StoreEntitySet="NHANVIEN">
                 <ScalarProperty Name="MACD" ColumnName="MACD" />
-                <ScalarProperty Name="LOAINHANVIEN" ColumnName="LOAINHANVIEN" />
                 <ScalarProperty Name="IDNHANVIEN" ColumnName="IDNHANVIEN" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -37,4 +37,16 @@ namespace QuanLyChuoiCuaHangCoffee.Utils
             "Lớn",
         };
     }
+
+    public class Positions
+    {
+        public static readonly List<string> ListChucVu = new List<string>()
+        {
+            "Quản lý cửa hàng",
+            "Trưởng nhân viên pha chế",
+            "Nhân viên pha chế",
+            "Nhân viên thu ngân",
+            "Nhân viên phục vụ",
+        };
+    }
 }
