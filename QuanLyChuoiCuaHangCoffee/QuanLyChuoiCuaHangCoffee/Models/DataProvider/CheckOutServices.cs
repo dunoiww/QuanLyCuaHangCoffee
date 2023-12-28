@@ -77,6 +77,8 @@ namespace QuanLyChuoiCuaHangCoffee.Models.DataProvider
                         }
 
                         cus.TICHDIEM += (int)_total / 100;
+                        cus.SODONHANG += 1;
+                        await CustomerServices.Ins.UpdateRankCus(cus);
                         context.SaveChanges();
                         return newBill.MADH;
                     }
@@ -100,7 +102,7 @@ namespace QuanLyChuoiCuaHangCoffee.Models.DataProvider
                         KHACHHANG newCus = new KHACHHANG();
                         newCus.IDKHACHHANG = CreateNextId(context.KHACHHANGs.Max(p => p.IDKHACHHANG), "KH");
                         newCus.TICHDIEM = 0;
-                        newCus.SODONHANG = 0;
+                        newCus.SODONHANG = 1;
                         newCus.HANGTHANHVIEN = "Chưa";
 
                         context.KHACHHANGs.Add(newCus);

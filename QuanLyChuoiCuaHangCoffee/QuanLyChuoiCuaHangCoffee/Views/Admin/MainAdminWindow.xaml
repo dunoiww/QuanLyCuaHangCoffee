@@ -234,7 +234,7 @@
                                VerticalAlignment="Center"
                                TextAlignment="Left"
                                Margin="5 0 0 0"
-                               Text="Design by GROUP 7 😀"
+                               Text="Designed by GROUP 7 😀"
                                FontFamily="Inter"
                                FontWeight= "DemiBold"
                                Foreground="#CACACA"

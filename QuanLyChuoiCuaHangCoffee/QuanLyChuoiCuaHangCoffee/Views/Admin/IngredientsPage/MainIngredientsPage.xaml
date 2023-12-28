@@ -38,9 +38,9 @@
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding MaskNameIngredients}"
-                       CommandParameter="{Binding ElementName=ShadowMask}" />
+                                   CommandParameter="{Binding ElementName=ShadowMask}" />
             <i:InvokeCommandAction Command="{Binding LoadIngredients}"
-                               CommandParameter="{Binding ElementName=lvIngredients}" />
+                                   CommandParameter="{Binding ElementName=lvIngredients}" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
 

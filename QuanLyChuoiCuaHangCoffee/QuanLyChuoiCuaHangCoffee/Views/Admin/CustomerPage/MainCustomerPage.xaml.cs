@@ -1,6 +1,9 @@
-﻿using System;
+﻿using QuanLyChuoiCuaHangCoffee.DTOs;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -27,7 +30,20 @@ namespace QuanLyChuoiCuaHangCoffee.Views.Admin.CustomerPage
 
         private void FilterBox_TextChanged(object sender, TextChangedEventArgs e)
         {
+            CollectionViewSource.GetDefaultView(lvCustomer.ItemsSource).Refresh();
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(lvCustomer.ItemsSource);
+            view.Filter = Filter;
+        }
 
+        private bool Filter(object item)
+        {
+            if (String.IsNullOrEmpty(FilterBox.Text)) return true;
+            else
+            {
+                return ((item as CustomerDTO).IDKHACHHANG.ToString().IndexOf(FilterBox.Text, StringComparison.OrdinalIgnoreCase) >= 0) ||
+                        ((item as CustomerDTO).HOTEN.ToString().IndexOf(FilterBox.Text, StringComparison.OrdinalIgnoreCase) >= 0) ||
+                        ((item as CustomerDTO).SODT.ToString().IndexOf(FilterBox.Text, StringComparison.OrdinalIgnoreCase) >= 0);
+            }
         }
     }
 }

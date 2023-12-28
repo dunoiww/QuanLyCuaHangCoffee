@@ -251,7 +251,9 @@
     <Compile Include="ViewModel\AdminVM\BillsVM\BillsViewModel.cs" />
     <Compile Include="ViewModel\AdminVM\BillsVM\ImportInvoicePageViewModel.cs" />
     <Compile Include="ViewModel\AdminVM\BillsVM\SalesInvoicePageViewModel.cs" />
+    <Compile Include="ViewModel\AdminVM\CustomerVM\AddCusViewModel.cs" />
     <Compile Include="ViewModel\AdminVM\CustomerVM\CustomerViewModel.cs" />
+    <Compile Include="ViewModel\AdminVM\CustomerVM\EditCusViewModel.cs" />
     <Compile Include="ViewModel\AdminVM\DashboardVM\DashboardViewModel.cs" />
     <Compile Include="ViewModel\AdminVM\EmployeeVM\EmployeeViewModel.cs" />
     <Compile Include="ViewModel\AdminVM\IngredientsVM\IngredientsViewModel.cs" />
@@ -278,6 +280,12 @@
     </Compile>
     <Compile Include="Views\Admin\BillsPage\SalesInvoicePage.xaml.cs">
       <DependentUpon>SalesInvoicePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Admin\CustomerPage\AddCustomerWindow.xaml.cs">
+      <DependentUpon>AddCustomerWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Admin\CustomerPage\EditCusWindow.xaml.cs">
+      <DependentUpon>EditCusWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Admin\CustomerPage\ListCustomerPage.xaml.cs">
       <DependentUpon>ListCustomerPage.xaml</DependentUpon>
@@ -388,6 +396,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Admin\BillsPage\SalesInvoicePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Admin\CustomerPage\AddCustomerWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Admin\CustomerPage\EditCusWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -251,5 +251,138 @@ namespace QuanLyChuoiCuaHangCoffee.Models.DataProvider
             }
         }
         #endregion
+
+        public async Task<List<CustomerDTO>> GetAllCus()
+        {
+            try
+            {
+                using (var context = new CoffeeManagementEntities())
+                {
+                    var cusList = (from kh in context.KHACHHANGs
+                                   select new CustomerDTO
+                                   {
+                                       IDKHACHHANG = kh.IDKHACHHANG,
+                                       USERNAME = kh.USER.USERNAME,
+                                       USERPASSWORD = kh.USER.USERPASSWORD,
+                                       HOTEN = kh.USER.HOTEN,
+                                       SODT = kh.USER.SODT,
+                                       EMAIL = kh.USER.EMAIL,
+                                       DCHI = kh.USER.DIACHI,
+                                       TICHDIEM = (int)kh.TICHDIEM,
+                                       SODONHANG = (int)kh.SODONHANG,
+                                       HANGTHANHVIEN = kh.HANGTHANHVIEN,
+                                       NGBATDAU = kh.USER.NGBATDAU
+                                   }).ToList();
+
+                    return cusList;
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public async Task UpdateRankCus(KHACHHANG cus)
+        {
+            try
+            {
+                using (var context = new CoffeeManagementEntities())
+                {
+                    if (cus != null)
+                    {
+                        if (cus.TICHDIEM >= 5000)
+                        {
+                            cus.HANGTHANHVIEN = "Đồng";
+                        }
+                        else if (cus.TICHDIEM >= 10000)
+                        {
+                            cus.HANGTHANHVIEN = "Bạc";
+                        }
+                        else if (cus.TICHDIEM >= 15000)
+                        {
+                            cus.HANGTHANHVIEN = "Vàng";
+                        }
+                        else if (cus.TICHDIEM >= 35000)
+                        {
+                            cus.HANGTHANHVIEN = "Kim cương";
+                        }
+                        else
+                        {
+                            cus.HANGTHANHVIEN = "Chưa";
+                        }
+
+                        context.SaveChanges();
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public async Task DeleteCus(string _makh)
+        {
+            try
+            {
+                using (var context = new CoffeeManagementEntities())
+                {
+                    var cus = context.KHACHHANGs.Where(p => p.IDKHACHHANG == _makh).FirstOrDefault();
+                    if (cus != null)
+                    {
+                        cus.USER.HOTEN = "Khách vãng lai";
+                        cus.USER.USERNAME = "";
+                        cus.USER.USERPASSWORD = "";
+                        cus.USER.EMAIL = "";
+                        cus.USER.SODT = "";
+                        cus.USER.DIACHI = "";
+                        cus.USER.EMAIL = "";
+                        cus.TICHDIEM = 0;
+                        cus.HANGTHANHVIEN = "Chưa";
+
+                        context.SaveChanges();
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public async Task<(bool, string)> EditCustomer(string _makh, string _name, DateTime _dob, string _email, string _phone, string _cccd, string _address, string _username, string _password)
+        {
+            try
+            {
+                using (var context = new CoffeeManagementEntities())
+                {
+                    var cus = context.KHACHHANGs.Where(p => p.IDKHACHHANG == _makh).FirstOrDefault();
+                    if (cus != null)
+                    {
+                        cus.USER.HOTEN = _name;
+                        cus.USER.DOB = _dob;
+                        cus.USER.EMAIL = _email;
+                        cus.USER.SODT = _phone;
+                        cus.USER.CCCD = _cccd;
+                        cus.USER.DIACHI = _address;
+                        cus.USER.USERNAME = _username;
+                        cus.USER.USERPASSWORD = _password;
+                        context.SaveChanges();
+                        return (true, "Sửa thành công");
+                    } else
+                    {
+                        return (false, "Không tìm thấy khách hàng");
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

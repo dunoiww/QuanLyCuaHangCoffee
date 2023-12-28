@@ -63,12 +63,12 @@
             </StackPanel>
             <!--Báo lỗi khi nhập lỗi-->
             <TextBlock Text="Vui lòng nhập họ tên"
-               Foreground="#FFF44336"
-               FontWeight="DemiBold"
-               Margin="0,2,65,0"
-               HorizontalAlignment="Right"
-               FontSize="12"
-               Visibility="{Binding IsNullNameReg, Converter={StaticResource ConverterBoolValue}}"/>
+                       Foreground="#FFF44336"
+                       FontWeight="DemiBold"
+                       Margin="0,2,65,0"
+                       HorizontalAlignment="Right"
+                       FontSize="12"
+                       Visibility="{Binding IsNullNameReg, Converter={StaticResource ConverterBoolValue}}"/>
 
 
             <StackPanel Margin="0,10,0,0"

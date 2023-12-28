@@ -209,7 +209,8 @@
                                     Height="54"
                                     VerticalContentAlignment="Center"
                                     BorderBrush="LightGray"
-                                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"  VerticalAlignment="Center"/>
+                                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"  
+                                    VerticalAlignment="Center"/>
                         </Grid>
                         <Grid Grid.Column="1">
                             <TextBox Margin="10 0 10 0"
