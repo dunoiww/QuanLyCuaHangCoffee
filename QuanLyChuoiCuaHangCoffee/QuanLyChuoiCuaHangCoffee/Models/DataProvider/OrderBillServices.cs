@@ -44,7 +44,7 @@ namespace QuanLyChuoiCuaHangCoffee.Models.DataProvider
                                         MABAN = dh.BAN.MABAN,
                                         NGDH = dh.NGAYDH,
                                         TONGTIEN = (decimal)dh.TONGGIATRIDONHANG,
-                                        DISCOUNT = (int)dh.ISDISCOUNT,
+                                        DISCOUNT = (int)dh.DISCOUNT,
                                         GHICHU = dh.GHICHU,
                                         TIMEIN = dh.TIME_IN.ToString(),
                                         TIMEOUT = dh.TIME_OUT.ToString()

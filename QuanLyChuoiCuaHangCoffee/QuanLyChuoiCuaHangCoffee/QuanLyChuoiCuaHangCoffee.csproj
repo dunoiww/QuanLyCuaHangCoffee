@@ -174,6 +174,7 @@
     <Compile Include="DTOs\ProductsDTO.cs" />
     <Compile Include="DTOs\ProductSizesDTO.cs" />
     <Compile Include="DTOs\TablesDTO.cs" />
+    <Compile Include="DTOs\VoucherDTO.cs" />
     <Compile Include="Models\BAN.cs">
       <DependentUpon>QuanLyChuoiCuaHangCoffeeModel.tt</DependentUpon>
     </Compile>
@@ -241,6 +242,9 @@
     <Compile Include="Models\USER.cs">
       <DependentUpon>QuanLyChuoiCuaHangCoffeeModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\VOUCHER.cs">
+      <DependentUpon>QuanLyChuoiCuaHangCoffeeModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="UsercontrolCF\uc_controlbar.xaml.cs">
       <DependentUpon>uc_controlbar.xaml</DependentUpon>
     </Compile>
@@ -270,6 +274,8 @@
     <Compile Include="ViewModel\AdminVM\SettingVM\SettingViewModel.cs" />
     <Compile Include="ViewModel\AdminVM\TablesVM\MenuPageViewModel.cs" />
     <Compile Include="ViewModel\AdminVM\TablesVM\TablesViewModel.cs" />
+    <Compile Include="ViewModel\AdminVM\VoucherVM\AddVoucherViewModel.cs" />
+    <Compile Include="ViewModel\AdminVM\VoucherVM\VoucherViewModel.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\LoginVM\ForgotPassViewModel.cs" />
     <Compile Include="ViewModel\LoginVM\LoginViewModel.cs" />
@@ -339,6 +345,12 @@
     </Compile>
     <Compile Include="Views\Admin\TablesPage\TablesPage.xaml.cs">
       <DependentUpon>TablesPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Admin\VoucherPage\AddVoucherWindow.xaml.cs">
+      <DependentUpon>AddVoucherWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Admin\VoucherPage\MainVoucherPage.xaml.cs">
+      <DependentUpon>MainVoucherPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Customer\MainCustomerWindow.xaml.cs">
       <DependentUpon>MainCustomerWindow.xaml</DependentUpon>
@@ -472,6 +484,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Admin\VoucherPage\AddVoucherWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Admin\VoucherPage\MainVoucherPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Customer\MainCustomerWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -569,6 +589,7 @@
     </Content>
     <Resource Include="Resources\table.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.4.9.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.4.9.0\build\MaterialDesignThemes.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

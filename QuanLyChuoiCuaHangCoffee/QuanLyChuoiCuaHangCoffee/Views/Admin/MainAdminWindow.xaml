@@ -186,12 +186,12 @@
                                      CommandParameter="{Binding ElementName=mainFrame}">
                             <StackPanel Orientation="Horizontal">
                                 <materialDesign:PackIcon Kind="AccountGroup"
-                                 Width="35"
-                                 Height="32"
-                                 VerticalAlignment="Center"
-                                 Cursor="Hand"
-                                 Foreground="White"
-                                 Style="{StaticResource menuButtonIcon}"/>
+                                                         Width="35"
+                                                         Height="32"
+                                                         VerticalAlignment="Center"
+                                                         Cursor="Hand"
+                                                         Foreground="White"
+                                                         Style="{StaticResource menuButtonIcon}"/>
                                 <TextBlock Text="Nhân viên" Style="{StaticResource menuButtonText}"/>
                             </StackPanel>
                         </RadioButton>
@@ -212,6 +212,25 @@
                                                          Foreground="White"
                                                          Style="{StaticResource menuButtonIcon}"/>
                                 <TextBlock Text="Khách hàng" Style="{StaticResource menuButtonText}"/>
+                            </StackPanel>
+                        </RadioButton>
+                    </Border>
+
+                    <!-- Button quản lý voucher -->
+                    <Border CornerRadius="5">
+                        <RadioButton Style="{StaticResource MenuButtonMain}"
+                                     GroupName="mainOptions"
+                                     Command="{Binding LoadMainVoucherPageCF}"
+                                     CommandParameter="{Binding ElementName=mainFrame}">
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="TicketPercent"
+                                                         Width="35"
+                                                         Height="32"
+                                                         VerticalAlignment="Center"
+                                                         Cursor="Hand"
+                                                         Foreground="White"
+                                                         Style="{StaticResource menuButtonIcon}"/>
+                                <TextBlock Text="Voucher" Style="{StaticResource menuButtonText}"/>
                             </StackPanel>
                         </RadioButton>
                     </Border>

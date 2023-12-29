@@ -61,10 +61,10 @@
           <Property Name="MABAN" Type="int" />
           <Property Name="NGAYDH" Type="smalldatetime" Nullable="false" />
           <Property Name="TONGGIATRIDONHANG" Type="money" />
-          <Property Name="ISDISCOUNT" Type="int" />
           <Property Name="GHICHU" Type="nvarchar(max)" />
           <Property Name="TIME_IN" Type="smalldatetime" />
           <Property Name="TIME_OUT" Type="smalldatetime" />
+          <Property Name="DISCOUNT" Type="int" />
         </EntityType>
         <EntityType Name="KHACHHANG">
           <Key>
@@ -134,6 +134,17 @@
           <Property Name="DIACHI" Type="nvarchar(max)" />
           <Property Name="NGBATDAU" Type="smalldatetime" Nullable="false" />
           <Property Name="ROLE" Type="int" />
+        </EntityType>
+        <EntityType Name="VOUCHER">
+          <Key>
+            <PropertyRef Name="MAVOUCHER" />
+          </Key>
+          <Property Name="MAVOUCHER" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="CODE" Type="varchar" MaxLength="12" />
+          <Property Name="DISCOUNT" Type="int" />
+          <Property Name="DATEEXPIRED" Type="smalldatetime" />
+          <Property Name="VOUCHERSTATUS" Type="nvarchar" MaxLength="20" />
+          <Property Name="REASON" Type="nvarchar(max)" />
         </EntityType>
         <Association Name="FK__CTDH__MADH__3E1D39E1">
           <End Role="DONHANG" Type="Self.DONHANG" Multiplicity="1" />
@@ -321,6 +332,7 @@
           <EntitySet Name="NHAPKHO" EntityType="Self.NHAPKHO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SIZE" EntityType="Self.SIZE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="USERS" EntityType="Self.USERS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VOUCHER" EntityType="Self.VOUCHER" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__CTDH__MADH__3E1D39E1" Association="Self.FK__CTDH__MADH__3E1D39E1">
             <End Role="DONHANG" EntitySet="DONHANG" />
             <End Role="CTDH" EntitySet="CTDH" />
@@ -396,6 +408,7 @@
           <EntitySet Name="NHAPKHOes" EntityType="QuanLyChuoiCuaHangCoffeeModel.NHAPKHO" />
           <EntitySet Name="SIZEs" EntityType="QuanLyChuoiCuaHangCoffeeModel.SIZE" />
           <EntitySet Name="USERS" EntityType="QuanLyChuoiCuaHangCoffeeModel.USER" />
+          <EntitySet Name="VOUCHERs" EntityType="QuanLyChuoiCuaHangCoffeeModel.VOUCHER" />
           <AssociationSet Name="FK__DONHANG__MABAN__37703C52" Association="QuanLyChuoiCuaHangCoffeeModel.FK__DONHANG__MABAN__37703C52">
             <End Role="BAN" EntitySet="BANs" />
             <End Role="DONHANG" EntitySet="DONHANGs" />
@@ -517,10 +530,10 @@
           <Property Name="MABAN" Type="Int32" />
           <Property Name="NGAYDH" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="TONGGIATRIDONHANG" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="ISDISCOUNT" Type="Int32" />
           <Property Name="GHICHU" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="TIME_IN" Type="DateTime" Precision="0" />
           <Property Name="TIME_OUT" Type="DateTime" Precision="0" />
+          <Property Name="DISCOUNT" Type="Int32" />
           <NavigationProperty Name="BAN" Relationship="QuanLyChuoiCuaHangCoffeeModel.FK__DONHANG__MABAN__37703C52" FromRole="DONHANG" ToRole="BAN" />
           <NavigationProperty Name="CTDHs" Relationship="QuanLyChuoiCuaHangCoffeeModel.FK__CTDH__MADH__3E1D39E1" FromRole="DONHANG" ToRole="CTDH" />
           <NavigationProperty Name="KHACHHANG" Relationship="QuanLyChuoiCuaHangCoffeeModel.FK__DONHANG__IDKHACH__3587F3E0" FromRole="DONHANG" ToRole="KHACHHANG" />
@@ -610,6 +623,17 @@
           <Property Name="ROLE" Type="Int32" />
           <NavigationProperty Name="KHACHHANG" Relationship="QuanLyChuoiCuaHangCoffeeModel.FK__KHACHHANG__IDKHA__4F7CD00D" FromRole="USER" ToRole="KHACHHANG" />
           <NavigationProperty Name="NHANVIEN" Relationship="QuanLyChuoiCuaHangCoffeeModel.FK__NHANVIEN__IDNHAN__3C69FB99" FromRole="USER" ToRole="NHANVIEN" />
+        </EntityType>
+        <EntityType Name="VOUCHER">
+          <Key>
+            <PropertyRef Name="MAVOUCHER" />
+          </Key>
+          <Property Name="MAVOUCHER" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="CODE" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="DISCOUNT" Type="Int32" />
+          <Property Name="DATEEXPIRED" Type="DateTime" Precision="0" />
+          <Property Name="VOUCHERSTATUS" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="REASON" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK__DONHANG__MABAN__37703C52">
           <End Type="QuanLyChuoiCuaHangCoffeeModel.BAN" Role="BAN" Multiplicity="0..1" />
@@ -840,10 +864,10 @@
           <EntitySetMapping Name="DONHANGs">
             <EntityTypeMapping TypeName="QuanLyChuoiCuaHangCoffeeModel.DONHANG">
               <MappingFragment StoreEntitySet="DONHANG">
+                <ScalarProperty Name="DISCOUNT" ColumnName="DISCOUNT" />
                 <ScalarProperty Name="TIME_OUT" ColumnName="TIME_OUT" />
                 <ScalarProperty Name="TIME_IN" ColumnName="TIME_IN" />
                 <ScalarProperty Name="GHICHU" ColumnName="GHICHU" />
-                <ScalarProperty Name="ISDISCOUNT" ColumnName="ISDISCOUNT" />
                 <ScalarProperty Name="TONGGIATRIDONHANG" ColumnName="TONGGIATRIDONHANG" />
                 <ScalarProperty Name="NGAYDH" ColumnName="NGAYDH" />
                 <ScalarProperty Name="MABAN" ColumnName="MABAN" />
@@ -926,6 +950,18 @@
                 <ScalarProperty Name="USERPASSWORD" ColumnName="USERPASSWORD" />
                 <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
                 <ScalarProperty Name="IDUSER" ColumnName="IDUSER" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VOUCHERs">
+            <EntityTypeMapping TypeName="QuanLyChuoiCuaHangCoffeeModel.VOUCHER">
+              <MappingFragment StoreEntitySet="VOUCHER">
+                <ScalarProperty Name="REASON" ColumnName="REASON" />
+                <ScalarProperty Name="VOUCHERSTATUS" ColumnName="VOUCHERSTATUS" />
+                <ScalarProperty Name="DATEEXPIRED" ColumnName="DATEEXPIRED" />
+                <ScalarProperty Name="DISCOUNT" ColumnName="DISCOUNT" />
+                <ScalarProperty Name="CODE" ColumnName="CODE" />
+                <ScalarProperty Name="MAVOUCHER" ColumnName="MAVOUCHER" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

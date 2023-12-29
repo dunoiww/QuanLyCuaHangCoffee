@@ -42,10 +42,10 @@ namespace QuanLyChuoiCuaHangCoffee.Models.DataProvider
                         newBill.MABAN = _maban;
                         newBill.NGAYDH = DateTime.Parse(_datetime);
                         newBill.TONGGIATRIDONHANG = _total;
-                        newBill.ISDISCOUNT = _isDiscount;
                         newBill.GHICHU = _ghichu;
                         newBill.TIME_IN = DateTime.Parse(_timein);
                         newBill.TIME_OUT = DateTime.Parse(_timeout);
+                        newBill.DISCOUNT = _isDiscount;
                         context.DONHANGs.Add(newBill);
 
                         foreach (var item in _listproduct)
@@ -114,10 +114,10 @@ namespace QuanLyChuoiCuaHangCoffee.Models.DataProvider
                         newBill.MABAN = _maban;
                         newBill.NGAYDH = DateTime.Parse(_datetime);
                         newBill.TONGGIATRIDONHANG = _total;
-                        newBill.ISDISCOUNT = _isDiscount;
                         newBill.GHICHU = _ghichu;
                         newBill.TIME_IN = DateTime.Parse(_timein);
                         newBill.TIME_OUT = DateTime.Parse(_timeout);
+                        newBill.DISCOUNT = _isDiscount;
                         context.DONHANGs.Add(newBill);
 
                         foreach (var item in _listproduct)

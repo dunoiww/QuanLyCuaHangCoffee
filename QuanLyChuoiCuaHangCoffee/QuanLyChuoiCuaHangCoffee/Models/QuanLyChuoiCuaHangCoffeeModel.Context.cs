@@ -38,5 +38,6 @@ namespace QuanLyChuoiCuaHangCoffee.Models
         public virtual DbSet<NHAPKHO> NHAPKHOes { get; set; }
         public virtual DbSet<SIZE> SIZEs { get; set; }
         public virtual DbSet<USER> USERS { get; set; }
+        public virtual DbSet<VOUCHER> VOUCHERs { get; set; }
     }
 }

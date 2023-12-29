@@ -10,7 +10,8 @@
                     xmlns:viewmodel25="clr-namespace:QuanLyChuoiCuaHangCoffee.ViewModel.AdminVM.EmployeeVM"
                     xmlns:viewmodel26="clr-namespace:QuanLyChuoiCuaHangCoffee.ViewModel.AdminVM.CustomerVM"
                     xmlns:viewmodel27="clr-namespace:QuanLyChuoiCuaHangCoffee.ViewModel.AdminVM.SettingVM"
-                    xmlns:viewmodel28="clr-namespace:QuanLyChuoiCuaHangCoffee.ViewModel.AdminVM.ItemsVM">
+                    xmlns:viewmodel28="clr-namespace:QuanLyChuoiCuaHangCoffee.ViewModel.AdminVM.ItemsVM"
+                    xmlns:viewmodel29="clr-namespace:QuanLyChuoiCuaHangCoffee.ViewModel.AdminVM.VoucherVM">
     <viewmodel1:LoginViewModel x:Key="LoginVM"/>
     <viewmodel1:ForgotPassViewModel x:Key="ForgotPassVM"/>
     <viewmodel2:MainAdminViewModel x:Key="AdminVM"/>
@@ -22,4 +23,5 @@
     <viewmodel26:CustomerViewModel x:Key="CustomerVM"/>
     <viewmodel27:SettingViewModel x:Key="SettingVM"/>
     <viewmodel28:ItemsViewModel x:Key="ItemsVM"/>
+    <viewmodel29:VoucherViewModel x:Key="VoucherVM"/>
 </ResourceDictionary>

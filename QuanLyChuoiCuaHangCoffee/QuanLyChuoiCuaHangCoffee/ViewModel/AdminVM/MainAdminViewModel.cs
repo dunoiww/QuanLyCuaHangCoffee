@@ -8,6 +8,7 @@ using QuanLyChuoiCuaHangCoffee.Views.Admin.IngredientsPage;
 using QuanLyChuoiCuaHangCoffee.Views.Admin.ItemsPage;
 using QuanLyChuoiCuaHangCoffee.Views.Admin.SettingPage;
 using QuanLyChuoiCuaHangCoffee.Views.Admin.TablesPage;
+using QuanLyChuoiCuaHangCoffee.Views.Admin.VoucherPage;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,6 +32,7 @@ namespace QuanLyChuoiCuaHangCoffee.ViewModel.AdminVM
         public ICommand LoadMainEmployeePageCF { get; set; }
         public ICommand LoadMainCustomerPageCF { get; set; }
         public ICommand LoadMainSettingPageCF { get; set; }
+        public ICommand LoadMainVoucherPageCF { get; set; }
         public ICommand LoadRole { get; set; }
 
         private string _optionName { get; set; }
@@ -93,6 +95,12 @@ namespace QuanLyChuoiCuaHangCoffee.ViewModel.AdminVM
             {
                 p.Content = new MainSettingPage();
                 optionName = "Cài đặt";
+            });
+
+            LoadMainVoucherPageCF = new RelayCommand<Frame>((p) => { return true; }, (p) =>
+            {
+                p.Content = new MainVoucherPage();
+                optionName = "Voucher";
             });
         }
     }

@@ -49,4 +49,10 @@ namespace QuanLyChuoiCuaHangCoffee.Utils
             "Nhân viên phục vụ",
         };
     }
+
+    public class VOUCHER_STATUS
+    {
+        public static readonly string RELEASED = "Đã phát hành";
+        public static readonly string USED = "Đã sử dụng";
+    }
 }

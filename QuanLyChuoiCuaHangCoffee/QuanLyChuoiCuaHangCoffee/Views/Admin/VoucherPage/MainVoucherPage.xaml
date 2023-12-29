@@ -1,0 +1,192 @@
+﻿<Page x:Class="QuanLyChuoiCuaHangCoffee.Views.Admin.VoucherPage.MainVoucherPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:QuanLyChuoiCuaHangCoffee.Views.Admin.VoucherPage"
+      mc:Ignorable="d" 
+      d:DesignHeight="690" d:DesignWidth="1180"
+      Title="MainVoucherPage"
+      x:Name="MainVoucherPageCF"
+      xmlns:i = "http://schemas.microsoft.com/xaml/behaviors"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+    TextElement.FontWeight="Regular"
+    TextElement.FontSize="13"
+    TextOptions.TextFormattingMode="Ideal"
+    TextOptions.TextRenderingMode="Auto"
+    FontFamily="{DynamicResource MaterialDesignFont}"
+    DataContext="{StaticResource VoucherVM}">
+
+    <Page.Triggers>
+        <EventTrigger RoutedEvent="Page.Loaded">
+            <BeginStoryboard>
+                <Storyboard>
+                    <DoubleAnimation Storyboard.TargetName="MainVoucherPageCF"
+                                  Storyboard.TargetProperty="Opacity"
+                                  From="0"
+                                  To="1"
+                                  Duration="0:0:0.3" />
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+    </Page.Triggers>
+
+    <Grid  Background="#000000">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10*" />
+            <RowDefinition Height="90*" />
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0"
+                    Orientation="Horizontal"
+                    Margin="100,0,0,0">
+            <materialDesign:Card Width="325" Margin="0 5 0 5"
+                                 UniformCornerRadius="10">
+
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PackIcon    Kind="Magnify"
+                                                Width="25"
+                                                Height="35"
+                                                Foreground="Black"
+                                                VerticalAlignment="Center" 
+                                                Margin="10 0 0 0"/>
+
+                    <TextBox materialDesign:HintAssist.Hint="Tìm kiếm" 
+                             x:Name="FilterBox"
+                             FontSize="18"
+                             Foreground="#DD000000"
+                             FontFamily="arial"
+                             Width="280"
+                             Height="30"
+                             TextChanged="FilterBox_TextChanged"
+                             HorizontalAlignment="Left"/>
+
+                </StackPanel>
+            </materialDesign:Card>
+            
+            <StackPanel Orientation="Horizontal"
+                        Margin="30,0,0,0"
+                        VerticalAlignment="Center">
+                <Button VerticalAlignment="Top"
+                        HorizontalAlignment="Center"
+                        Width="120"
+                        Height="40"
+                        FontSize="25"
+                        FontFamily="arial"
+                        Padding="0"
+                        materialDesign:ButtonAssist.CornerRadius="8"
+                        Command="{Binding LoadAddVoucher}">
+                    <Button.Content>
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="PlusCircleOutline"
+                                                 Width="25"
+                                                 Height="25"
+                                                 VerticalAlignment="Center"
+                                                 Margin="0,0,0,0" />
+                            <TextBlock Text="Thêm"
+                                   Margin="5,0,0,0" />
+                        </StackPanel>
+                    </Button.Content>
+                </Button>
+            </StackPanel>
+        </StackPanel>
+        
+        <Grid Grid.Row="1">
+            <materialDesign:Card Background="#242424"
+                             Margin="100,20,100,20"
+                             UniformCornerRadius="5">
+                <StackPanel>
+                    <ListView x:Name="VoucherListView"
+                              Focusable="True"
+                              Height="580"
+                              SelectedItem="{Binding SelectedVoucherItem,UpdateSourceTrigger=PropertyChanged}"
+                              ItemsSource="{Binding ListVoucher}">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Mã voucher"
+                                                Width="150">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding MAVOUCHER}"
+                                                       FontSize="18"
+                                                       Margin="18,0,0,0" 
+                                                       Foreground="White"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="Code voucer"
+                                                Width="150">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding CODEVOUCHER}"
+                                                       Margin="15,0,0,0"
+                                                       FontSize="18"
+                                                       Foreground="White"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="Giảm giá"
+                                            Width="150">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding DISCOUNT}"
+                                                       Margin="15,0,0,0"
+                                                       FontSize="18"
+                                                       Foreground="White"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="Ngày hết hạn"
+                                            Width="150">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding DATEEXPIRED,StringFormat=dd/MM/yyyy}"
+                                                       Margin="15,0,0,0"
+                                                       FontSize="18"
+                                                       Foreground="White"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="Tình trạng"
+                                            Width="150">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding STATUS}"
+                                                       Margin="20,0,0,0"
+                                                       FontSize="18" 
+                                                       Foreground="White"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="Đợt phát hành">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding REASON}"
+                                                       Margin="15,0,0,0"
+                                                       FontSize="18" 
+                                                       Foreground="White"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </StackPanel>
+            </materialDesign:Card>
+        </Grid>
+        
+        <Grid Grid.RowSpan="2"
+              Background="Gray"
+              Opacity="0.3"
+              Visibility="Collapsed"
+              x:Name="ShadowMask" />
+        <Grid Grid.RowSpan="2">
+            <ProgressBar Style="{StaticResource MaterialDesignCircularProgressBar}"
+                     Value="0"
+                     IsIndeterminate="{Binding IsReleaseVoucherLoading,UpdateSourceTrigger=PropertyChanged}"
+                     Width="100"
+                     Height="100" />
+        </Grid>
+    </Grid>
+</Page>
