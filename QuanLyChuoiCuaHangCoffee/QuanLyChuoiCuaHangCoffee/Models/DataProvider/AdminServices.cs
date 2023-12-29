@@ -17,6 +17,10 @@ namespace QuanLyChuoiCuaHangCoffee.Models.DataProvider
         public static string EmailNhanVien { get; set; }
         public static string UserNameNhanVien { get; set; }
         public static string PasswordNhanVien { get; set; }
+        public static int Role { get; set; }
+        public static string LuongCoBan { get; set; }  
+        public static string ChucVuNhanVien { get; set; }
+        public static double HeSoLuong { get; set; }
 
         public AdminServices() { }   
         private static AdminServices _ins;
@@ -40,7 +44,7 @@ namespace QuanLyChuoiCuaHangCoffee.Models.DataProvider
                 using (var context = new CoffeeManagementEntities())
                 {
                     var admin = await (from s in context.NHANVIENs
-                                       where s.USER.USERNAME == username && s.USER.USERPASSWORD == password && s.USER.ROLE == 1
+                                       where s.USER.USERNAME == username && s.USER.USERPASSWORD == password && s.USER.ROLE != 3
                                        select new AdminDTO
                                        {
                                            IDNHANVIEN = s.IDNHANVIEN,
@@ -52,7 +56,12 @@ namespace QuanLyChuoiCuaHangCoffee.Models.DataProvider
                                            SODT = s.USER.SODT,
                                            DOB = s.USER.DOB,
                                            DCHI = s.USER.DIACHI,
-                                           NGBATDAU = s.USER.NGBATDAU
+                                           NGBATDAU = s.USER.NGBATDAU,
+                                           ROLE = (int)s.USER.ROLE,
+                                           CHUCVU = s.CHUCDANH.TENCHUCDANH,
+                                           HESOLUONG = (double)s.CHUCDANH.HESOLUONG,
+                                           LUONGCOBAN = (decimal)s.CHUCDANH.LUONGCOBAN,
+
                                        }).FirstOrDefaultAsync();
 
                     if (admin == null)
@@ -69,6 +78,10 @@ namespace QuanLyChuoiCuaHangCoffee.Models.DataProvider
                         EmailNhanVien = admin.EMAIL;
                         UserNameNhanVien = admin.USERNAME;
                         PasswordNhanVien = admin.USERPASSWORD;
+                        Role = admin.ROLE;
+                        LuongCoBan = admin.LUONGCOBANSTR;
+                        ChucVuNhanVien = admin.CHUCVU;
+                        HeSoLuong = admin.HESOLUONG;
                         return (true, "");
                     }
                 }
@@ -83,5 +96,56 @@ namespace QuanLyChuoiCuaHangCoffee.Models.DataProvider
             }
         }
 
+        public async Task EditSetting(string _manv, string _phone, string _email, string _password, string _currentPassword)
+        {
+            try
+            {
+                using (var context = new CoffeeManagementEntities())
+                {
+                    var employee = context.NHANVIENs.Where(p => p.IDNHANVIEN == _manv).FirstOrDefault();
+                    if (employee != null)
+                    {
+                        if (_password != null)
+                        {
+                            employee.USER.USERPASSWORD = _password;
+                        }
+                        else
+                        {
+                            employee.USER.USERPASSWORD = _currentPassword;
+                        }
+                        employee.USER.SODT = _phone;
+                        employee.USER.EMAIL = _email;
+                        context.SaveChanges();
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public async Task UpdateSalary(string _tenchucdanh, decimal _basesalary, double _coefficientsalary)
+        {
+            try
+            {
+                using (var context = new CoffeeManagementEntities())
+                {
+                    var chucdanh = context.CHUCDANHs.Where(p => p.TENCHUCDANH == _tenchucdanh).FirstOrDefault();
+                    if (chucdanh != null)
+                    {
+                        chucdanh.LUONGCOBAN = _basesalary;
+                        chucdanh.HESOLUONG = _coefficientsalary;
+                        context.SaveChanges();
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

@@ -80,7 +80,7 @@ namespace QuanLyChuoiCuaHangCoffee.ViewModel.AdminVM.EmployeeVM
             LoadInfoEmployee = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
                 NameEmployee = SelectedEmployeeItem.HOTEN;
-                AddressEmployee = SelectedEmployeeItem.DIACHI;
+                AddressEmployee = SelectedEmployeeItem.EMAIL;
                 PhoneEmployee = SelectedEmployeeItem.SODT;
                 JobEmployee = SelectedEmployeeItem.CHUCVU;
                 SalaryEmployee = SelectedEmployeeItem.LUONGCOBANSTR;
@@ -167,8 +167,9 @@ namespace QuanLyChuoiCuaHangCoffee.ViewModel.AdminVM.EmployeeVM
                     worksheet.Cells[1, 1].Value = "Mã nhân viên";
                     worksheet.Cells[1, 2].Value = "Tên nhân viên";
                     worksheet.Cells[1, 3].Value = "Số điện thoại";
-                    worksheet.Cells[1, 4].Value = "Địa chỉ";
-                    worksheet.Cells[1, 5].Value = "Chức vụ";
+                    worksheet.Cells[1, 4].Value = "Email";
+                    worksheet.Cells[1, 5].Value = "Địa chỉ";
+                    worksheet.Cells[1, 6].Value = "Chức vụ";
 
                     // Dữ liệu
                     int count = 2;
@@ -177,8 +178,9 @@ namespace QuanLyChuoiCuaHangCoffee.ViewModel.AdminVM.EmployeeVM
                         worksheet.Cells[count, 1].Value = item.IDNHANVIEN;
                         worksheet.Cells[count, 2].Value = item.HOTEN;
                         worksheet.Cells[count, 3].Value = item.SODT;
-                        worksheet.Cells[count, 4].Value = item.DIACHI;
-                        worksheet.Cells[count, 5].Value = item.CHUCVU;
+                        worksheet.Cells[count, 4].Value = item.EMAIL;
+                        worksheet.Cells[count, 5].Value = item.DIACHI;
+                        worksheet.Cells[count, 6].Value = item.CHUCVU;
 
                         count++;
                     }

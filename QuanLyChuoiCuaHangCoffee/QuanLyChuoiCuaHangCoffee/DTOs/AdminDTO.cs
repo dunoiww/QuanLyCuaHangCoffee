@@ -41,5 +41,12 @@ namespace QuanLyChuoiCuaHangCoffee.DTOs
         public string DCHI { get; set; }
         public DateTime NGBATDAU { get; set; }
         public int ROLE { get; set; }
+        public string CHUCVU { get; set; }
+        public double HESOLUONG { get; set; }
+        public decimal LUONGCOBAN { get; set; }
+        public string LUONGCOBANSTR
+        {
+            get { return Utils.Helper.FormatVNMoney(LUONGCOBAN); }
+        }
     }
 }

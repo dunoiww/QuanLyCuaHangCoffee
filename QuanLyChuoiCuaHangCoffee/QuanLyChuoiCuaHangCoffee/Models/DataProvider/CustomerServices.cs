@@ -271,7 +271,9 @@ namespace QuanLyChuoiCuaHangCoffee.Models.DataProvider
                                        TICHDIEM = (int)kh.TICHDIEM,
                                        SODONHANG = (int)kh.SODONHANG,
                                        HANGTHANHVIEN = kh.HANGTHANHVIEN,
-                                       NGBATDAU = kh.USER.NGBATDAU
+                                       NGBATDAU = kh.USER.NGBATDAU,
+                                       DOB = kh.USER.DOB
+                                       
                                    }).ToList();
 
                     return cusList;

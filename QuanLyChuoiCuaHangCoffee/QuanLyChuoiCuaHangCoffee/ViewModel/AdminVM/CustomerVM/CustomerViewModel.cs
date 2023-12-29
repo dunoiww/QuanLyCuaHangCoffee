@@ -127,6 +127,7 @@ namespace QuanLyChuoiCuaHangCoffee.ViewModel.AdminVM.CustomerVM
                 EditCusWindow wd = new EditCusWindow();
                 NameEdit = SelectedCusItem.HOTEN;
                 DOBEdit = SelectedCusItem.DOB;
+                SelectedDate = SelectedCusItem.DOB;
                 EmailEdit = SelectedCusItem.EMAIL;
                 PhoneEdit = SelectedCusItem.SODT;
                 CCCDEdit = SelectedCusItem.CCCD;

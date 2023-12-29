@@ -43,6 +43,9 @@ namespace QuanLyChuoiCuaHangCoffee.ViewModel.AdminVM.CustomerVM
 
         private bool _IsNullPhoneEdit { get; set; }
         public bool IsNullPhoneEdit { get => _IsNullPhoneEdit; set { _IsNullPhoneEdit = value; OnPropertyChanged(); } }
+
+        private DateTime _SelectedDate { get; set; }
+        public DateTime SelectedDate { get => _SelectedDate; set { _SelectedDate = value; OnPropertyChanged(); } }
         #endregion
 
         #region command

@@ -164,7 +164,7 @@
                                                 <DataTemplate>
                                                     <TextBlock  Text="{Binding HOTEN}"
                                                                 FontSize="18"
-                                                                Margin="45,0,0,0" Foreground="#ffffff" 
+                                                                Margin="40,0,0,0" Foreground="#ffffff" 
                                                                 TextWrapping="Wrap"
                                                                 MaxWidth="180"/>
                                                 </DataTemplate>

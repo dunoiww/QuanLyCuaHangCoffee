@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QuanLyChuoiCuaHangCoffee.Views.Admin"
         xmlns:uc="clr-namespace:QuanLyChuoiCuaHangCoffee.UsercontrolCF"
+        xmlns:cv="clr-namespace:QuanLyChuoiCuaHangCoffee.Utils.ConverterValue"
         mc:Ignorable="d"
         Title="MainAdminWindow"
         Name="MainAdminWD"
@@ -25,6 +26,16 @@
     <Window.Clip>
         <RectangleGeometry Rect="0, 0, 1400, 800" RadiusX="20" RadiusY="20"></RectangleGeometry>
     </Window.Clip>
+
+    <Window.Resources>
+        <cv:RoleConverter x:Key="RoleConverter"/>
+    </Window.Resources>
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadRole}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
 
     <Grid Background="#000000">
         <Grid.RowDefinitions>
@@ -73,7 +84,7 @@
                 <StackPanel Grid.Row="1" Background="#1B0D00">
                     <!--Button dashboard-->
                     <RadioButton Style="{StaticResource MenuButtonMain}"
-                                 IsChecked="True"
+                                 IsEnabled="{Binding Role, Converter={StaticResource RoleConverter}}"
                                  Name="Dashboard"
                                  GroupName="mainOptions"
                                  Command="{Binding LoadMainDashboardPageCF}"
@@ -93,6 +104,7 @@
                     <!-- Button quản lý bàn-->
                     <Border CornerRadius="5">
                         <RadioButton Style="{StaticResource MenuButtonMain}"
+                                     IsChecked="True"
                                      GroupName="mainOptions"
                                      Command="{Binding LoadMainTablesPageCF}"
                                      CommandParameter="{Binding ElementName=mainFrame}">
@@ -167,7 +179,7 @@
                     </Border>
 
                     <!-- Button quản lý nhân viên -->
-                    <Border CornerRadius="5">
+                    <Border CornerRadius="5" IsEnabled="{Binding Role, Converter={StaticResource RoleConverter}}">
                         <RadioButton Style="{StaticResource MenuButtonMain}"
                                      GroupName="mainOptions"
                                      Command="{Binding LoadMainEmployeePageCF}"
@@ -273,7 +285,7 @@
 
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="Loaded">
-                                    <i:InvokeCommandAction Command="{Binding LoadMainDashboardPageCF}"
+                                    <i:InvokeCommandAction Command="{Binding LoadMainTablesPageCF}"
                                                            CommandParameter="{Binding ElementName=mainFrame}" />
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>

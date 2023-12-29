@@ -169,6 +169,7 @@
     <Compile Include="DTOs\IngredientsDTO.cs" />
     <Compile Include="DTOs\MenuItemDTO.cs" />
     <Compile Include="DTOs\OrderBillsDTO.cs" />
+    <Compile Include="DTOs\PositionDTO.cs" />
     <Compile Include="DTOs\ProductDetailDTO.cs" />
     <Compile Include="DTOs\ProductsDTO.cs" />
     <Compile Include="DTOs\ProductSizesDTO.cs" />
@@ -197,6 +198,7 @@
     <Compile Include="Models\DataProvider\ImportIngredientsServices.cs" />
     <Compile Include="Models\DataProvider\IngredientsServices.cs" />
     <Compile Include="Models\DataProvider\OrderBillServices.cs" />
+    <Compile Include="Models\DataProvider\PositionServices.cs" />
     <Compile Include="Models\DataProvider\ProductServices.cs" />
     <Compile Include="Models\DataProvider\StatisticServices.cs" />
     <Compile Include="Models\DataProvider\TablesServices.cs" />
@@ -244,8 +246,11 @@
     </Compile>
     <Compile Include="Utils\CloudinaryServices.cs" />
     <Compile Include="Utils\Constants.cs" />
+    <Compile Include="Utils\ConverterValue\BackgroundButtonConverter.cs" />
     <Compile Include="Utils\ConverterValue\BoolValueConverter.cs" />
     <Compile Include="Utils\ConverterValue\IndexConverter.cs" />
+    <Compile Include="Utils\ConverterValue\IsEditConverter.cs" />
+    <Compile Include="Utils\ConverterValue\RoleConverter.cs" />
     <Compile Include="Utils\ConverterValue\StockStatusConverter.cs" />
     <Compile Include="Utils\ConverterValue\TableStatusConverter.cs" />
     <Compile Include="Utils\Helper.cs" />

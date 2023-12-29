@@ -102,6 +102,7 @@
                                     FontSize="15"
                                     Width="300"
                                     x:Name="dobDatePicker"
+                                    SelectedDate="{Binding SelectedDate}"
                                     materialDesign:HintAssist.Hint="Ngày sinh">
                             <DatePicker.Resources>
                                 <Style TargetType="DatePickerTextBox">

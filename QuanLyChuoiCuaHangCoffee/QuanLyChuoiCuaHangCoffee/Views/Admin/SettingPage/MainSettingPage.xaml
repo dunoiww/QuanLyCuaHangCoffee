@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:QuanLyChuoiCuaHangCoffee.Views.Admin.SettingPage"
+      xmlns:cv="clr-namespace:QuanLyChuoiCuaHangCoffee.Utils.ConverterValue"
       mc:Ignorable="d" 
       d:DesignHeight="700" d:DesignWidth="1200"
       Title="MainSettingPage"
@@ -16,7 +17,20 @@
     TextOptions.TextFormattingMode="Ideal"
     TextOptions.TextRenderingMode="Auto"
     FontFamily="{DynamicResource MaterialDesignFont}"
-    DataContext="{StaticResource EmployeeVM}">
+    DataContext="{StaticResource SettingVM}">
+
+    <Page.Resources>
+        <cv:IsEditConverter x:Key="IsEditConverter"/>
+        <cv:BackgroundButtonConverter x:Key="BackgroundButtonConverter"/>
+        <cv:IsEnableConverter x:Key="IsEnableConverter"/>
+        <cv:RoleConverter x:Key="RoleConverter"/>
+    </Page.Resources>
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadInformation}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -58,7 +72,7 @@
                                 <Label Grid.Column="0" Content="Tên đăng nhập: "
                                        FontSize="18"
                                        Foreground="#f0b000"></Label>
-                                <Label Grid.Column="1" x:Name="username"
+                                <Label Grid.Column="1" Content="{Binding Username}"
                                        Foreground="#ffffff"
                                        FontSize="18" HorizontalAlignment="Right"/>
                             </Grid>
@@ -73,23 +87,7 @@
                                 <Label Grid.Column="0" Content="Họ và tên: "
                                        FontSize="18"
                                        Foreground="#f0b000"></Label>
-                                <Label Grid.Column="1" x:Name="name"
-                                       Foreground="#ffffff"
-                                       FontSize="18" HorizontalAlignment="Right"/>
-                            </Grid>
-                        </StackPanel>
-
-                        <StackPanel>
-                            <Grid Margin="0 3 0 0">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition></ColumnDefinition>
-                                    <ColumnDefinition></ColumnDefinition>
-                                </Grid.ColumnDefinitions>
-
-                                <Label Grid.Column="0" Content="Giới tính: "
-                                       FontSize="18"
-                                       Foreground="#f0b000"></Label>
-                                <Label Grid.Column="1" x:Name="sex"
+                                <Label Grid.Column="1" Content="{Binding Name}"
                                        Foreground="#ffffff"
                                        FontSize="18" HorizontalAlignment="Right"/>
                             </Grid>
@@ -105,7 +103,23 @@
                                 <Label Grid.Column="0" Content="Ngày sinh: "
                                        FontSize="18"
                                        Foreground="#f0b000"></Label>
-                                <Label Grid.Column="1" x:Name="dob"
+                                <Label Grid.Column="1" Content="{Binding DOB}"
+                                       Foreground="#ffffff"
+                                       FontSize="18" HorizontalAlignment="Right"/>
+                            </Grid>
+                        </StackPanel>
+
+                        <StackPanel>
+                            <Grid Margin="0 3 0 0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Grid.Column="0" Content="Chức danh: "
+                                       FontSize="18"
+                                       Foreground="#f0b000"></Label>
+                                <Label Grid.Column="1" Content="{Binding Position}"
                                        Foreground="#ffffff"
                                        FontSize="18" HorizontalAlignment="Right"/>
                             </Grid>
@@ -115,29 +129,6 @@
             </Grid>
             <Grid Grid.Row="1">
                 <StackPanel Orientation="Vertical">
-                    <StackPanel Orientation="Vertical">
-                        <Label Content="Chức danh"
-                               FontSize="18"
-                               Margin="10 0 10 0"
-                               Foreground="#f0b000">
-
-                        </Label>
-
-                        <Border BorderThickness="1"
-                                BorderBrush="#8692A6"
-                                CornerRadius="10"
-                                Margin="10 0 10 0"
-                                Height="50">
-                            <TextBlock Text="Manager"
-                                       FontSize="20"
-                                       Foreground="#ffffff"
-                                       VerticalAlignment="Center"
-                                       Margin="15 10 0 10">
-
-                            </TextBlock>
-                        </Border>
-                    </StackPanel>
-
                     <StackPanel Orientation="Vertical" Margin="0 10 0 0">
                         <Label Content="Số điện thoại"
                                FontSize="18"
@@ -150,14 +141,18 @@
                                 BorderBrush="#8692A6"
                                 CornerRadius="10"
                                 Margin="10 0 10 0"
-                                Height="50">
-                            <TextBlock Text="Manager"
-                                       FontSize="20"
-                                       Foreground="#ffffff"
-                                       VerticalAlignment="Center"
-                                       Margin="15 10 0 10">
+                                Height="60">
+                            <TextBox Text="{Binding Phone}"
+                                     FontSize="18"
+                                     Foreground="#ffffff"
+                                     VerticalAlignment="Center"
+                                     BorderBrush="Transparent"
+                                     Margin="15 10 0 10"
+                                     PreviewTextInput="TextBox_PreviewTextInput"
+                                     TextChanged="TextBox_TextChanged"
+                                     IsReadOnly="{Binding IsEdit, Converter={StaticResource IsEditConverter}}">
 
-                            </TextBlock>
+                            </TextBox>
                         </Border>
                     </StackPanel>
 
@@ -173,19 +168,21 @@
                                 BorderBrush="#8692A6"
                                 CornerRadius="10"
                                 Margin="10 0 10 0"
-                                Height="50">
-                            <TextBlock Text="Manager"
-                                       FontSize="20"
-                                       Foreground="#ffffff"
-                                       VerticalAlignment="Center"
-                                       Margin="15 10 0 10">
+                                Height="60">
+                            <TextBox Text="{Binding Email}"
+                                     FontSize="18"
+                                     Foreground="#ffffff"
+                                     BorderBrush="Transparent"
+                                     VerticalAlignment="Center"
+                                     Margin="15 10 0 10"
+                                     IsReadOnly="{Binding IsEdit, Converter={StaticResource IsEditConverter}}">
 
-                            </TextBlock>
+                            </TextBox>
                         </Border>
                     </StackPanel>
 
                     <StackPanel Orientation="Vertical" Margin="0 10 0 0">
-                        <Label Content="Ngày vào làm"
+                        <Label Content="Mật khẩu mới"
                                FontSize="18"
                                Margin="10 0 10 0"
                                Foreground="#f0b000">
@@ -196,16 +193,67 @@
                                 BorderBrush="#8692A6"
                                 CornerRadius="10"
                                 Margin="10 0 10 0"
-                                Height="50">
-                            <TextBlock Text="Manager"
-                                       FontSize="20"
-                                       Foreground="#ffffff"
-                                       VerticalAlignment="Center"
-                                       Margin="15 10 0 10">
+                                Height="60">
+                            <PasswordBox x:Name="FloatingPasswordBox"
+                                         FontSize="18"
+                                         Foreground="#ffffff"
+                                         BorderBrush="Transparent"
+                                         VerticalAlignment="Center"
+                                         Margin="15 5 5 10"
+                                         IsEnabled="{Binding IsEdit, Converter={StaticResource IsEnableConverter}}"
+                                         Style="{StaticResource MaterialDesignFloatingHintRevealPasswordBox}" 
+                                         IsEnabledChanged="FloatingPasswordBox_IsEnabledChanged">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="PasswordChanged">
+                                        <i:InvokeCommandAction Command="{Binding PasswordChanged}"
+                                                               CommandParameter="{Binding ElementName=FloatingPasswordBox}" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
 
-                            </TextBlock>
+                            </PasswordBox>
                         </Border>
                     </StackPanel>
+
+                    <StackPanel Orientation="Vertical" Margin="0 10 0 0">
+                        <Label Content="Mật khẩu hiện tại"
+                               FontSize="18"
+                               Margin="10 0 10 0"
+                               Foreground="#f0b000">
+
+                        </Label>
+
+                        <Border BorderThickness="1"
+                                BorderBrush="#8692A6"
+                                CornerRadius="10"
+                                Margin="10 0 10 0"
+                                Height="60">
+                            <PasswordBox x:Name="FloatingPasswordBoxCurrent"
+                                         FontSize="18"
+                                         Foreground="#ffffff"
+                                         BorderBrush="Transparent"
+                                         VerticalAlignment="Center"
+                                         Margin="15 5 5 10"
+                                         IsEnabled="{Binding IsEdit, Converter={StaticResource IsEnableConverter}}"
+                                         Style="{StaticResource MaterialDesignFloatingHintRevealPasswordBox}"
+                                         IsEnabledChanged="FloatingPasswordBoxCurrent_IsEnabledChanged">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="PasswordChanged">
+                                        <i:InvokeCommandAction Command="{Binding PasswordConfirmChanged}"
+                                                               CommandParameter="{Binding ElementName=FloatingPasswordBoxCurrent}" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+
+                            </PasswordBox>
+                        </Border>
+                    </StackPanel>
+                    <Label Content="*Vui lòng nhập mật khẩu hiện tại để lưu thông tin chỉnh sửa."
+                           Foreground="Red"
+                           HorizontalAlignment="Right"
+                           FontSize="12"
+                           FontStyle="Italic"
+                           Margin="0 0 5 0">
+                        
+                    </Label>
                 </StackPanel>
             </Grid>
 
@@ -218,14 +266,15 @@
                 <Grid Grid.Column="0">
                     <materialDesign:Card Margin="10 0 10 0"
                                          Height="70"
-                                         Background="#f0b000"
+                                         Background="{Binding IsEdit, Converter={StaticResource BackgroundButtonConverter}}"
                                          UniformCornerRadius="10">
-                        <Button Content="Sửa thông tin"
+                        <Button Content="{Binding lbButton}"
                                 FontSize="20"
                                 Height="70"
                                 Background="Transparent"
                                 Foreground="#000000"
-                                BorderBrush="Transparent">
+                                BorderBrush="Transparent"
+                                Command="{Binding Edit}">
 
                         </Button>
                     </materialDesign:Card>
@@ -236,12 +285,13 @@
                                          Height="70"
                                          Background="#FF3636"
                                          UniformCornerRadius="10">
-                        <Button Content="Đăng xuất"
+                        <Button Content="{Binding lbButtonLogout}"
                                 FontSize="20"
                                 Height="70"
                                 Background="Transparent"
                                 Foreground="#000000"
-                                BorderBrush="Transparent">
+                                BorderBrush="Transparent"
+                                Command="{Binding LogOut}">
                         </Button>
                     </materialDesign:Card>
                 </Grid>
@@ -257,50 +307,95 @@
             <Grid Grid.Row="0">
                 <StackPanel Orientation="Vertical" Margin="0 10 0 0">
                     <StackPanel Orientation="Horizontal">
-                        <Label Content="Ngày vào làm"
+                        <Label Content="Lương cơ bản"
                                FontSize="18"
                                Margin="10 0 10 0"
                                Foreground="#f0b000"
                                VerticalAlignment="Center">
                         </Label>
 
-                        <materialDesign:Card Width="150" Height="40" Margin="300 5 0 5" 
-                                             UniformCornerRadius="10" Background="#000000">
-                            <ComboBox Height="30" x:Name="filtercbb"
-                                      Width="140"
+                        <materialDesign:Card Width="300" Height="40" Margin="140 5 0 5" 
+                                             UniformCornerRadius="10" Background="#242424">
+                            <ComboBox Height="30"
+                                      Width="280"
                                       Margin="0 0 0 0"
                                       FontSize="18"
                                       Foreground="#ffffff"
+                                      BorderBrush="White"
                                       SelectedIndex="0"
-                                      SelectedItem="{Binding SelectedBorrowFilter}"
-                                      SelectionChanged="filtercbb_SelectionChanged">
+                                      IsEnabled="{Binding Role, Converter={StaticResource RoleConverter}}"
+                                      SelectedItem="{Binding SelectedPositionItem}"
+                                      ItemsSource="{Binding ListPosition}">
                                 <i:Interaction.Triggers>
                                     <i:EventTrigger EventName="SelectionChanged">
-                                        <i:InvokeCommandAction Command="{Binding CheckSelectedBorrowFilterML}"
-                                                               CommandParameter="{Binding ElementName=filtercbb}" />
+                                        <i:InvokeCommandAction Command="{Binding SelectedPositionChanged}"/>
                                     </i:EventTrigger>
                                 </i:Interaction.Triggers>
-
-                                <ComboBoxItem Content="Còn hàng"/>
-                                <ComboBoxItem Content="Hết hàng"/>
+                                <ComboBox.ItemContainerStyle>
+                                    <Style TargetType="ComboBoxItem">
+                                        <Setter Property="Foreground"
+                                                Value="Black" />
+                                        <Setter Property="Margin"
+                                                Value="5" />
+                                    </Style>
+                                </ComboBox.ItemContainerStyle>
                             </ComboBox>
                         </materialDesign:Card>
 
                     </StackPanel>
-                    
-                    <Border BorderThickness="1"
-                            BorderBrush="#8692A6"
-                            CornerRadius="10"
-                            Margin="10 0 10 0"
-                            Height="50">
-                        <TextBlock Text="Manager"
-                                   FontSize="20"
-                                   Foreground="#ffffff"
-                                   VerticalAlignment="Center"
-                                   Margin="15 10 0 10">
 
-                        </TextBlock>
-                    </Border>
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind= "Cash"
+                                                 Height="20"
+                                                 Width="20"
+                                                 VerticalAlignment="Center" 
+                                                 Foreground="#ffffff"
+                                                 Margin="10 0 10 0"/>
+                        <TextBox Margin="10 0 10 0"
+                                 Text="{Binding BaseSalary, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                 materialDesign:HintAssist.Hint="Lương cơ bản"
+                                 Foreground="#ffffff"
+                                 FontSize="15"
+                                 Height="55"
+                                 Width="300"
+                                 IsEnabled="{Binding Role, Converter={StaticResource RoleConverter}}"
+                                 VerticalContentAlignment="Center"
+                                 BorderBrush="LightGray"
+                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"  
+                                 VerticalAlignment="Center"/>
+
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Hệ số lương"
+                               FontSize="18"
+                               Margin="10 0 10 0"
+                               Foreground="#f0b000"
+                               VerticalAlignment="Center">
+                        </Label>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind= "CurrencyUsd"
+                                                 Height="20"
+                                                 Width="20"
+                                                 VerticalAlignment="Center" 
+                                                 Foreground="#ffffff"
+                                                 Margin="10 0 10 0"/>
+                        <TextBox Margin="10 0 10 0"
+                                 Text="{Binding CoefficientsSalary, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                 materialDesign:HintAssist.Hint="Hệ số lương"
+                                 Foreground="#ffffff"
+                                 FontSize="15"
+                                 Height="55"
+                                 Width="300"
+                                 IsEnabled="{Binding Role, Converter={StaticResource RoleConverter}}"
+                                 VerticalContentAlignment="Center"
+                                 BorderBrush="LightGray"
+                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"  
+                                 VerticalAlignment="Center"/>
+
+                    </StackPanel>
 
                     <materialDesign:Card Margin="10 20 10 0"
                                          Height="70"
@@ -311,7 +406,9 @@
                                 Height="70"
                                 Background="Transparent"
                                 Foreground="#000000"
-                                BorderBrush="Transparent">
+                                BorderBrush="Transparent"
+                                IsEnabled="{Binding Role, Converter={StaticResource RoleConverter}}"
+                                Command="{Binding Save}">
 
                         </Button>
                     </materialDesign:Card>
@@ -319,67 +416,7 @@
             </Grid>
 
             <Grid Grid.Row="1">
-                <StackPanel Orientation="Vertical" Margin="0 10 0 0">
-                    <StackPanel Orientation="Horizontal">
-                        <Label Content="Hệ số lương"
-                               FontSize="18"
-                               Margin="10 0 10 0"
-                               Foreground="#f0b000"
-                               VerticalAlignment="Center">
-                        </Label>
-
-                        <materialDesign:Card Width="150" Height="40" Margin="300 5 0 5" 
-                                 UniformCornerRadius="10" Background="#000000">
-                            <ComboBox Height="30" x:Name="filtercbb1"
-                                      Width="140"
-                                      Margin="0 0 0 0"
-                                      FontSize="18"
-                                      Foreground="#ffffff"
-                                      SelectedIndex="0"
-                                      SelectedItem="{Binding SelectedBorrowFilter}"
-                                      SelectionChanged="filtercbb_SelectionChanged">
-                                <i:Interaction.Triggers>
-                                    <i:EventTrigger EventName="SelectionChanged">
-                                        <i:InvokeCommandAction Command="{Binding CheckSelectedBorrowFilterML}"
-                                                   CommandParameter="{Binding ElementName=filtercbb}" />
-                                    </i:EventTrigger>
-                                </i:Interaction.Triggers>
-
-                                <ComboBoxItem Content="Còn hàng"/>
-                                <ComboBoxItem Content="Hết hàng"/>
-                            </ComboBox>
-                        </materialDesign:Card>
-
-                    </StackPanel>
-
-                    <Border BorderThickness="1"
-                            BorderBrush="#8692A6"
-                            CornerRadius="10"
-                            Margin="10 0 10 0"
-                            Height="50">
-                        <TextBlock Text="Manager"
-                                   FontSize="20"
-                                   Foreground="#ffffff"
-                                   VerticalAlignment="Center"
-                                   Margin="15 10 0 10">
-
-                        </TextBlock>
-                    </Border>
-
-                    <materialDesign:Card Margin="10 20 10 0"
-                             Height="70"
-                             Background="#f0b000"
-                             UniformCornerRadius="10">
-                        <Button Content="Lưu thông tin"
-                                FontSize="20"
-                                Height="70"
-                                Background="Transparent"
-                                Foreground="#000000"
-                                BorderBrush="Transparent">
-
-                        </Button>
-                    </materialDesign:Card>
-                </StackPanel>
+                
             </Grid>
         </Grid>
     </Grid>

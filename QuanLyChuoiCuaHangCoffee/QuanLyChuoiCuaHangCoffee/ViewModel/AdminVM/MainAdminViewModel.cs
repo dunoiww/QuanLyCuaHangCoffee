@@ -1,4 +1,5 @@
 ﻿using Library.ViewModel;
+using QuanLyChuoiCuaHangCoffee.Models.DataProvider;
 using QuanLyChuoiCuaHangCoffee.Views.Admin.BillsPage;
 using QuanLyChuoiCuaHangCoffee.Views.Admin.CustomerPage;
 using QuanLyChuoiCuaHangCoffee.Views.Admin.DashboardPage;
@@ -13,12 +14,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Windows.Forms;
 using System.Windows.Input;
 
 namespace QuanLyChuoiCuaHangCoffee.ViewModel.AdminVM
 {
     public class MainAdminViewModel : BaseViewModel
     {
+        public int _Role { get; set; }
+        public int Role { get => _Role; set { _Role = value; OnPropertyChanged(); } }
         public ICommand LoadMainDashboardPageCF { get; set; }
         public ICommand LoadMainTablesPageCF { get; set; }
         public ICommand LoadMainItemsPageCF { get; set; }
@@ -27,6 +31,7 @@ namespace QuanLyChuoiCuaHangCoffee.ViewModel.AdminVM
         public ICommand LoadMainEmployeePageCF { get; set; }
         public ICommand LoadMainCustomerPageCF { get; set; }
         public ICommand LoadMainSettingPageCF { get; set; }
+        public ICommand LoadRole { get; set; }
 
         private string _optionName { get; set; }
         public string optionName
@@ -37,6 +42,11 @@ namespace QuanLyChuoiCuaHangCoffee.ViewModel.AdminVM
 
         public MainAdminViewModel()
         {
+            LoadRole = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                Role = AdminServices.Role;
+            });
+
             LoadMainDashboardPageCF = new RelayCommand<Frame>((p) => { return true; }, (p) =>
             {
                 p.Content = new MainDashboardPage();
