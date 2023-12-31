@@ -52,7 +52,18 @@ namespace QuanLyChuoiCuaHangCoffee.Utils
 
     public class VOUCHER_STATUS
     {
+        public static readonly string UNRELEASED = "Chưa phát hành";
         public static readonly string RELEASED = "Đã phát hành";
         public static readonly string USED = "Đã sử dụng";
+        public static readonly string EXPIRED = "Đã hết hạn";
+    }
+
+    public class RANK
+    {
+        public static readonly string NORMAL = "Thường";
+        public static readonly string BRONZE = "Đồng";
+        public static readonly string SILVER = "Bạc";
+        public static readonly string GOLD = "Vàng";
+        public static readonly string DIAMOND = "Kim cương";
     }
 }

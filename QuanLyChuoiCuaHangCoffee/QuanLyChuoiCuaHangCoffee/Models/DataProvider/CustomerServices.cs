@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xaml.Behaviors.Media;
 using QuanLyChuoiCuaHangCoffee.DTOs;
+using QuanLyChuoiCuaHangCoffee.Utils;
 using QuanLyChuoiCuaHangCoffee.Views.MessageBoxCF;
 using System;
 using System.Collections.Generic;
@@ -72,7 +73,7 @@ namespace QuanLyChuoiCuaHangCoffee.Models.DataProvider
                 cus.IDKHACHHANG = id;
                 cus.TICHDIEM = 0;
                 cus.SODONHANG = 0;
-                cus.HANGTHANHVIEN = "Chưa";
+                cus.HANGTHANHVIEN = RANK.NORMAL;
 
                 context.KHACHHANGs.Add(cus);
 
@@ -296,23 +297,23 @@ namespace QuanLyChuoiCuaHangCoffee.Models.DataProvider
                     {
                         if (cus.TICHDIEM >= 5000)
                         {
-                            cus.HANGTHANHVIEN = "Đồng";
+                            cus.HANGTHANHVIEN = RANK.BRONZE;
                         }
                         else if (cus.TICHDIEM >= 10000)
                         {
-                            cus.HANGTHANHVIEN = "Bạc";
+                            cus.HANGTHANHVIEN = RANK.SILVER;
                         }
                         else if (cus.TICHDIEM >= 15000)
                         {
-                            cus.HANGTHANHVIEN = "Vàng";
+                            cus.HANGTHANHVIEN = RANK.GOLD;
                         }
                         else if (cus.TICHDIEM >= 35000)
                         {
-                            cus.HANGTHANHVIEN = "Kim cương";
+                            cus.HANGTHANHVIEN = RANK.DIAMOND;
                         }
                         else
                         {
-                            cus.HANGTHANHVIEN = "Chưa";
+                            cus.HANGTHANHVIEN = RANK.NORMAL;
                         }
 
                         context.SaveChanges();
@@ -343,7 +344,7 @@ namespace QuanLyChuoiCuaHangCoffee.Models.DataProvider
                         cus.USER.DIACHI = "";
                         cus.USER.EMAIL = "";
                         cus.TICHDIEM = 0;
-                        cus.HANGTHANHVIEN = "Chưa";
+                        cus.HANGTHANHVIEN = RANK.NORMAL;
 
                         context.SaveChanges();
                     }
@@ -383,6 +384,31 @@ namespace QuanLyChuoiCuaHangCoffee.Models.DataProvider
             }
             catch (Exception)
             {
+                throw;
+            }
+        }
+
+        public async Task<List<CustomerDTO>> GetRankCustomer(string _rank)
+        {
+            try
+            {
+                using (var context = new CoffeeManagementEntities())
+                {
+                    var cusList = (from p in context.KHACHHANGs
+                                   where p.HANGTHANHVIEN == _rank
+                                   select new CustomerDTO
+                                   {
+                                       HOTEN = p.USER.HOTEN,
+                                       SODT = p.USER.SODT,
+                                       EMAIL = p.USER.EMAIL,
+                                   }).ToListAsync();
+
+                    return await cusList;
+                }
+            }
+            catch (Exception)
+            {
+
                 throw;
             }
         }

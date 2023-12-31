@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:QuanLyChuoiCuaHangCoffee.Views.Admin.TablesPage"
         xmlns:uc="clr-namespace:QuanLyChuoiCuaHangCoffee.UsercontrolCF"
         mc:Ignorable="d"
-        Title="BillWindow" Height="800" Width="475"
+        Title="BillWindow" Height="850" Width="475"
         Name="BillWindowCF"
         xmlns:i = "http://schemas.microsoft.com/xaml/behaviors"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
@@ -22,7 +22,7 @@
         DataContext="{StaticResource TablesVM}">
 
     <Window.Clip>
-        <RectangleGeometry Rect="0, 0, 472, 800" RadiusX="10" RadiusY="10"></RectangleGeometry>
+        <RectangleGeometry Rect="0, 0, 472, 850" RadiusX="10" RadiusY="10"></RectangleGeometry>
     </Window.Clip>
     
     <Grid>
@@ -32,8 +32,8 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="4*"></RowDefinition>
                     <RowDefinition Height="2*"></RowDefinition>
-                    <RowDefinition Height="6*"></RowDefinition>
-                    <RowDefinition Height="3*"></RowDefinition>
+                    <RowDefinition Height="5*"></RowDefinition>
+                    <RowDefinition Height="4*"></RowDefinition>
                 </Grid.RowDefinitions>
 
                 <Grid Grid.Row="0">
@@ -299,10 +299,30 @@
                             <ColumnDefinition></ColumnDefinition>
                             <ColumnDefinition></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <Label Grid.Column="0" Content="Tổng hoá đơn" Foreground="#f0b000" FontSize="18"></Label>
+                        <Label Grid.Column="0" Content="Tổng hoá đơn:" Foreground="#f0b000" FontSize="18"></Label>
                         <Label Grid.Column="1" FontSize="18" Foreground="#ffffff" Content="{Binding Total}" HorizontalAlignment="Right"></Label>
                     </Grid>
 
+                    <Grid Margin="8 0 4 5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" Content="Giảm giá: " Foreground="#f0b000" FontSize="18"></Label>
+                        <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                            <Label FontSize="18" Foreground="#ffffff" Content="{Binding VoucherPercentage}" HorizontalAlignment="Right"></Label>
+                            <Label FontSize="18" Foreground="#ffffff" Content="%"></Label>
+                        </StackPanel>
+                    </Grid>
+
+                    <Grid Margin="8 0 4 5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" Content="Tổng thanh toán:" Foreground="#f0b000" FontSize="18"></Label>
+                        <Label Grid.Column="1" FontSize="18" Foreground="#ffffff" Content="{Binding TotalFinal}" HorizontalAlignment="Right"></Label>
+                    </Grid>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="*Ghi chú: "
                                    Foreground="White"

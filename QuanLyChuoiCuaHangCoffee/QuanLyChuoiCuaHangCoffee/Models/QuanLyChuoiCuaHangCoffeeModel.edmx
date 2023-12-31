@@ -139,7 +139,7 @@
           <Key>
             <PropertyRef Name="MAVOUCHER" />
           </Key>
-          <Property Name="MAVOUCHER" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="MAVOUCHER" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CODE" Type="varchar" MaxLength="12" />
           <Property Name="DISCOUNT" Type="int" />
           <Property Name="DATEEXPIRED" Type="smalldatetime" />
@@ -628,7 +628,7 @@
           <Key>
             <PropertyRef Name="MAVOUCHER" />
           </Key>
-          <Property Name="MAVOUCHER" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="MAVOUCHER" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CODE" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
           <Property Name="DISCOUNT" Type="Int32" />
           <Property Name="DATEEXPIRED" Type="DateTime" Precision="0" />

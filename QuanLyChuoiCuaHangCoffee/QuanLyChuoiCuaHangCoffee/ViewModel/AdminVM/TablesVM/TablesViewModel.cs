@@ -99,6 +99,34 @@ namespace QuanLyChuoiCuaHangCoffee.ViewModel.AdminVM.TablesVM
             set { _TotalDec = value; OnPropertyChanged(); }
         }
 
+        private string _VoucherCode { get; set; }
+        public string VoucherCode
+        {
+            get { return _VoucherCode; }
+            set { _VoucherCode = value; OnPropertyChanged(); }
+        }
+
+        private int _VoucherPercentage { get; set; }
+        public int VoucherPercentage
+        {
+            get { return _VoucherPercentage; }
+            set { _VoucherPercentage = value; OnPropertyChanged(); }
+        }
+
+        private decimal _TotalFinalDec { get; set; }
+        public decimal TotalFinalDec
+        {
+            get { return _TotalFinalDec; }
+            set { _TotalFinalDec = value; OnPropertyChanged(); }
+        }
+
+        private string _TotalFinal { get; set; }
+        public string TotalFinal
+        {
+            get { return _TotalFinal; }
+            set { _TotalFinal = value; OnPropertyChanged(); }
+        }
+
         private string _Total { get; set; }
         public string Total
         {
@@ -124,6 +152,13 @@ namespace QuanLyChuoiCuaHangCoffee.ViewModel.AdminVM.TablesVM
         {
             get { return _NewNumTable; }
             set { _NewNumTable = value; OnPropertyChanged(); }
+        }
+
+        private string _CodeVoucher { get; set; }
+        public string CodeVoucher
+        {
+            get { return _CodeVoucher; }
+            set { _CodeVoucher = value; OnPropertyChanged(); }
         }
 
         private string _Note { get; set; }
@@ -187,6 +222,7 @@ namespace QuanLyChuoiCuaHangCoffee.ViewModel.AdminVM.TablesVM
         public ICommand MaskNameCF { get; set; }
         public ICommand LoadUser { get; set; }
         public ICommand LoadNote { get; set; }
+        public ICommand LoadCodeVoucher { get; set; }
 
         #endregion
 
@@ -329,6 +365,27 @@ namespace QuanLyChuoiCuaHangCoffee.ViewModel.AdminVM.TablesVM
                 }
             });
 
+            LoadCodeVoucher = new RelayCommand<object>((p) => { return true; }, async (p) =>
+            {
+                (VoucherDTO voucher, string s) = await VoucherServices.Ins.FindVoucher(CodeVoucher);
+
+                if (voucher == null)
+                {
+                    MessageBoxCF mb = new MessageBoxCF(s, MessageType.Error, MessageButtons.OK);
+                    mb.ShowDialog();
+                    TotalFinalDec = TotalDec;
+                    TotalFinal = Helper.FormatVNMoney(TotalFinalDec);
+                    return;
+                }
+
+                VoucherCode = voucher.CODEVOUCHER;
+                VoucherPercentage = voucher.DISCOUNT;
+
+                
+                TotalFinalDec = TotalDec - TotalDec * voucher.DISCOUNT / 100;
+                TotalFinal = Helper.FormatVNMoney(TotalFinalDec);
+            });
+
             CheckOut = new RelayCommand<Window>((p) => { return true; }, async (p) =>
             {
                 var table = MenuOfTable.Where(x => x.MABAN == SelectedTableItem.MABAN).FirstOrDefault();
@@ -336,13 +393,13 @@ namespace QuanLyChuoiCuaHangCoffee.ViewModel.AdminVM.TablesVM
                 {
                     if (table.Products.Count == 0)
                     {
-                        MessageBoxCF ms = new MessageBoxCF("Bạn chưa chọn món ăn!", MessageType.Error, MessageButtons.OK);
+                        MessageBoxCF ms = new MessageBoxCF("Bạn chưa chọn món!", MessageType.Error, MessageButtons.OK);
                         ms.ShowDialog();
                         return;
                     }
                     HourBillOut = DateTime.Now.ToString("HH:mm:ss");
 
-                    string madh = await CheckOutServices.Ins.CheckOut(CusID, AdminServices.MaNhanVien, SelectedTableItem.MABAN, _DateBill, TotalDec, 20, Note, table.Products, table.TIMEIn, HourBillOut);
+                    string madh = await CheckOutServices.Ins.CheckOut(CusID, AdminServices.MaNhanVien, SelectedTableItem.MABAN, _DateBill, TotalFinalDec, VoucherPercentage, Note, table.Products, table.TIMEIn, HourBillOut, VoucherCode);
                     MADH = madh;
 
                     MaskName.Visibility = Visibility.Visible;
@@ -478,6 +535,9 @@ namespace QuanLyChuoiCuaHangCoffee.ViewModel.AdminVM.TablesVM
             CusPoint = 0;
             HourBillIn = "";
             HourBillOut = "";
+            VoucherPercentage = 0;
+            VoucherCode = "";
+            TotalFinal = "";
             Note = "";
         }
 

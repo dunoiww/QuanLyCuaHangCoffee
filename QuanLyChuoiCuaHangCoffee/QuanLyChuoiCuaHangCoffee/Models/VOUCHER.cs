@@ -14,7 +14,7 @@ namespace QuanLyChuoiCuaHangCoffee.Models
     
     public partial class VOUCHER
     {
-        public string MAVOUCHER { get; set; }
+        public int MAVOUCHER { get; set; }
         public string CODE { get; set; }
         public Nullable<int> DISCOUNT { get; set; }
         public Nullable<System.DateTime> DATEEXPIRED { get; set; }

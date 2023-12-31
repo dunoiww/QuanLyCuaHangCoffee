@@ -203,6 +203,7 @@
     <Compile Include="Models\DataProvider\ProductServices.cs" />
     <Compile Include="Models\DataProvider\StatisticServices.cs" />
     <Compile Include="Models\DataProvider\TablesServices.cs" />
+    <Compile Include="Models\DataProvider\VoucherServices.cs" />
     <Compile Include="Models\DONHANG.cs">
       <DependentUpon>QuanLyChuoiCuaHangCoffeeModel.tt</DependentUpon>
     </Compile>
@@ -255,9 +256,11 @@
     <Compile Include="Utils\ConverterValue\IndexConverter.cs" />
     <Compile Include="Utils\ConverterValue\IsEditConverter.cs" />
     <Compile Include="Utils\ConverterValue\RoleConverter.cs" />
+    <Compile Include="Utils\ConverterValue\StatusVoucherConverter.cs" />
     <Compile Include="Utils\ConverterValue\StockStatusConverter.cs" />
     <Compile Include="Utils\ConverterValue\TableStatusConverter.cs" />
     <Compile Include="Utils\Helper.cs" />
+    <Compile Include="Utils\RegexUtilities.cs" />
     <Compile Include="ViewModel\AdminVM\BillsVM\BillDetailWindowViewModel.cs" />
     <Compile Include="ViewModel\AdminVM\BillsVM\BillsViewModel.cs" />
     <Compile Include="ViewModel\AdminVM\BillsVM\ImportInvoicePageViewModel.cs" />
@@ -275,6 +278,7 @@
     <Compile Include="ViewModel\AdminVM\TablesVM\MenuPageViewModel.cs" />
     <Compile Include="ViewModel\AdminVM\TablesVM\TablesViewModel.cs" />
     <Compile Include="ViewModel\AdminVM\VoucherVM\AddVoucherViewModel.cs" />
+    <Compile Include="ViewModel\AdminVM\VoucherVM\ReleaseVoucherViewModel.cs" />
     <Compile Include="ViewModel\AdminVM\VoucherVM\VoucherViewModel.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\LoginVM\ForgotPassViewModel.cs" />
@@ -351,6 +355,9 @@
     </Compile>
     <Compile Include="Views\Admin\VoucherPage\MainVoucherPage.xaml.cs">
       <DependentUpon>MainVoucherPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Admin\VoucherPage\ReleaseVoucherWindow.xaml.cs">
+      <DependentUpon>ReleaseVoucherWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Customer\MainCustomerWindow.xaml.cs">
       <DependentUpon>MainCustomerWindow.xaml</DependentUpon>
@@ -489,6 +496,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Admin\VoucherPage\MainVoucherPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Admin\VoucherPage\ReleaseVoucherWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QuanLyChuoiCuaHangCoffee.Views.Admin.VoucherPage"
         mc:Ignorable="d"
-        Title="AddVoucherWindow" Height="350" Width="500"
+        Title="AddVoucherWindow" Height="470" Width="500"
         xmlns:i = "http://schemas.microsoft.com/xaml/behaviors"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
@@ -73,16 +73,16 @@
                             </Style>
                             <Style TargetType="TextBox">
                                 <Setter Property="BorderThickness"
-                                        Value="0,0,0,1" />
+                                        Value="0 0 0 1" />
                                 <Setter Property="FontSize"
                                         Value="20" />
                                 <Setter Property="Margin"
-                                        Value="-20,0,0,20" />
+                                        Value="0 0 0 20" />
                                 <Setter Property="Width"
                                         Value="auto" />
                             </Style>
                         </StackPanel.Resources>
-                        <Grid Height="238">
+                        <Grid Height="350">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="48*" />
                                 <ColumnDefinition Width="52*" />
@@ -91,10 +91,12 @@
                             <StackPanel Grid.Column="0"
                                         Margin="0,10,0,0">
                                 <Label Content="Số lượng voucher:" />
+                                <Label Content="Giảm giá:"/>
                                 <Label Content="Độ dài mã (tối đa 12):" />
                                 <Label Content="Ký tự bắt đầu:" />
                                 <Label Content="Ký tự kết thúc:" />
                                 <Label Content="Đợt phát hành:" />
+                                <Label Content="Thời gian"/>
 
                             </StackPanel>
                             <StackPanel Grid.Column="1"
@@ -103,6 +105,10 @@
                                          TextAlignment="Right"
                                          PreviewTextInput="TextBox_PreviewTextInput"
                                          TextChanged="TextBox_TextChanged" />
+                                <TextBox Text="{Binding Percentage}"
+                                         TextAlignment="Right"
+                                         PreviewTextInput="TextBox_PreviewTextInput"
+                                         TextChanged="TextBox_TextChanged"/>
                                 <TextBox TextAlignment="Right"
                                          Text="{Binding Length}"
                                          PreviewTextInput="TextBox_PreviewTextInput" />
@@ -112,6 +118,11 @@
                                          Text="{Binding LastChar}" />
                                 <TextBox TextAlignment="Right"
                                          Text="{Binding ReleaseName}" />
+                                <DatePicker SelectedDate="{Binding ExpiredDate}"
+                                            Text="{Binding ExpiredDate, StringFormat=dd/MM/yyyy}" 
+                                            Name="dateTimePicker"
+                                            FontSize="20"
+                                            CalendarOpened="dateTimePicker_CalendarOpened"/>
                             </StackPanel>
                             
                         </Grid>

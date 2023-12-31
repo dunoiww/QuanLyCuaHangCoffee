@@ -44,9 +44,10 @@ namespace QuanLyChuoiCuaHangCoffee.ViewModel.AdminVM
 
         public MainAdminViewModel()
         {
-            LoadRole = new RelayCommand<object>((p) => { return true; }, (p) =>
+            LoadRole = new RelayCommand<object>((p) => { return true; }, async (p) =>
             {
                 Role = AdminServices.Role;
+                await VoucherServices.Ins.UpdateExpiredVoucher();
             });
 
             LoadMainDashboardPageCF = new RelayCommand<Frame>((p) => { return true; }, (p) =>

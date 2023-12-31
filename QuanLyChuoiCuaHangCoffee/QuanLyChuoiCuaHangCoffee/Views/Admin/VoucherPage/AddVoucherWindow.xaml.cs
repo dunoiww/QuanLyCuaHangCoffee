@@ -66,5 +66,11 @@ namespace QuanLyChuoiCuaHangCoffee.Views.Admin.VoucherPage
         {
             this.Close();
         }
+
+        private void dateTimePicker_CalendarOpened(object sender, RoutedEventArgs e)
+        {
+            DatePicker datePicker = (DatePicker)sender;
+            datePicker.DisplayDateStart = DateTime.Today.AddDays(1);
+        }
     }
 }

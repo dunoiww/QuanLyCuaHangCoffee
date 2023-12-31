@@ -8,9 +8,9 @@ namespace QuanLyChuoiCuaHangCoffee.DTOs
 {
     public class VoucherDTO
     {
-        public string MAVOUCHER { get; set; }
+        public int MAVOUCHER { get; set; }
         public string CODEVOUCHER { get; set; }
-        public string DISCOUNT { get; set; }
+        public int DISCOUNT { get; set; }
         public DateTime DATEEXPIRED { get; set; }
         public string STATUS { get; set; }
         public string REASON { get; set; }

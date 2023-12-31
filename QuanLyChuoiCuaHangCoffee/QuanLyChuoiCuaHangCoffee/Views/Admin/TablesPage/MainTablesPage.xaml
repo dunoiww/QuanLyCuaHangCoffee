@@ -73,10 +73,10 @@
                          Background="#000000">
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="1.5*"></RowDefinition>
-                            <RowDefinition Height="2.5*"></RowDefinition>
-                            <RowDefinition Height="6*"></RowDefinition>
-                            <RowDefinition Height="4*"></RowDefinition>
+                            <RowDefinition Height="1*"></RowDefinition>
+                            <RowDefinition Height="2*"></RowDefinition>
+                            <RowDefinition Height="5.5*"></RowDefinition>
+                            <RowDefinition Height="5*"></RowDefinition>
                         </Grid.RowDefinitions>
 
                         <Grid Grid.Row="0">
@@ -89,7 +89,7 @@
                                        BorderThickness="0 0 0 1"
                                        BorderBrush="#f0b000"
                                        HorizontalContentAlignment="Center"
-                                       Margin="0 10 0 0"/>
+                                       Margin="0 0 0 0"/>
                             </Grid>
                         </Grid>
 
@@ -155,16 +155,17 @@
                                 <StackPanel Grid.Column="1">
                                     <StackPanel>
                                         <TextBox Margin="6 0 10 0"
-                                                         Text="{Binding CusPhone, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                                         materialDesign:HintAssist.Hint="Số điện thoại"
-                                                         Foreground="#ffffff"
-                                                         FontSize="15"
-                                                         Height="50"
-                                                         VerticalContentAlignment="Center"
-                                                         BorderBrush="LightGray"
-                                                         PreviewTextInput="TextBox_PreviewTextInput"
-                                                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"  
-                                                         VerticalAlignment="Center">
+                                                 Text="{Binding CusPhone, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                 materialDesign:HintAssist.Hint="Số điện thoại"
+                                                 Foreground="#ffffff"
+                                                 FontSize="15"
+                                                 Height="40"
+                                                 VerticalContentAlignment="Center"
+                                                 BorderBrush="LightGray"
+                                                 PreviewTextInput="TextBox_PreviewTextInput"
+                                                 TextChanged="TextBox_TextChanged"       
+                                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"  
+                                                VerticalAlignment="Center">
                                             <i:Interaction.Triggers>
                                                 <i:EventTrigger EventName="TextChanged">
                                                     <i:InvokeCommandAction Command="{Binding LoadUser}"/>
@@ -343,13 +344,73 @@
                                     <ColumnDefinition></ColumnDefinition>
                                     <ColumnDefinition></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
-                                <Label Grid.Column="0" Content="Tổng hoá đơn" Foreground="#f0b000" FontSize="18"></Label>
+                                <Label Grid.Column="0" Content="Tổng hoá đơn:" Foreground="#f0b000" FontSize="18"></Label>
                                 <Label Grid.Column="1" FontSize="18" Foreground="#ffffff" x:Name="TotalCost" Content="{Binding Total}" HorizontalAlignment="Right"></Label>
+                            </Grid>
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="2*"/>
+                                    <ColumnDefinition Width="1*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid Grid.Column="0" Margin="12 0 0 5">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBox Text="{Binding CodeVoucher, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                 materialDesign:HintAssist.Hint="Mã giảm giá"
+                                                 Foreground="#ffffff"
+                                                 FontSize="18"
+                                                 Width="230"
+                                                 VerticalContentAlignment="Center"
+                                                 BorderBrush="LightGray"
+                                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"  
+                                                 VerticalAlignment="Center">
+                                        </TextBox>
+
+                                        <Button Background="#512da8"  
+                                                BorderBrush="#4a148c" 
+                                                Foreground="#ffffff"
+                                                Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
+                                                Width="35" 
+                                                Height="35"
+                                                Command="{Binding LoadCodeVoucher}">
+                                            <materialDesign:PackIcon Kind="CheckBold" Width="15" Height="15"/>
+                                        </Button>
+                                    </StackPanel>
+                                </Grid>
+
+                                <Grid Grid.Column="1">
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                        <Label Content="{Binding VoucherPercentage}"
+                                               Foreground="White"
+                                               FontSize="18"
+                                               VerticalAlignment="Center"
+                                               HorizontalAlignment="Right">
+
+                                        </Label>
+
+                                        <Label Content="%"
+                                               Foreground="White"
+                                               FontSize="18"
+                                               VerticalAlignment="Center"
+                                               HorizontalAlignment="Right">
+
+                                        </Label>
+
+                                    </StackPanel>
+                                </Grid>
+                            </Grid>
+                            <Grid Margin="8 0 0 5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Column="0" Content="Thanh toán:" Foreground="#f0b000" FontSize="18"></Label>
+                                <Label Grid.Column="1" FontSize="18" Foreground="#ffffff" Content="{Binding TotalFinal}" HorizontalAlignment="Right"></Label>
                             </Grid>
 
                             <TextBox Style="{StaticResource MaterialDesignOutlinedTextBox}"
                                      Width="440"
-                                     Height="100"
+                                     Height="80"
                                      FontSize="18"
                                      MaxLength="100"
                                      BorderBrush="#696F79"

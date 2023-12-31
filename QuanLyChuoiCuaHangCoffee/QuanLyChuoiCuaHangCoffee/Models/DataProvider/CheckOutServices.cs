@@ -1,4 +1,5 @@
 ﻿using QuanLyChuoiCuaHangCoffee.DTOs;
+using QuanLyChuoiCuaHangCoffee.Utils;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -26,7 +27,7 @@ namespace QuanLyChuoiCuaHangCoffee.Models.DataProvider
             private set => _ins = value;
         }
 
-        public async Task<string> CheckOut(string _makh, string _manv, int _maban, string _datetime, decimal _total, int _isDiscount, string _ghichu, ObservableCollection<MenuItemDTO> _listproduct, string _timein, string _timeout) 
+        public async Task<string> CheckOut(string _makh, string _manv, int _maban, string _datetime, decimal _total, int _isDiscount, string _ghichu, ObservableCollection<MenuItemDTO> _listproduct, string _timein, string _timeout, string _code) 
         {
             try
             {
@@ -79,6 +80,7 @@ namespace QuanLyChuoiCuaHangCoffee.Models.DataProvider
                         cus.TICHDIEM += (int)_total / 100;
                         cus.SODONHANG += 1;
                         await CustomerServices.Ins.UpdateRankCus(cus);
+                        await VoucherServices.Ins.UpdateStatusVoucher(_code);
                         context.SaveChanges();
                         return newBill.MADH;
                     }
@@ -103,7 +105,7 @@ namespace QuanLyChuoiCuaHangCoffee.Models.DataProvider
                         newCus.IDKHACHHANG = CreateNextId(context.KHACHHANGs.Max(p => p.IDKHACHHANG), "KH");
                         newCus.TICHDIEM = 0;
                         newCus.SODONHANG = 1;
-                        newCus.HANGTHANHVIEN = "Chưa";
+                        newCus.HANGTHANHVIEN = RANK.NORMAL;
 
                         context.KHACHHANGs.Add(newCus);
 
