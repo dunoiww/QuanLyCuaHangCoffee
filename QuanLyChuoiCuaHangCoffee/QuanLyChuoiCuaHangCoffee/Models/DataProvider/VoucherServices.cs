@@ -76,6 +76,32 @@ namespace QuanLyChuoiCuaHangCoffee.Models.DataProvider
             }
         }
 
+        public async Task<List<VoucherDTO>> GetListVoucherCondition(string _s)
+        {
+            try
+            {
+                using (var context = new CoffeeManagementEntities())
+                {
+                    var listvoucher = (from s in context.VOUCHERs
+                                       where s.VOUCHERSTATUS == _s
+                                       select new VoucherDTO
+                                       {
+                                           MAVOUCHER = s.MAVOUCHER,
+                                           CODEVOUCHER = s.CODE,
+                                           DISCOUNT = (int)s.DISCOUNT,
+                                           DATEEXPIRED = (DateTime)s.DATEEXPIRED,
+                                           STATUS = s.VOUCHERSTATUS,
+                                           REASON = s.REASON,
+                                       }).ToListAsync();
+                    return await listvoucher;
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
         public async Task<List<VoucherDTO>> GetListVoucherCus()
         {
             try

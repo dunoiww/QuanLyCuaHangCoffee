@@ -52,49 +52,26 @@
                 </Grid.ColumnDefinitions>
 
                 <StackPanel Grid.Column="0" Orientation="Horizontal" Height="50">
-                    <materialDesign:Card Width="325" Margin="15 5 0 5"
-                          UniformCornerRadius="10">
-
-                        <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="Magnify"
-                                    Width="25"
-                                    Height="35"
-                                    Foreground="Black"
-                                    VerticalAlignment="Center" 
-                                    Margin="10 0 0 0"/>
-
-                            <TextBox materialDesign:HintAssist.Hint="Tìm kiếm" 
-                                     x:Name="FilterBox"
-                                     FontSize="18"
-                                     Foreground="#DD000000"
-                                     FontFamily="arial"
-                                     Width="280"
-                                     Height="30"
-                                     TextChanged="FilterBox_TextChanged"
-                                     HorizontalAlignment="Left"/>
-
-                        </StackPanel>
-                    </materialDesign:Card>
-
-                    <materialDesign:Card Width="120" Margin="15 5 0 5"
+                    <materialDesign:Card Width="180" Margin="15 5 0 5"
                         UniformCornerRadius="10">
                         <ComboBox Height="30" x:Name="filtercbb"
-                                  Width="100"
+                                  Width="160"
                                   Margin="0 0 0 0"
                                   Padding="0 10 10 0"
                                   FontSize="15"
                                   SelectedIndex="0"
-                                  SelectedItem="{Binding SelectStockFilter}">
+                                  SelectedItem="{Binding SelectVoucherFilter}">
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="SelectionChanged">
-                                    <i:InvokeCommandAction Command="{Binding CheckSelectStockFilterCF}"
+                                    <i:InvokeCommandAction Command="{Binding CheckSelectVoucherFilterCF}"
                                            CommandParameter="{Binding ElementName=filtercbb}" />
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
 
                             <ComboBoxItem Content="Toàn bộ"/>
-                            <ComboBoxItem Content="Còn hàng"/>
-                            <ComboBoxItem Content="Hết hàng"/>
+                            <ComboBoxItem Content="Đã phát hành"/>
+                            <ComboBoxItem Content="Chưa phát hành"/>
+                            <ComboBoxItem Content="Hết hạn"/>
                         </ComboBox>
                     </materialDesign:Card>
 

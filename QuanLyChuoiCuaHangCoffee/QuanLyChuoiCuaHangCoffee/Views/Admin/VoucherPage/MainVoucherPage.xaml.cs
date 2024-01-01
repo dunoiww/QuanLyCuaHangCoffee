@@ -24,10 +24,5 @@ namespace QuanLyChuoiCuaHangCoffee.Views.Admin.VoucherPage
         {
             InitializeComponent();
         }
-
-        private void FilterBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
     }
 }
