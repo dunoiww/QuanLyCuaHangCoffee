@@ -76,6 +76,32 @@ namespace QuanLyChuoiCuaHangCoffee.Models.DataProvider
             }
         }
 
+        public async Task<List<VoucherDTO>> GetListVoucherCus()
+        {
+            try
+            {
+                using (var context = new CoffeeManagementEntities())
+                {
+                    var listVoucher = (from s in context.VOUCHERs
+                                       where s.VOUCHERSTATUS != VOUCHER_STATUS.RELEASED && s.VOUCHERSTATUS != VOUCHER_STATUS.USED && s.VOUCHERSTATUS != VOUCHER_STATUS.EXPIRED
+                                       select new VoucherDTO
+                                       {
+                                           MAVOUCHER = s.MAVOUCHER,
+                                           CODEVOUCHER = s.CODE,
+                                           DISCOUNT = (int)s.DISCOUNT,
+                                           DATEEXPIRED = (DateTime)s.DATEEXPIRED,
+                                           STATUS = s.VOUCHERSTATUS,
+                                           REASON = s.REASON,
+                                       }).ToListAsync();
+                    return await listVoucher;
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
         public async Task<(bool, string)> ReleaseMultiVoucher(List<string> _listVoucherCode)
         {
             try
@@ -172,7 +198,7 @@ namespace QuanLyChuoiCuaHangCoffee.Models.DataProvider
                     var listVoucher = context.VOUCHERs.ToList();
                     foreach (var item in listVoucher)
                     {
-                        if (item.DATEEXPIRED < DateTime.Now)
+                        if (item.DATEEXPIRED < DateTime.Now && item.VOUCHERSTATUS != VOUCHER_STATUS.USED)
                         {
                             item.VOUCHERSTATUS = VOUCHER_STATUS.EXPIRED;
                         }

@@ -284,6 +284,7 @@
     <Compile Include="ViewModel\CustomerVM\BillsVM\BillDetailCusViewModel.cs" />
     <Compile Include="ViewModel\CustomerVM\BillsVM\BillViewModel.cs" />
     <Compile Include="ViewModel\CustomerVM\MainCustomerViewModel.cs" />
+    <Compile Include="ViewModel\CustomerVM\VoucherCusVM\VoucherCusViewModel.cs" />
     <Compile Include="ViewModel\LoginVM\ForgotPassViewModel.cs" />
     <Compile Include="ViewModel\LoginVM\LoginViewModel.cs" />
     <Compile Include="ViewModel\uc_controlbarViewModel.cs" />
@@ -370,6 +371,9 @@
     </Compile>
     <Compile Include="Views\Customer\MainCustomerWindow.xaml.cs">
       <DependentUpon>MainCustomerWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Customer\VoucherPage\MainVoucherCusPage.xaml.cs">
+      <DependentUpon>MainVoucherCusPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Login\CreateNewPassPage.xaml.cs">
       <DependentUpon>CreateNewPassPage.xaml</DependentUpon>
@@ -521,6 +525,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Customer\MainCustomerWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Customer\VoucherPage\MainVoucherCusPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

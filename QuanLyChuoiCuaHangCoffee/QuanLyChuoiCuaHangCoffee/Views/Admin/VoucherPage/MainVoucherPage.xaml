@@ -33,10 +33,6 @@
         </EventTrigger>
     </Page.Triggers>
 
-    <Page.Resources>
-        <cv:StatusVoucherConverter x:Key="Converter" />
-    </Page.Resources>
-
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding LoadListVoucher}" />
@@ -68,14 +64,14 @@
                                     Margin="10 0 0 0"/>
 
                             <TextBox materialDesign:HintAssist.Hint="Tìm kiếm" 
-                             x:Name="FilterBox"
-                             FontSize="18"
-                             Foreground="#DD000000"
-                             FontFamily="arial"
-                             Width="280"
-                             Height="30"
-                             TextChanged="FilterBox_TextChanged"
-                             HorizontalAlignment="Left"/>
+                                     x:Name="FilterBox"
+                                     FontSize="18"
+                                     Foreground="#DD000000"
+                                     FontFamily="arial"
+                                     Width="280"
+                                     Height="30"
+                                     TextChanged="FilterBox_TextChanged"
+                                     HorizontalAlignment="Left"/>
 
                         </StackPanel>
                     </materialDesign:Card>
