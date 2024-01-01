@@ -2,6 +2,9 @@
 using OfficeOpenXml;
 using QuanLyChuoiCuaHangCoffee.DTOs;
 using QuanLyChuoiCuaHangCoffee.Models.DataProvider;
+using QuanLyChuoiCuaHangCoffee.Utils;
+using QuanLyChuoiCuaHangCoffee.Views.Admin.BillsPage;
+using QuanLyChuoiCuaHangCoffee.Views.Customer.BillsPage;
 using QuanLyChuoiCuaHangCoffee.Views.MessageBoxCF;
 using System;
 using System.Collections.Generic;
@@ -10,12 +13,13 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Input;
 
 namespace QuanLyChuoiCuaHangCoffee.ViewModel.CustomerVM.BillsVM
 {
-    public class BillViewModel : BaseViewModel
+    public partial class BillViewModel : BaseViewModel
     {
         private DateTime _SelectedDateStart { get; set; }
         public DateTime SelectedDateStart { get => _SelectedDateStart; set { _SelectedDateStart = value; OnPropertyChanged(); } }
@@ -80,6 +84,30 @@ namespace QuanLyChuoiCuaHangCoffee.ViewModel.CustomerVM.BillsVM
                 }
             });
 
+            LoadInforSaleInvoice = new RelayCommand<object>((p) => { return true; }, async (p) =>
+            {
+                if (SelectedSaleInvoiceItem != null)
+                {
+                    tableNumber = SelectedSaleInvoiceItem.MABAN.ToString();
+                    DateBill = SelectedSaleInvoiceItem.NGDH.ToString("dd/MM/yyyy");
+                    Employee = SelectedSaleInvoiceItem.TENNV;
+                    HourBillIn = DateTime.Parse(SelectedSaleInvoiceItem.TIMEIN).ToString("HH:mm:ss");
+                    MADH = SelectedSaleInvoiceItem.MADH;
+                    CusName = SelectedSaleInvoiceItem.TENKHACHHANG;
+                    HourBillOut = SelectedSaleInvoiceItem.TIMEOUT != null ? DateTime.Parse(SelectedSaleInvoiceItem.TIMEOUT).ToString("HH:mm:ss") : "";
+                    Note = SelectedSaleInvoiceItem.GHICHU;
+                    VoucherPercentage = SelectedSaleInvoiceItem.DISCOUNT;
+                    double total = (double)SelectedSaleInvoiceItem.TONGTIEN / (1 - SelectedSaleInvoiceItem.DISCOUNT / 100.0);
+                    Total = Helper.FormatVNMoney(Convert.ToDecimal(total));
+                    TotalFinal = Helper.FormatVNMoney(SelectedSaleInvoiceItem.TONGTIEN);
+
+                    ListProduct = new ObservableCollection<MenuItemDTO>(await OrderBillServices.Ins.GetProductFromBill(SelectedSaleInvoiceItem.MADH));
+
+                    BillDetailCusWindow w = new BillDetailCusWindow();
+                    w.ShowDialog();
+                }
+            });
+
             ExportFileSaleInvoiceCF = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
                 SaveFileDialog sf = new SaveFileDialog
@@ -127,6 +155,11 @@ namespace QuanLyChuoiCuaHangCoffee.ViewModel.CustomerVM.BillsVM
                     MessageBoxCF mb = new MessageBoxCF("Xuất file thành công", MessageType.Accept, MessageButtons.OK);
                     mb.ShowDialog();
                 }
+            });
+
+            closeCF = new RelayCommand<Window>((p) => { return true; }, (p) =>
+            {
+                p.Close();
             });
         }
 

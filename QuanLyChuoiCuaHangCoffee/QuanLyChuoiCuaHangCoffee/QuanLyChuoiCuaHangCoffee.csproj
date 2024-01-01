@@ -281,6 +281,7 @@
     <Compile Include="ViewModel\AdminVM\VoucherVM\ReleaseVoucherViewModel.cs" />
     <Compile Include="ViewModel\AdminVM\VoucherVM\VoucherViewModel.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
+    <Compile Include="ViewModel\CustomerVM\BillsVM\BillDetailCusViewModel.cs" />
     <Compile Include="ViewModel\CustomerVM\BillsVM\BillViewModel.cs" />
     <Compile Include="ViewModel\CustomerVM\MainCustomerViewModel.cs" />
     <Compile Include="ViewModel\LoginVM\ForgotPassViewModel.cs" />
