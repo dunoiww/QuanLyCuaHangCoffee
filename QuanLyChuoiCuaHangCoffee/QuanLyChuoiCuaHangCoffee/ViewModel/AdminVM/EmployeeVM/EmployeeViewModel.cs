@@ -90,11 +90,11 @@ namespace QuanLyChuoiCuaHangCoffee.ViewModel.AdminVM.EmployeeVM
             AddEmployee = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
                 SelectedDate = DateTime.Now;
-                MaskName.Visibility = System.Windows.Visibility.Visible;
+                MaskName.Visibility = Visibility.Visible;
                 isAdd = true;
                 AddEmployeeWindow w = new AddEmployeeWindow();
                 w.ShowDialog();
-                MaskName.Visibility = System.Windows.Visibility.Collapsed;
+                MaskName.Visibility = Visibility.Collapsed;
             });
 
             EditEmployee = new RelayCommand<object>((p) => { return true; }, (p) =>
@@ -198,6 +198,13 @@ namespace QuanLyChuoiCuaHangCoffee.ViewModel.AdminVM.EmployeeVM
             //page add employee
             SelectedDateChanged = new RelayCommand<DatePicker>((p) => { return true; }, (p) =>
             {
+                if (p.SelectedDate.Value > DateTime.Now.AddYears(-18))
+                {
+                    MessageBoxCF ms = new MessageBoxCF("Nhân viên phải lớn hơn 18 tuổi", MessageType.Error, MessageButtons.OK);
+                    ms.ShowDialog();
+                    p.SelectedDate = SelectedDate;
+                    return;
+                }
                 DOBAdd = p.SelectedDate.Value;
             });
 

@@ -398,7 +398,6 @@ namespace QuanLyChuoiCuaHangCoffee.ViewModel.AdminVM.TablesVM
                         return;
                     }
                     HourBillOut = DateTime.Now.ToString("HH:mm:ss");
-
                     string madh = await CheckOutServices.Ins.CheckOut(CusID, AdminServices.MaNhanVien, SelectedTableItem.MABAN, _DateBill, TotalFinalDec, VoucherPercentage, Note, table.Products, table.TIMEIn, HourBillOut, VoucherCode);
                     MADH = madh;
 

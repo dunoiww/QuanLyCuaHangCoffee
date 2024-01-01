@@ -87,6 +87,7 @@
                         Margin="10,0,0,0"
                         BorderBrush="LightGray"
                         PreviewTextInput="tb_PreviewTextInput"
+                         TextChanged="sdt_tb_TextChanged"
                         Text="{Binding Phonereg}"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                         x:Name="sdt_tb" />

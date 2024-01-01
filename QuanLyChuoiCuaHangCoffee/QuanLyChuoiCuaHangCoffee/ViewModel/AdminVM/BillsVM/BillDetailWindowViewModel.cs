@@ -34,6 +34,28 @@ namespace QuanLyChuoiCuaHangCoffee.ViewModel.AdminVM.BillsVM
             }
         }
 
+        private int _VoucherPercentage { get; set; }
+        public int VoucherPercentage
+        {
+            get => _VoucherPercentage;
+            set
+            {
+                _VoucherPercentage = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string _TotalFinal { get; set; }
+        public string TotalFinal
+        {
+            get => _TotalFinal;
+            set
+            {
+                _TotalFinal = value;
+                OnPropertyChanged();
+            }
+        }
+
         private string _Employee { get; set; }
         public string Employee
         {

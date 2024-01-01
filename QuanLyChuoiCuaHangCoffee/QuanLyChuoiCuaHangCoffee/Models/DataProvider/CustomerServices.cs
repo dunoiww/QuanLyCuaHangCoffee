@@ -14,6 +14,7 @@ namespace QuanLyChuoiCuaHangCoffee.Models.DataProvider
 {
     public class CustomerServices
     {
+        public static string IDKHACHHANG { get; set; }
         public CustomerServices() { }
         private static CustomerServices _ins;
         public static CustomerServices Ins
@@ -109,7 +110,7 @@ namespace QuanLyChuoiCuaHangCoffee.Models.DataProvider
                 using (var context = new CoffeeManagementEntities())
                 {
                     var cus = (from s in context.KHACHHANGs
-                               where s.USER.USERNAME == _username && s.USER.USERPASSWORD == _password && s.USER.ROLE == 2
+                               where s.USER.USERNAME == _username && s.USER.USERPASSWORD == _password && s.USER.ROLE == 3
                                select new CustomerDTO
                                {
                                    IDKHACHHANG = s.IDKHACHHANG,
@@ -126,6 +127,7 @@ namespace QuanLyChuoiCuaHangCoffee.Models.DataProvider
                         return (false, "Sai tài khoản hoặc mật khẩu.", null);
                     } else
                     {
+                        IDKHACHHANG = cus.IDKHACHHANG;
                         return (true, "", cus);
                     }
                 }

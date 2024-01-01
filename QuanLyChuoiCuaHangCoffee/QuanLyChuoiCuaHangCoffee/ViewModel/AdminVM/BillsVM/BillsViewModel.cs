@@ -6,8 +6,10 @@ using QuanLyChuoiCuaHangCoffee.Utils;
 using QuanLyChuoiCuaHangCoffee.Views.Admin.BillsPage;
 using QuanLyChuoiCuaHangCoffee.Views.MessageBoxCF;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Input;
@@ -48,15 +50,16 @@ namespace QuanLyChuoiCuaHangCoffee.ViewModel.AdminVM.BillsVM
 
             LoadSalesInvoicePage = new RelayCommand<Frame>((p) => { return true; }, async (p) =>
             {
-                
-                ListSaleInvoice = new ObservableCollection<OrderBillsDTO>(await OrderBillServices.Ins.GetAllBill(SelectedDateStart, SelectedDateEnd));
+                await LoadListSaleInvoice(SelectedDateStart, SelectedDateEnd);
+                //ListSaleInvoice = new ObservableCollection<OrderBillsDTO>(await OrderBillServices.Ins.GetAllBill(SelectedDateStart, SelectedDateEnd));
                 SalesInvoicePage w = new SalesInvoicePage();
                 p.Content = w;
             });
 
             LoadImportInvoicePage = new RelayCommand<Frame>((p) => { return true; }, async (p) =>
             {
-                ListImportInvoice = new ObservableCollection<ImportBillDTO>(await ImportBillServices.Ins.GetAllBill(SelectedDateStartImport, SelectedDateEndImport));
+                await LoadListImportInvoice(SelectedDateStartImport, SelectedDateEndImport);
+                //ListImportInvoice = new ObservableCollection<ImportBillDTO>(await ImportBillServices.Ins.GetAllBill(SelectedDateStartImport, SelectedDateEndImport));
                 ImportInvoicePage w = new ImportInvoicePage();
                 p.Content = w;
             });
@@ -119,12 +122,12 @@ namespace QuanLyChuoiCuaHangCoffee.ViewModel.AdminVM.BillsVM
                     MessageBoxCF ms = new MessageBoxCF("Ngày bắt đầu không thể lớn hơn ngày kết thúc!", MessageType.Error, MessageButtons.OK);
                     ms.ShowDialog();
                     IsGettingSource = true;
-                    ListSaleInvoice = new ObservableCollection<OrderBillsDTO>(await OrderBillServices.Ins.GetAllBill(SelectedDateStart, SelectedDateEnd));
+                    await LoadListSaleInvoice(SelectedDateStart, SelectedDateEnd);
                     IsGettingSource = false;
                 } else
                 {
                     IsGettingSource = true;
-                    ListSaleInvoice = new ObservableCollection<OrderBillsDTO>(await OrderBillServices.Ins.GetAllBill(SelectedDateStart, SelectedDateEnd));
+                    await LoadListSaleInvoice(SelectedDateStart, SelectedDateEnd);
                     IsGettingSource = false;
                 }
             });
@@ -136,12 +139,12 @@ namespace QuanLyChuoiCuaHangCoffee.ViewModel.AdminVM.BillsVM
                     MessageBoxCF ms = new MessageBoxCF("Ngày kết thúc không thể nhỏ hơn ngày bắt đầu!", MessageType.Error, MessageButtons.OK);
                     ms.ShowDialog();
                     IsGettingSource = true;
-                    ListSaleInvoice = new ObservableCollection<OrderBillsDTO>(await OrderBillServices.Ins.GetAllBill(SelectedDateStart, SelectedDateEnd));
+                    await LoadListSaleInvoice(SelectedDateStart, SelectedDateEnd);
                     IsGettingSource = false;
                 } else
                 {
                     IsGettingSource = true;
-                    ListSaleInvoice = new ObservableCollection<OrderBillsDTO>(await OrderBillServices.Ins.GetAllBill(SelectedDateStart, SelectedDateEnd));
+                    await LoadListSaleInvoice(SelectedDateStart, SelectedDateEnd);
                     IsGettingSource = false;
                 }
             });
@@ -158,7 +161,10 @@ namespace QuanLyChuoiCuaHangCoffee.ViewModel.AdminVM.BillsVM
                     CusName = SelectedSaleInvoiceItem.TENKHACHHANG;
                     HourBillOut = SelectedSaleInvoiceItem.TIMEOUT != null ? DateTime.Parse(SelectedSaleInvoiceItem.TIMEOUT).ToString("HH:mm:ss") : "";
                     Note = SelectedSaleInvoiceItem.GHICHU;
-                    Total = Helper.FormatVNMoney(SelectedSaleInvoiceItem.TONGTIEN);
+                    VoucherPercentage = SelectedSaleInvoiceItem.DISCOUNT;
+                    double total = (double)SelectedSaleInvoiceItem.TONGTIEN / (1 - SelectedSaleInvoiceItem.DISCOUNT / 100.0);
+                    Total = Helper.FormatVNMoney(Convert.ToDecimal(total));
+                    TotalFinal = Helper.FormatVNMoney(SelectedSaleInvoiceItem.TONGTIEN);
 
                     ListProduct = new ObservableCollection<MenuItemDTO>(await OrderBillServices.Ins.GetProductFromBill(SelectedSaleInvoiceItem.MADH));
 
@@ -182,13 +188,15 @@ namespace QuanLyChuoiCuaHangCoffee.ViewModel.AdminVM.BillsVM
                     MessageBoxCF ms = new MessageBoxCF("Ngày bắt đầu không thể lớn hơn ngày kết thúc!", MessageType.Error, MessageButtons.OK);
                     ms.ShowDialog();
                     IsGettingSource = true;
-                    ListImportInvoice = new ObservableCollection<ImportBillDTO>(await ImportBillServices.Ins.GetAllBill(SelectedDateStartImport, SelectedDateEndImport));
+                    //ListImportInvoice = new ObservableCollection<ImportBillDTO>(await ImportBillServices.Ins.GetAllBill(SelectedDateStartImport, SelectedDateEndImport));
+                    await LoadListImportInvoice(SelectedDateStartImport, SelectedDateEndImport);
                     IsGettingSource = false;
                 }
                 else
                 {
                     IsGettingSource = true;
-                    ListImportInvoice = new ObservableCollection<ImportBillDTO>(await ImportBillServices.Ins.GetAllBill(SelectedDateStartImport, SelectedDateEndImport));
+                    //ListImportInvoice = new ObservableCollection<ImportBillDTO>(await ImportBillServices.Ins.GetAllBill(SelectedDateStartImport, SelectedDateEndImport));
+                    await LoadListImportInvoice(SelectedDateStartImport, SelectedDateEndImport);
                     IsGettingSource = false;
                 }
             });
@@ -200,13 +208,13 @@ namespace QuanLyChuoiCuaHangCoffee.ViewModel.AdminVM.BillsVM
                     MessageBoxCF ms = new MessageBoxCF("Ngày kết thúc không thể nhỏ hơn ngày bắt đầu!", MessageType.Error, MessageButtons.OK);
                     ms.ShowDialog();
                     IsGettingSource = true;
-                    ListImportInvoice = new ObservableCollection<ImportBillDTO>(await ImportBillServices.Ins.GetAllBill(SelectedDateStartImport, SelectedDateEndImport));
+                    await LoadListImportInvoice(SelectedDateStartImport, SelectedDateEndImport);
                     IsGettingSource = false;
                 }
                 else
                 {
                     IsGettingSource = true;
-                    ListImportInvoice = new ObservableCollection<ImportBillDTO>(await ImportBillServices.Ins.GetAllBill(SelectedDateStartImport, SelectedDateEndImport));
+                    await LoadListImportInvoice(SelectedDateStartImport, SelectedDateEndImport);
                     IsGettingSource = false;
                 }
             });
@@ -275,6 +283,19 @@ namespace QuanLyChuoiCuaHangCoffee.ViewModel.AdminVM.BillsVM
                 }
             });
             #endregion
+        }
+        private async Task LoadListSaleInvoice(DateTime _datestart, DateTime _dateend)
+        {
+            List<OrderBillsDTO> _listSale = await OrderBillServices.Ins.GetAllBill(_datestart, _dateend);
+            _listSale.Reverse();
+            ListSaleInvoice = new ObservableCollection<OrderBillsDTO>(_listSale);
+        }
+
+        private async Task LoadListImportInvoice(DateTime _datestart, DateTime _dateend)
+        {
+            List<ImportBillDTO> _listImport = await ImportBillServices.Ins.GetAllBill(_datestart, _dateend);
+            _listImport.Reverse();
+            ListImportInvoice = new ObservableCollection<ImportBillDTO>(_listImport);
         }
     }
 }

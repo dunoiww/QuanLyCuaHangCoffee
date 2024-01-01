@@ -205,6 +205,13 @@ namespace QuanLyChuoiCuaHangCoffee.ViewModel.AdminVM.CustomerVM
             //page edit cus
             SelectedDateChanged = new RelayCommand<DatePicker>((p) => { return true; }, (p) =>
             {
+                if (p.SelectedDate.Value > DateTime.Now.AddYears(-15))
+                {
+                    MessageBoxCF ms = new MessageBoxCF("Khách hàng phải lớn hơn 15 tuổi", MessageType.Error, MessageButtons.OK);
+                    ms.ShowDialog();
+                    p.SelectedDate = SelectedDate;
+                    return;
+                }
                 DOBEdit = p.SelectedDate.Value;
             });
 

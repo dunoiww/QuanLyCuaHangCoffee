@@ -37,5 +37,19 @@ namespace QuanLyChuoiCuaHangCoffee.Views.Login
             LoginViewModel.Mask.Visibility = Visibility.Collapsed;
             this.Close();
         }
+
+        private void sdt_tb_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Regex regex = new Regex("^[0-9]{0,10}$");
+
+            TextBox textBox = (TextBox)sender;
+            string inputText = textBox.Text;
+
+            if (!regex.IsMatch(inputText))
+            {
+                textBox.Text = inputText.Remove(inputText.Length - 1);
+                textBox.CaretIndex = textBox.Text.Length;
+            }
+        }
     }
 }

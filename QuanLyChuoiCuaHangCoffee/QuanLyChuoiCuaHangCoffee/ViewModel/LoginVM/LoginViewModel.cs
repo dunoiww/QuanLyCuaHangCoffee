@@ -258,13 +258,10 @@ namespace QuanLyChuoiCuaHangCoffee.ViewModel.LoginVM
             // thực hiện Login tài khoản admin
             (bool loginAdmin, string messAdmin) = await Task.Run(() => AdminServices.Ins.Login(usr, pwd));
 
-            lbl.Content = messAdmin;
             if (loginCus)
             {
 
                 MainCustomerWindow w1 = new MainCustomerWindow();
-                //MainCustomerViewModel.CurrentCustomer = cus;
-                //w1._CustomerName.Text = cus.TENKH;
                 w1.Show();
 
                 LoginWindow w = Application.Current.Windows.OfType<LoginWindow>().FirstOrDefault();
