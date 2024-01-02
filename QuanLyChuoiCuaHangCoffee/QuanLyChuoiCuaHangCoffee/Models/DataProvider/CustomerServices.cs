@@ -15,6 +15,16 @@ namespace QuanLyChuoiCuaHangCoffee.Models.DataProvider
     public class CustomerServices
     {
         public static string IDKHACHHANG { get; set; }
+        public static string TENKH { get; set; }
+        public static string RANKKH { get; set; }
+        public static string DIACHI { get; set; }
+        public static string SDT { get; set; }
+        public static DateTime DOB { get; set; }
+        public static string EMAIL { get; set; }
+        public static string CCCD { get; set; }
+        public static string USERNAME { get; set; }
+        public static string PASSWORD { get; set; }
+        public static string IMAGESOURCE { get; set; }
         public CustomerServices() { }
         private static CustomerServices _ins;
         public static CustomerServices Ins
@@ -67,6 +77,7 @@ namespace QuanLyChuoiCuaHangCoffee.Models.DataProvider
                 us.DIACHI = "";
                 us.NGBATDAU = DateTime.Now;
                 us.ROLE = 3;
+                us.IMAGESOURCE = "Resources/cup-of-coffee-avatar.jpg";
 
                 context.USERS.Add(us);
 
@@ -118,8 +129,12 @@ namespace QuanLyChuoiCuaHangCoffee.Models.DataProvider
                                    USERPASSWORD = s.USER.USERPASSWORD,
                                    HOTEN = s.USER.HOTEN,
                                    SODT = s.USER.SODT,
+                                   CCCD = s.USER.CCCD,
                                    EMAIL = s.USER.EMAIL,
-                                   DCHI = s.USER.DIACHI
+                                   DCHI = s.USER.DIACHI,
+                                   HANGTHANHVIEN = s.HANGTHANHVIEN,
+                                   DOB = s.USER.DOB,
+                                   IMAGESOURCE = s.USER.IMAGESOURCE,
                                }).FirstOrDefault();
 
                     if (cus == null)
@@ -128,6 +143,16 @@ namespace QuanLyChuoiCuaHangCoffee.Models.DataProvider
                     } else
                     {
                         IDKHACHHANG = cus.IDKHACHHANG;
+                        TENKH = cus.HOTEN;
+                        RANKKH = cus.HANGTHANHVIEN;
+                        DIACHI = cus.DCHI;
+                        SDT = cus.SODT;
+                        DOB = cus.DOB;
+                        EMAIL = cus.EMAIL;
+                        CCCD = cus.CCCD;
+                        USERNAME = cus.USERNAME;
+                        PASSWORD = cus.USERPASSWORD;
+                        IMAGESOURCE = cus.IMAGESOURCE;
                         return (true, "", cus);
                     }
                 }
@@ -139,6 +164,64 @@ namespace QuanLyChuoiCuaHangCoffee.Models.DataProvider
             catch (Exception)
             {
                 return (false, "Lỗi hệ thống", null);
+            }
+        }
+
+        public async Task EditSetting(string _makh, string _phone, string _email, DateTime _dob, string _address, string _cccd, string _password, string _currentPassword)
+        {
+            try
+            {
+                using (var context = new CoffeeManagementEntities())
+                {
+                    var cus = context.KHACHHANGs.Where(p => p.IDKHACHHANG == _makh).FirstOrDefault();
+                    if (cus != null)
+                    {
+
+                        if (!string.IsNullOrEmpty(_password))
+                        {
+                            cus.USER.USERPASSWORD = _password;
+                        } else
+                        {
+                            cus.USER.USERPASSWORD = _currentPassword;
+                        }
+
+                        cus.USER.SODT = _phone;
+                        cus.USER.EMAIL = _email;
+                        cus.USER.DOB = _dob;
+                        cus.USER.DIACHI = _address;
+                        cus.USER.CCCD = _cccd;
+                        cus.USER.USERPASSWORD = _password;
+                        context.SaveChanges();
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public async Task<(bool, string)> UpdateAvatar(string _makh, string _imageSource)
+        {
+            try
+            {
+                using (var context = new CoffeeManagementEntities())
+                {
+                    var cus = context.KHACHHANGs.Where(p => p.IDKHACHHANG == _makh).FirstOrDefault();
+                    if (cus != null)
+                    {
+                        cus.USER.IMAGESOURCE = _imageSource;
+                        context.SaveChanges();
+                        return (true, "Đổi ảnh đại diện thành công");
+                    }
+                    return (false, "Có lỗi xảy ra");
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
             }
         }
 

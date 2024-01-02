@@ -255,6 +255,7 @@
     <Compile Include="Utils\ConverterValue\BoolValueConverter.cs" />
     <Compile Include="Utils\ConverterValue\IndexConverter.cs" />
     <Compile Include="Utils\ConverterValue\IsEditConverter.cs" />
+    <Compile Include="Utils\ConverterValue\RankForegroundConverter.cs" />
     <Compile Include="Utils\ConverterValue\RoleConverter.cs" />
     <Compile Include="Utils\ConverterValue\StatusVoucherConverter.cs" />
     <Compile Include="Utils\ConverterValue\StockStatusConverter.cs" />
@@ -284,6 +285,7 @@
     <Compile Include="ViewModel\CustomerVM\BillsVM\BillDetailCusViewModel.cs" />
     <Compile Include="ViewModel\CustomerVM\BillsVM\BillViewModel.cs" />
     <Compile Include="ViewModel\CustomerVM\MainCustomerViewModel.cs" />
+    <Compile Include="ViewModel\CustomerVM\SettingCusVM\SettingCusViewModel.cs" />
     <Compile Include="ViewModel\CustomerVM\VoucherCusVM\VoucherCusViewModel.cs" />
     <Compile Include="ViewModel\LoginVM\ForgotPassViewModel.cs" />
     <Compile Include="ViewModel\LoginVM\LoginViewModel.cs" />
@@ -371,6 +373,9 @@
     </Compile>
     <Compile Include="Views\Customer\MainCustomerWindow.xaml.cs">
       <DependentUpon>MainCustomerWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Customer\SettingPage\MainSettingCusPage.xaml.cs">
+      <DependentUpon>MainSettingCusPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Customer\VoucherPage\MainVoucherCusPage.xaml.cs">
       <DependentUpon>MainVoucherCusPage.xaml</DependentUpon>
@@ -528,6 +533,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Customer\SettingPage\MainSettingCusPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Customer\VoucherPage\MainVoucherCusPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -610,6 +619,7 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resources\cup-of-coffee-avatar.jpg" />
     <Content Include="SQL\COFFEEMANAGEMENT.sql" />
     <Resource Include="Resources\Machiato.jpg" />
     <Resource Include="LogoEPSRO.ico" />

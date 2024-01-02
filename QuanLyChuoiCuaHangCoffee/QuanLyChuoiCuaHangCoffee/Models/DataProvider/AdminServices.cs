@@ -105,7 +105,7 @@ namespace QuanLyChuoiCuaHangCoffee.Models.DataProvider
                     var employee = context.NHANVIENs.Where(p => p.IDNHANVIEN == _manv).FirstOrDefault();
                     if (employee != null)
                     {
-                        if (_password != null)
+                        if (!string.IsNullOrEmpty(_password))
                         {
                             employee.USER.USERPASSWORD = _password;
                         }

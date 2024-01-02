@@ -43,7 +43,7 @@ namespace QuanLyChuoiCuaHangCoffee.DTOs
         public int SODONHANG { get; set; }
         public string HANGTHANHVIEN { get; set; }
         public int ROLE { get; set; }
-
+        public string IMAGESOURCE { get; set; }
         public decimal CHITIEU { get; set; }
 
     }

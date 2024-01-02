@@ -99,6 +99,7 @@ namespace QuanLyChuoiCuaHangCoffee.Models.DataProvider
                         newUser.DIACHI = "";
                         newUser.NGBATDAU = DateTime.Now;
                         newUser.ROLE = 3;
+                        newUser.IMAGESOURCE = "Resources/cup-of-coffee-avatar.jpg";
                         context.USERS.Add(newUser);
 
                         KHACHHANG newCus = new KHACHHANG();

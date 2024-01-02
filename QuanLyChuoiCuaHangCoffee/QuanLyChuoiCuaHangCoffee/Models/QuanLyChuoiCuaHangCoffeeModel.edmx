@@ -134,6 +134,7 @@
           <Property Name="DIACHI" Type="nvarchar(max)" />
           <Property Name="NGBATDAU" Type="smalldatetime" Nullable="false" />
           <Property Name="ROLE" Type="int" />
+          <Property Name="IMAGESOURCE" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="VOUCHER">
           <Key>
@@ -621,6 +622,7 @@
           <Property Name="DIACHI" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="NGBATDAU" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="ROLE" Type="Int32" />
+          <Property Name="IMAGESOURCE" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="KHACHHANG" Relationship="QuanLyChuoiCuaHangCoffeeModel.FK__KHACHHANG__IDKHA__4F7CD00D" FromRole="USER" ToRole="KHACHHANG" />
           <NavigationProperty Name="NHANVIEN" Relationship="QuanLyChuoiCuaHangCoffeeModel.FK__NHANVIEN__IDNHAN__3C69FB99" FromRole="USER" ToRole="NHANVIEN" />
         </EntityType>
@@ -939,6 +941,7 @@
           <EntitySetMapping Name="USERS">
             <EntityTypeMapping TypeName="QuanLyChuoiCuaHangCoffeeModel.USER">
               <MappingFragment StoreEntitySet="USERS">
+                <ScalarProperty Name="IMAGESOURCE" ColumnName="IMAGESOURCE" />
                 <ScalarProperty Name="ROLE" ColumnName="ROLE" />
                 <ScalarProperty Name="NGBATDAU" ColumnName="NGBATDAU" />
                 <ScalarProperty Name="DIACHI" ColumnName="DIACHI" />

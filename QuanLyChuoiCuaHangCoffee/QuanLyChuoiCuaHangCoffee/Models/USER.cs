@@ -25,6 +25,7 @@ namespace QuanLyChuoiCuaHangCoffee.Models
         public string DIACHI { get; set; }
         public System.DateTime NGBATDAU { get; set; }
         public Nullable<int> ROLE { get; set; }
+        public string IMAGESOURCE { get; set; }
     
         public virtual KHACHHANG KHACHHANG { get; set; }
         public virtual NHANVIEN NHANVIEN { get; set; }

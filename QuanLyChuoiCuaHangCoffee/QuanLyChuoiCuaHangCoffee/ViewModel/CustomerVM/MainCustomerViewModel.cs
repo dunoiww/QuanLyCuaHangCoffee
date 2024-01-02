@@ -1,5 +1,6 @@
 ﻿using Library.ViewModel;
 using QuanLyChuoiCuaHangCoffee.Views.Customer.BillsPage;
+using QuanLyChuoiCuaHangCoffee.Views.Customer.SettingPage;
 using QuanLyChuoiCuaHangCoffee.Views.Customer.VoucherPage;
 using System;
 using System.Collections.Generic;
@@ -37,6 +38,12 @@ namespace QuanLyChuoiCuaHangCoffee.ViewModel.CustomerVM
             {
                 p.Content = new MainVoucherCusPage();
                 optionName = "Mã giảm giá";
+            });
+
+            LoadMainSettingPageCF = new RelayCommand<Frame>((p) => { return true; }, (p) =>
+            {
+                p.Content = new MainSettingCusPage();
+                optionName = "Cài đặt";
             });
         }
     }
