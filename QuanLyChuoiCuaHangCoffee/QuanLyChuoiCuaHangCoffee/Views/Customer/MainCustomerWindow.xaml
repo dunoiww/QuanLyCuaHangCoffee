@@ -196,7 +196,7 @@
 
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="Loaded">
-                                    <i:InvokeCommandAction Command="{Binding LoadMainTablesPageCF}"
+                                    <i:InvokeCommandAction Command="{Binding LoadMainDashboardPageCF}"
                                                            CommandParameter="{Binding ElementName=mainFrame}" />
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>

@@ -284,6 +284,7 @@
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\CustomerVM\BillsVM\BillDetailCusViewModel.cs" />
     <Compile Include="ViewModel\CustomerVM\BillsVM\BillViewModel.cs" />
+    <Compile Include="ViewModel\CustomerVM\DashboardCusVM\DashboardCusViewModel.cs" />
     <Compile Include="ViewModel\CustomerVM\MainCustomerViewModel.cs" />
     <Compile Include="ViewModel\CustomerVM\SettingCusVM\SettingCusViewModel.cs" />
     <Compile Include="ViewModel\CustomerVM\VoucherCusVM\VoucherCusViewModel.cs" />
@@ -370,6 +371,9 @@
     </Compile>
     <Compile Include="Views\Customer\BillsPage\MainBillsCusPage.xaml.cs">
       <DependentUpon>MainBillsCusPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Customer\DashboardPage\MainDashboardCusPage.xaml.cs">
+      <DependentUpon>MainDashboardCusPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Customer\MainCustomerWindow.xaml.cs">
       <DependentUpon>MainCustomerWindow.xaml</DependentUpon>
@@ -529,6 +533,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Customer\DashboardPage\MainDashboardCusPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Customer\MainCustomerWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -620,6 +628,11 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\cup-of-coffee-avatar.jpg" />
+    <Resource Include="Resources\bronze.png" />
+    <Resource Include="Resources\diamond.png" />
+    <Resource Include="Resources\gold.png" />
+    <Resource Include="Resources\silver.png" />
+    <Resource Include="Resources\norank.png" />
     <Content Include="SQL\COFFEEMANAGEMENT.sql" />
     <Resource Include="Resources\Machiato.jpg" />
     <Resource Include="LogoEPSRO.ico" />

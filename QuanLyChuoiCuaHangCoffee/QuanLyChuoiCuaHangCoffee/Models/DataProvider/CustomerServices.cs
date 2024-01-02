@@ -25,6 +25,9 @@ namespace QuanLyChuoiCuaHangCoffee.Models.DataProvider
         public static string USERNAME { get; set; }
         public static string PASSWORD { get; set; }
         public static string IMAGESOURCE { get; set; }
+        public static DateTime NGBATDAU { get; set; }
+        public static int TICHDIEM { get; set; }
+        public static int SODONHANG { get; set; }
         public CustomerServices() { }
         private static CustomerServices _ins;
         public static CustomerServices Ins
@@ -135,6 +138,9 @@ namespace QuanLyChuoiCuaHangCoffee.Models.DataProvider
                                    HANGTHANHVIEN = s.HANGTHANHVIEN,
                                    DOB = s.USER.DOB,
                                    IMAGESOURCE = s.USER.IMAGESOURCE,
+                                   NGBATDAU = s.USER.NGBATDAU,
+                                   TICHDIEM = (int)s.TICHDIEM,
+                                   SODONHANG = (int)s.SODONHANG
                                }).FirstOrDefault();
 
                     if (cus == null)
@@ -153,6 +159,9 @@ namespace QuanLyChuoiCuaHangCoffee.Models.DataProvider
                         USERNAME = cus.USERNAME;
                         PASSWORD = cus.USERPASSWORD;
                         IMAGESOURCE = cus.IMAGESOURCE;
+                        NGBATDAU = cus.NGBATDAU;
+                        TICHDIEM = cus.TICHDIEM;
+                        SODONHANG = cus.SODONHANG;
                         return (true, "", cus);
                     }
                 }

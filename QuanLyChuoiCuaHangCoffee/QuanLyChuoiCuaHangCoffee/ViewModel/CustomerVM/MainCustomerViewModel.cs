@@ -1,5 +1,6 @@
 ﻿using Library.ViewModel;
 using QuanLyChuoiCuaHangCoffee.Views.Customer.BillsPage;
+using QuanLyChuoiCuaHangCoffee.Views.Customer.DashboardPage;
 using QuanLyChuoiCuaHangCoffee.Views.Customer.SettingPage;
 using QuanLyChuoiCuaHangCoffee.Views.Customer.VoucherPage;
 using System;
@@ -28,6 +29,12 @@ namespace QuanLyChuoiCuaHangCoffee.ViewModel.CustomerVM
 
         public MainCustomerViewModel()
         {
+            LoadMainDashboardPageCF = new RelayCommand<Frame>((p) => { return true; }, (p) =>
+            {
+                p.Content = new MainDashboardCusPage();
+                optionName = "Trang chủ";
+            });
+
             LoadMainBillsPageCF = new RelayCommand<Frame>((p) => { return true; }, (p) =>
             {
                 p.Content = new MainBillsCusPage();
