@@ -321,6 +321,8 @@ namespace QuanLyChuoiCuaHangCoffee.ViewModel.AdminVM.TablesVM
                         table.GHICHU = Note;
                     }
                 }
+                CodeVoucher = "";
+                VoucherPercentage = 0;
                 MainFrame.Content = new TablesPage();
                 ResetProperty();
             });
@@ -375,6 +377,7 @@ namespace QuanLyChuoiCuaHangCoffee.ViewModel.AdminVM.TablesVM
                     mb.ShowDialog();
                     TotalFinalDec = TotalDec;
                     TotalFinal = Helper.FormatVNMoney(TotalFinalDec);
+                    VoucherPercentage = 0;
                     return;
                 }
 

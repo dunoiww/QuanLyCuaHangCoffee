@@ -102,6 +102,8 @@ namespace QuanLyChuoiCuaHangCoffee.ViewModel.AdminVM.BillsVM
                         worksheet.Cells[count, 4].Value = item.NGDH;
                         worksheet.Cells[count, 5].Value = item.TONGTIENSTR;
 
+                        worksheet.Cells[count, 4].Style.Numberformat.Format = "dd/MM/yyyy";
+
                         count++;
                     }
 
