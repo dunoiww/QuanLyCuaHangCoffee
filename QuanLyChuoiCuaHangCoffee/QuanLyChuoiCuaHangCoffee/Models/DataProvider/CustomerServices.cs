@@ -107,6 +107,59 @@ namespace QuanLyChuoiCuaHangCoffee.Models.DataProvider
             }
         }
 
+        public async Task LoadAvatar(string _makh)
+        {
+            try
+            {
+                using (var context = new CoffeeManagementEntities())
+                {
+                    var cus = context.KHACHHANGs.Where(p => p.IDKHACHHANG == _makh).FirstOrDefault();
+                    if (cus != null)
+                    {
+                        IMAGESOURCE = cus.USER.IMAGESOURCE;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public async Task LoadInforEdit(string _makh)
+        {
+            try
+            {
+                using (var context = new CoffeeManagementEntities())
+                {
+                    var cus = context.KHACHHANGs.Where(p => p.IDKHACHHANG == _makh).FirstOrDefault();
+                    if (cus != null)
+                    {
+                        IDKHACHHANG = cus.IDKHACHHANG;
+                        TENKH = cus.USER.HOTEN;
+                        RANKKH = cus.HANGTHANHVIEN;
+                        DIACHI = cus.USER.DIACHI;
+                        SDT = cus.USER.SODT;
+                        DOB = cus.USER.DOB;
+                        EMAIL = cus.USER.EMAIL;
+                        CCCD = cus.USER.CCCD;
+                        USERNAME = cus.USER.USERNAME;
+                        PASSWORD = cus.USER.USERPASSWORD;
+                        IMAGESOURCE = cus.USER.IMAGESOURCE;
+                        NGBATDAU = cus.USER.NGBATDAU;
+                        TICHDIEM = (int)cus.TICHDIEM;
+                        SODONHANG = (int)cus.SODONHANG;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         private string CreateNextCustomerId(string maxId)
         {
             if (maxId is null)

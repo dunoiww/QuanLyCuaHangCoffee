@@ -151,6 +151,7 @@ namespace QuanLyChuoiCuaHangCoffee.ViewModel.AdminVM.SettingVM
                         return;
                     }
                     await AdminServices.Ins.EditSetting(AdminServices.MaNhanVien, Phone, Email, Password, AdminServices.PasswordNhanVien);
+                    await AdminServices.Ins.LoadInfoEdit(AdminServices.MaNhanVien);
                     MessageBoxCF mb = new MessageBoxCF("Sửa thông tin thành công", MessageType.Accept, MessageButtons.OK);
                     mb.ShowDialog();
 

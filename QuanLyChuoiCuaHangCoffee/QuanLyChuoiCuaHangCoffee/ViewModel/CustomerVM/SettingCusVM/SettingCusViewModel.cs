@@ -119,9 +119,12 @@ namespace QuanLyChuoiCuaHangCoffee.ViewModel.CustomerVM.SettingCusVM
                     ImgSource = uploadResult.Url.ToString();
 
                     (bool b, string s) = await CustomerServices.Ins.UpdateAvatar(CustomerServices.IDKHACHHANG, ImgSource);
+                    await CustomerServices.Ins.LoadAvatar(CustomerServices.IDKHACHHANG);
+                    await CustomerServices.Ins.LoadInforEdit(CustomerServices.IDKHACHHANG);
                     MessageBoxCF ms = new MessageBoxCF(s, b ? MessageType.Accept : MessageType.Error, MessageButtons.OK);
                     ms.ShowDialog();
                     LoadInfor();
+                    
                 }
             });
 
@@ -155,6 +158,7 @@ namespace QuanLyChuoiCuaHangCoffee.ViewModel.CustomerVM.SettingCusVM
                         return;
                     }
                     await CustomerServices.Ins.EditSetting(CustomerServices.IDKHACHHANG, PhoneCus, EmailCus, DOBCus, AddressCus, CCCDCus, NewPassword, CurrentPassword);
+                    await CustomerServices.Ins.LoadInforEdit(CustomerServices.IDKHACHHANG);
                     MessageBoxCF mb = new MessageBoxCF("Sửa thông tin thành công", MessageType.Accept, MessageButtons.OK);
                     mb.ShowDialog();
 
@@ -168,7 +172,6 @@ namespace QuanLyChuoiCuaHangCoffee.ViewModel.CustomerVM.SettingCusVM
             SelectedDateChanged = new RelayCommand<DatePicker>((p) => { return true; }, (p) =>
             {
                 DOBCus = p.SelectedDate.Value;
-                System.Windows.MessageBox.Show(DOBCus.ToString());
             });
 
             LogOut = new RelayCommand<object>((p) => { return true; }, (p) =>

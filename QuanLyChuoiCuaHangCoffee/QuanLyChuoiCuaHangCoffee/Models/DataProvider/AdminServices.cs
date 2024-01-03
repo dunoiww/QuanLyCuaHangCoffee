@@ -126,6 +126,28 @@ namespace QuanLyChuoiCuaHangCoffee.Models.DataProvider
             }
         }
 
+        public async Task LoadInfoEdit(string _manv)
+        {
+            try
+            {
+                using (var context = new CoffeeManagementEntities())
+                {
+                    var employee = context.NHANVIENs.Where(p => p.IDNHANVIEN == _manv).FirstOrDefault();
+                    if (employee != null)
+                    {
+                        PasswordNhanVien = employee.USER.USERPASSWORD;
+                        SoDT = employee.USER.SODT;
+                        EmailNhanVien = employee.USER.EMAIL;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public async Task UpdateSalary(string _tenchucdanh, decimal _basesalary, double _coefficientsalary)
         {
             try

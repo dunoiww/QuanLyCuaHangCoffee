@@ -94,7 +94,7 @@
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>
-                                <GridViewColumn Header="Giảm giá"
+                                <GridViewColumn Header="Giảm giá (%)"
                                         Width="150">
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
@@ -128,7 +128,7 @@
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>
                                 <GridViewColumn Header="Đợt phát hành"
-                                            Width="auto">
+                                            Width="250">
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
                                             <TextBlock Text="{Binding REASON}"

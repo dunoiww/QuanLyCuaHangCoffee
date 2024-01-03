@@ -75,7 +75,7 @@ namespace QuanLyChuoiCuaHangCoffee.ViewModel.AdminVM.VoucherVM
                 p.Content = "";
                 p.IsHitTestVisible = false;
                 await SaveListVoucher();
-
+                await loadListVoucher();
                 p.Content = oldstring;
                 p.IsHitTestVisible = true;
             });
