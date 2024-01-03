@@ -189,7 +189,8 @@ namespace QuanLyChuoiCuaHangCoffee.Models.DataProvider
                         if (!string.IsNullOrEmpty(_password))
                         {
                             cus.USER.USERPASSWORD = _password;
-                        } else
+                        }
+                        else
                         {
                             cus.USER.USERPASSWORD = _currentPassword;
                         }
@@ -199,7 +200,6 @@ namespace QuanLyChuoiCuaHangCoffee.Models.DataProvider
                         cus.USER.DOB = _dob;
                         cus.USER.DIACHI = _address;
                         cus.USER.CCCD = _cccd;
-                        cus.USER.USERPASSWORD = _password;
                         context.SaveChanges();
                     }
                 }

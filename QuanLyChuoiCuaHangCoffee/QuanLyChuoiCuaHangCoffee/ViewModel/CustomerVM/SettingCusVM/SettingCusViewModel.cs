@@ -151,6 +151,7 @@ namespace QuanLyChuoiCuaHangCoffee.ViewModel.CustomerVM.SettingCusVM
                         ms.ShowDialog();
                         IsEdit = false;
                         lbButton = "Sửa thông tin";
+                        lbButtonLogout = "Đăng xuất";
                         return;
                     }
                     await CustomerServices.Ins.EditSetting(CustomerServices.IDKHACHHANG, PhoneCus, EmailCus, DOBCus, AddressCus, CCCDCus, NewPassword, CurrentPassword);

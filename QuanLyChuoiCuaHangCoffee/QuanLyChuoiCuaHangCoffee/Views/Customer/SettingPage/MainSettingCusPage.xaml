@@ -307,7 +307,7 @@
                                      VerticalAlignment="Center"
                                      BorderBrush="Transparent"
                                      Margin="15 10 0 10"
-                                     IsReadOnly="{Binding IsEdit, Converter={StaticResource IsEditConverter}}">
+                                     IsReadOnly="True">
 
                             </TextBox>
                         </Border>
