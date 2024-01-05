@@ -627,13 +627,13 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="SQL\COFFEEMANAGEMENT.sql" />
     <Resource Include="Resources\cup-of-coffee-avatar.jpg" />
     <Resource Include="Resources\bronze.png" />
     <Resource Include="Resources\diamond.png" />
     <Resource Include="Resources\gold.png" />
     <Resource Include="Resources\silver.png" />
     <Resource Include="Resources\norank.png" />
-    <Content Include="SQL\COFFEEMANAGEMENT.sql" />
     <Resource Include="Resources\Machiato.jpg" />
     <Resource Include="LogoEPSRO.ico" />
     <Content Include="Models\QuanLyChuoiCuaHangCoffeeModel.Context.tt">
