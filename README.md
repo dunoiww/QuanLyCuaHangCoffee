@@ -25,6 +25,8 @@ The purpose of a Coffee Management Application is to streamline and manage the o
 
 [V. Summary](#Summary)
 
+[VI. Screenshot](#Screenshot)
+
 
 <!-- Introduction -->
 <div id="Introduction"></div>
@@ -130,7 +132,7 @@ The purpose of a Coffee Management Application is to streamline and manage the o
 ## III. Authors
 
 * [Ngô Phương Nam](https://github.com/dunoiww) - 21522348
-    * Role: Team leader, Tester, Front end developer, backend developer, database designer, UI/UX designer
+    * Role: Team leader, Tester, Front-end developer, back-end developer, database designer, UI/UX designer
     * 
 * [Trần Khiết Tường] - 21521657
     * Role: Document preparer, Report preparer
@@ -142,12 +144,12 @@ The purpose of a Coffee Management Application is to streamline and manage the o
 <div id="Instructor"></div>
 
 ## IV. Instructor
-* Lecturers: Lê Thanh Trọng & Nguyễn Tấn Toàn
+* Lecturers: Lê Thanh Trọng and Nguyễn Tấn Toàn
 
 <!-- TỔNG KẾT -->
 <div id="Summary"></div>
 
-## VI. Summary
+## V. Summary
 * A product is the culmination of a project successfully accomplished by the members of a team. Throughout this process, the team members have gained specialized knowledge and skills in real-world programming procedures, fostering a comprehensive understanding of programming while accumulating invaluable experiences and lessons for future endeavors.
 
 * Furthermore, the team extends deep and heartfelt gratitude to the guiding instructors, Lê Thanh Trọng and Nguyễn Tấn Toàn, for their unwavering support and guidance throughout the entire project, leading to the achievement of the present outcome.
@@ -158,7 +160,7 @@ The purpose of a Coffee Management Application is to streamline and manage the o
 
 <div id="Screenshot"></div>
 
-## VII. Screenshot
+## VI. Screenshot
 
 ![dashboard](https://github.com/dunoiww/QuanLyCuaHangCoffee/assets/113670905/be277c8f-6190-4727-99f6-e8c5a60cff09)
 ![table](https://github.com/dunoiww/QuanLyCuaHangCoffee/assets/113670905/9079b2e7-0026-4ad4-ae36-e8cc65a46cb7)
