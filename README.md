@@ -147,7 +147,7 @@ The purpose of a Coffee Management Application is to streamline and manage the o
 <!-- TỔNG KẾT -->
 <div id="Summary"></div>
 
-## V. Summary
+## VI. Summary
 * A product is the culmination of a project successfully accomplished by the members of a team. Throughout this process, the team members have gained specialized knowledge and skills in real-world programming procedures, fostering a comprehensive understanding of programming while accumulating invaluable experiences and lessons for future endeavors.
 
 * Furthermore, the team extends deep and heartfelt gratitude to the guiding instructors, Lê Thanh Trọng and Nguyễn Tấn Toàn, for their unwavering support and guidance throughout the entire project, leading to the achievement of the present outcome.
@@ -156,6 +156,25 @@ The purpose of a Coffee Management Application is to streamline and manage the o
 
 * Thank you for your interest and attention!
 
----
+<div id="Screenshot"></div>
 
+## VII. Screenshot
+
+![dashboard](https://github.com/dunoiww/QuanLyCuaHangCoffee/assets/113670905/be277c8f-6190-4727-99f6-e8c5a60cff09)
+![table](https://github.com/dunoiww/QuanLyCuaHangCoffee/assets/113670905/9079b2e7-0026-4ad4-ae36-e8cc65a46cb7)
+![table-menu](https://github.com/dunoiww/QuanLyCuaHangCoffee/assets/113670905/3c1c99a9-1851-469a-9b7b-35564936d68c)
+![menu](https://github.com/dunoiww/QuanLyCuaHangCoffee/assets/113670905/91d45ce5-8a02-4908-8427-1e67e55b68f0)
+![add-menu](https://github.com/dunoiww/QuanLyCuaHangCoffee/assets/113670905/2637fe28-df19-4b4b-bda8-89c88b2b8748)
+![ingredient](https://github.com/dunoiww/QuanLyCuaHangCoffee/assets/113670905/661ffe50-b42c-4511-8d2e-8720bd841458)
+![add-ingredient](https://github.com/dunoiww/QuanLyCuaHangCoffee/assets/113670905/03d18c2f-cc31-4f03-8640-f4c9558556af)
+![bill](https://github.com/dunoiww/QuanLyCuaHangCoffee/assets/113670905/edd3a7fa-5f0a-4505-a340-3adcca89e6bd)
+![employee](https://github.com/dunoiww/QuanLyCuaHangCoffee/assets/113670905/8c88c411-e2cf-440e-8fe8-beb95f57b052)
+![customer](https://github.com/dunoiww/QuanLyCuaHangCoffee/assets/113670905/1abe6a2e-46c7-4b26-a086-8ac3f0e3af34)
+![voucher](https://github.com/dunoiww/QuanLyCuaHangCoffee/assets/113670905/59a1adb8-196e-469f-9c22-6388995daaf3)
+![setting](https://github.com/dunoiww/QuanLyCuaHangCoffee/assets/113670905/086831b7-6160-4333-bc0e-5fdf35f6bb6a)
+![cus-dashboard](https://github.com/dunoiww/QuanLyCuaHangCoffee/assets/113670905/c416d07e-e4ca-432e-82f2-06fcef0e5651)
+![cus-bill](https://github.com/dunoiww/QuanLyCuaHangCoffee/assets/113670905/b1b632f0-ae2f-40a5-82fd-7488454023cc)
+![cus-voucher](https://github.com/dunoiww/QuanLyCuaHangCoffee/assets/113670905/b34c8ca6-7769-4100-9e51-a66e9d5a1bc4)
+![cus-setting](https://github.com/dunoiww/QuanLyCuaHangCoffee/assets/113670905/24809764-96be-43f6-b888-204a01bbb871)
+---
 <p align="right"><a href="#Top">Back to the top</a></p>
