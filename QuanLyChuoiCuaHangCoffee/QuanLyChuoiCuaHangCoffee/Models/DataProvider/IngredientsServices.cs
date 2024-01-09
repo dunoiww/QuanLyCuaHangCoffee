@@ -1,6 +1,7 @@
 ﻿using QuanLyChuoiCuaHangCoffee.DTOs;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data.Entity;
 using System.Linq;
 using System.Text;
@@ -123,6 +124,48 @@ namespace QuanLyChuoiCuaHangCoffee.Models.DataProvider
             }
         }
 
+        public async Task<bool> CheckIngredients(ObservableCollection<MenuItemDTO> _listProduct)
+        {
+            try
+            {
+                using (var context = new CoffeeManagementEntities())
+                {
+                    Dictionary<string, int> ingredientQuantities = new Dictionary<string, int>(); // Lưu trữ tổng số lượng nguyên liệu
 
+                    foreach (var item in _listProduct)
+                    {
+                        List<ImportProductIngredient> listIngredients = new List<ImportProductIngredient>(await FindIngredients(item.MAMON));
+
+                        foreach (var ingredient in listIngredients)
+                        {
+                            if (ingredientQuantities.ContainsKey(ingredient.MaNguyenLieu))
+                            {
+                                // Nếu nguyên liệu đã tồn tại trong dictionary, cộng thêm số lượng nguyên liệu của sản phẩm hiện tại
+                                ingredientQuantities[ingredient.MaNguyenLieu] += ingredient.SoLuong * int.Parse(item.SOLUONG);
+                            }
+                            else
+                            {
+                                // Nếu nguyên liệu chưa tồn tại trong dictionary, thêm nguyên liệu vào dictionary với số lượng ban đầu là số lượng nguyên liệu của sản phẩm hiện tại
+                                ingredientQuantities.Add(ingredient.MaNguyenLieu, ingredient.SoLuong * int.Parse(item.SOLUONG));
+                            }
+                        }
+                    }
+
+                    // In tổng số lượng nguyên liệu cho từng nguyên liệu
+                    foreach (var ingredientQuantity in ingredientQuantities)
+                    {
+                        if (ingredientQuantity.Value > context.NGUYENLIEUx.Where(p => p.MANGUYENLIEU == ingredientQuantity.Key).FirstOrDefault().SOLUONGTRONGKHO)
+                        {
+                            return false;
+                        }
+                    }
+                    return true;
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
     }
 }

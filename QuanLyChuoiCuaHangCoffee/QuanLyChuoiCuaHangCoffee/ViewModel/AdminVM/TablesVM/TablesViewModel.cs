@@ -401,6 +401,19 @@ namespace QuanLyChuoiCuaHangCoffee.ViewModel.AdminVM.TablesVM
                         return;
                     }
                     HourBillOut = DateTime.Now.ToString("HH:mm:ss");
+                    if (TotalFinalDec == 0 || TotalFinalDec != TotalDec)
+                    {
+                        TotalFinalDec = TotalDec;
+                    }
+                    //check số lượng nguyên liệu cho tất cả món đã chọn
+                    bool f = await IngredientsServices.Ins.CheckIngredients(table.Products);
+                    if (!f)
+                    {
+                        MessageBoxCF mb = new MessageBoxCF("Số lượng nguyên liệu không đủ!", MessageType.Error, MessageButtons.OK);
+                        mb.ShowDialog();
+                        return;
+                    }
+
                     string madh = await CheckOutServices.Ins.CheckOut(CusID, AdminServices.MaNhanVien, SelectedTableItem.MABAN, _DateBill, TotalFinalDec, VoucherPercentage, Note, table.Products, table.TIMEIn, HourBillOut, VoucherCode);
                     MADH = madh;
 
@@ -445,6 +458,8 @@ namespace QuanLyChuoiCuaHangCoffee.ViewModel.AdminVM.TablesVM
                 await TablesServices.Ins.SetStatusNotAvailableTable((SelectedTableItem.MABAN));
 
                 CalTotalBill();
+                TotalFinalDec = TotalDec;
+                TotalFinal = Helper.FormatVNMoney(TotalFinalDec);
             });
 
             IncreaseProduct = new RelayCommand<object>((p) => { return true; }, (p) =>
@@ -479,6 +494,8 @@ namespace QuanLyChuoiCuaHangCoffee.ViewModel.AdminVM.TablesVM
                             ListProduct = new ObservableCollection<MenuItemDTO>(temporaryList);
 
                             CalTotalBill();
+                            TotalFinalDec = TotalDec;
+                            TotalFinal = Helper.FormatVNMoney(TotalFinalDec);
 
                             currentTable.Products = ListProduct;
                         }
@@ -516,6 +533,8 @@ namespace QuanLyChuoiCuaHangCoffee.ViewModel.AdminVM.TablesVM
                             }
 
                             CalTotalBill();
+                            TotalFinalDec = TotalDec;
+                            TotalFinal = Helper.FormatVNMoney(TotalFinalDec);
 
                             currentTable.Products = ListProduct;
                         }
