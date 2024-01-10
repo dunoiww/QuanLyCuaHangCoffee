@@ -132,13 +132,13 @@ The purpose of a Coffee Management Application is to streamline and manage the o
 ## III. Authors
 
 * [Ngô Phương Nam](https://github.com/dunoiww) - 21522348
-    * Role: Team leader, Tester, Front-end developer, back-end developer, database designer, UI/UX designer
+    * Role: Team leader, UI/UX designer, Tester, Front-end developer, back-end developer, database designer
     * 
-* [Trần Khiết Tường] - 21521657
-    * Role: Document preparer, Report preparer
+* [Trần Khiết Tường](https://github.com/TuongTran1301) - 21521657
+    * Role: Document preparer, Report preparer, Tester
 
 * [Phạm Nguyễn](https://github.com/kazei1211) - 21522394
-    * Role: UI/UX designer, Document preparer, Report preparer
+    * Role: UI/UX designer, Document preparer, Report preparer, Tester
 
 <!-- NGƯỜI HƯỚNG DẪN -->
 <div id="Instructor"></div>
