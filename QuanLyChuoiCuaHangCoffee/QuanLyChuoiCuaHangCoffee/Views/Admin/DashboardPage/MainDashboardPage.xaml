@@ -203,11 +203,11 @@
                                 </TextBlock>
                             </Grid>
                             <Grid Grid.Column="1">
-                                <Border CornerRadius="5" BorderBrush="Gray" BorderThickness="1" 
+                                <!--<Border CornerRadius="5" BorderBrush="Gray" BorderThickness="1" 
                                         Width="110"
                                         Background="#F0B000"
                                         Margin="0 0 0 0">
-                                    <!--<ComboBox Width="170"
+                                    --><!--<ComboBox Width="170"
                                              FontSize="20"
                                              Selected="{Binding SelectedTime}"
                                              HorizontalAlignment="Right"
@@ -222,14 +222,15 @@
                                                            CommandParameter="{Binding ElementName=TimeBox}" />
                                             </i:EventTrigger>
                                         </i:Interaction.Triggers>
-                                    </ComboBox>-->
-                                </Border>
+                                    </ComboBox>--><!--
+                                </Border>-->
                             </Grid>
                         </Grid>
 
                         <Grid Grid.Row="1" Margin="0 10 0 0">
                             <lvc:PieChart LegendLocation="Right"
                                           Background="Transparent"
+                                          Foreground="White"
                                           Series="{Binding TopBeverage}"
                                           Height="280"
                                           InnerRadius="10"
@@ -267,7 +268,7 @@
                             </Grid.ColumnDefinitions>
 
                             <Grid Grid.Column="0">
-                                <TextBlock Text="Top bánh ngọt" HorizontalAlignment="Left"
+                                <TextBlock Text="Top ăn vặt" HorizontalAlignment="Left"
                                            Foreground="#F0B000"
                                            FontWeight="Bold"
                                            FontSize="20"
@@ -275,11 +276,11 @@
                                 </TextBlock>
                             </Grid>
                             <Grid Grid.Column="1">
-                                <Border CornerRadius="5" BorderBrush="Gray" BorderThickness="1" 
+                                <!--<Border CornerRadius="5" BorderBrush="Gray" BorderThickness="1" 
                                         Width="110"
                                         Background="#F0B000"
                                         Margin="0 0 0 0">
-                                    <!--<ComboBox Width="170"
+                                    --><!--<ComboBox Width="170"
                                              FontSize="20"
                                              Selected="{Binding SelectedTime}"
                                              HorizontalAlignment="Right"
@@ -294,8 +295,8 @@
                                                            CommandParameter="{Binding ElementName=TimeBox}" />
                                             </i:EventTrigger>
                                         </i:Interaction.Triggers>
-                                    </ComboBox>-->
-                                </Border>
+                                    </ComboBox>--><!--
+                                </Border>-->
                             </Grid>
                         </Grid>
 
@@ -304,6 +305,7 @@
                                           Background="Transparent"
                                           Series="{Binding TopFood}"
                                           Height="280"
+                                          Foreground="White"
                                           InnerRadius="10"
                                           Width="350">
 
@@ -347,11 +349,11 @@
                                 </TextBlock>
                             </Grid>
                             <Grid Grid.Column="1">
-                                <Border CornerRadius="5" BorderBrush="Gray" BorderThickness="1" 
+                                <!--<Border CornerRadius="5" BorderBrush="Gray" BorderThickness="1" 
                                         Width="110"
                                         Background="#F0B000"
                                         Margin="0 0 0 0">
-                                    <!--<ComboBox Width="170"
+                                    --><!--<ComboBox Width="170"
                                              FontSize="20"
                                              Selected="{Binding SelectedTime}"
                                              HorizontalAlignment="Right"
@@ -366,8 +368,8 @@
                                                                        CommandParameter="{Binding ElementName=TimeBox}" />
                                             </i:EventTrigger>
                                         </i:Interaction.Triggers>
-                                    </ComboBox>-->
-                                </Border>
+                                    </ComboBox>--><!--
+                                </Border>-->
                             </Grid>
                         </Grid>
 
@@ -377,6 +379,7 @@
                                           Series="{Binding TopCus}"
                                           Height="280"
                                           InnerRadius="10"
+                                          Foreground="White"
                                           Width="350">
 
                             </lvc:PieChart>
